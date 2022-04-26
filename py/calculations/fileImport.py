@@ -2,17 +2,35 @@ import csv
 import os
 import os.path
 
-def readMachineDatabase (machine):
+def readMachineDatabase ():
     #Reads CSV machine database to pull completion time
 
-    d = os.getcwd() #Gets the current working directory
-    os.chdir("..") #Go up one directory from working directory
-    o = [os.path.join(d,o) for o in os.listdir(d) if os.path.isdir(os.path.join(d,o))] # Gets all directories in the folder as a tuple
+    #Gets current working directory
+    currentPath = os.getcwd()
+    
+    #Selects parent directory
+    pathParent = os.path.dirname(currentPath)
+    print(pathParent)
+    
+    #Selects grandparent directory
+    pathGrandparent = os.path.dirname(pathParent)
+    print(pathGrandparent)
+    
+    #Sets grandparent directory to active directory
+    os.chdir(pathGrandparent)
+    
+    # Gets all directories in the folder as a tuple
+    o = [os.path.join(pathGrandparent,o) for o in os.listdir(pathGrandparent) if os.path.isdir(os.path.join(pathGrandparent,o))]
+    print(o)
+    
 
     #Combs data for the csv file
     for item in o:
-        if os.path.exists(item + '\\machineDatabase.csv'):
-            pickedFile = item + '\\machineDatabase.csv'
+        if os.path.exists(item + '/machineDatabase.csv'):
+            pickedFile = item + '/machineDatabase.csv'
+        else:
+            print("none")
+            
 
     #Opens file as CSV
     file = open(pickedFile, "r")
@@ -26,12 +44,12 @@ def readMachineDatabase (machine):
         rows.append(row)
     print(rows)
 
-    if rows == machine:
-        print(rows)
+    #if rows == machine:
+        #print(rows)
 
 
 
     #Closes file after use, needed anytime any file is opened
     file.close()
 
-readMachineDatabase("Tsugami 5")
+readMachineDatabase()
