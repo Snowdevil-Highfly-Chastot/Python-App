@@ -1,4 +1,5 @@
 from functionRunTimeLeft import runTimeLeft
+from fileImport import readMachineDatabase
 
 class machine:
     def __init__(self, name, partTime, partsNeeded):
@@ -11,13 +12,21 @@ class machine:
         print(self.name)
         runTimeLeft(self.partTime, self.partsNeeded)
         print(" ")
+
+    def pullCompletionTime(self):
+
+        print("fetching...")
+        readMachineDatabase(self.name)
         
         
 machine1 = machine("Tsugami 5", 117, 950)
 machine1.jobFinished()
+
 machine2 = machine("Tsugami 6", 102, 3350)
 machine2.jobFinished()
+
 machine3 = machine("Tsugami 7", 55, 2400)
 machine3.jobFinished()
+
 machine4 = machine("Tsugami 8", 65, 1400)
 machine4.jobFinished()
