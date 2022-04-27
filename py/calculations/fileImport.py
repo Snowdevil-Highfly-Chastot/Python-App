@@ -31,14 +31,11 @@ def readMachineDatabase (machine):
 
     #Pulls data and separates headers from rows
     header = next(csvreader)
-    print(header)
     rows = []
     for row in csvreader:
         if row[0] == machine:
             rows.append(row)
-    print(rows)
+    print(rows[0][1])
 
     #Closes file after use, needed anytime any file is opened
     file.close()
-
-readMachineDatabase("Tsugami 6")
