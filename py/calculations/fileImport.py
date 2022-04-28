@@ -2,7 +2,7 @@ import sqlite3 as sql
 import os
 import os.path
 
-def readMachineDatabase (machine):
+def saveMachine (machine, time):
 
     #Gets current working directory
     currentPath = os.getcwd()
@@ -14,10 +14,16 @@ def readMachineDatabase (machine):
     setupDb = sql.connect('machineDatabase.db')
     cursor = setupDb.cursor()
     
+    #sql statement
+    sql1 = ''' INSERT INTO Machines(machine_name,completion_time)
+            VALUES(?,?)'''
+    sql2 = '''CREATE TABLE IF NOT EXISTS Machines
+                  (Machine_Name TEXT, Completion_Time TEXT)'''
+
     #Creates table if not created, otherwise will return machine name and time left
-    cursor.execute('''CREATE TABLE IF NOT EXISTS Shows
-                  (Machine_Name TEXT, Time_left DATE)''')             
+    cursor.execute(sql2)
+    cursor.execute(sql1)             
     setupDb.commit
     setupDb.close
 
-readMachineDatabase("Tsugami 5")
+saveMachine("Tsugami 5", "asd")
