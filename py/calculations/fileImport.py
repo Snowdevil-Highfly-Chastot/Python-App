@@ -1,4 +1,4 @@
-import csv
+import sqlite3 as sql
 import os
 import os.path
 
@@ -20,22 +20,21 @@ def readMachineDatabase (machine):
     # Gets all directories in the folder as a tuple
     o = [os.path.join(pathGrandparent,o) for o in os.listdir(pathGrandparent) if os.path.isdir(os.path.join(pathGrandparent,o))]
     
+    print(o)
+    
     #Combs data for the csv file
     for item in o:
-        if os.path.exists(item + '/machineDatabase.csv'):
-            pickedFile = item + '/machineDatabase.csv'
-            
-    #Opens file as CSV
-    file = open(pickedFile, "r")
-    csvreader = csv.reader(file)
+        if os.path.exists(item + 'db/):
+            pickedFile = item + 'db/'
 
-    #Pulls data and separates headers from rows
-    header = next(csvreader)
-    rows = []
-    for row in csvreader:
-        if row[0] == machine:
-            rows.append(row)
-    print(rows[0][1])
+    setupDb = sql.connect('machineDatabase.db')
+    
+    cursor = setupDb.cursor()
+    
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Shows
+                  (Title TEXT, Director TEXT, Year INT)''')
+                  
+    setupDb.commit
+    setupDb.close
 
-    #Closes file after use, needed anytime any file is opened
-    file.close()
+readMachineDatabase("Tsugami")
