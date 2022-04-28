@@ -7,18 +7,16 @@ def readMachineDatabase (machine):
     #Gets current working directory
     currentPath = os.getcwd()
     
-    #Sets grandparent directory to active directory
+    #Changes current directory to db directory and sets to active
     os.chdir(currentPath + '\\db')
-    
-    # Gets all directories in the folder as a tuple
-    o = [os.path.join(currentPath,o) for o in os.listdir(currentPath) if os.path.isdir(os.path.join(currentPath,o))]
 
+    #Creates database if not created, otherwise connects to it
     setupDb = sql.connect('machineDatabase.db')
     cursor = setupDb.cursor()
     
+    #Creates table if not created, otherwise will return machine name and time left
     cursor.execute('''CREATE TABLE IF NOT EXISTS Shows
-                  (Title TEXT, Director TEXT, Year INT)''')
-                  
+                  (Machine_Name TEXT, Time_left DATE)''')             
     setupDb.commit
     setupDb.close
 
