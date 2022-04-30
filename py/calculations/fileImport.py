@@ -1,14 +1,17 @@
 import sqlite3 as sql
 import os
 import os.path
+from config.definitions import ROOT_DIR
 
 def saveMachine (machine, time):
+    
+    print(os.path.join(ROOT_DIR, 'py', 'testing', 'test.py'))
 
     #Gets current working directory
     currentPath = os.getcwd()
     
     #Changes current directory to db directory and sets to active
-    os.chdir(currentPath + '\\db')
+    os.chdir('..')
 
     #Creates database if not created, otherwise connects to it
     setupDb = sql.connect('machineDatabase.db')
