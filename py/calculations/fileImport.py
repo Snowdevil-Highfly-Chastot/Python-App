@@ -21,10 +21,17 @@ def saveMachine ():
     cursor = setupDb.cursor()
     
     #sql statement
+    sql1 = '''INSERT INTO Machines (Machine_Name, Completion_Time)
+        VALUES
+            ("Buddy Rich", "1"),
+            ("Candido", "2"),
+            ("Charlie Byrd", "2")'''
+
     sql2 = '''CREATE TABLE IF NOT EXISTS Machines
                   (Machine_Name TEXT, Completion_Time TEXT)'''
 
     #Creates table if not created, otherwise will return machine name and time left
+    cursor.execute(sql1)
     cursor.execute(sql2)            
     setupDb.commit
     setupDb.close
