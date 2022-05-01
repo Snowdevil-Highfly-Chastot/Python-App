@@ -6,7 +6,7 @@ from config.definitions import (
     climbDirectory
 )
 
-def saveMachine ():
+def saveMachine (Machine_Name, Completion_Time):
     
     #Find current path of this folder
     currentPath = os.path.join(ROOT_DIR)
@@ -23,17 +23,20 @@ def saveMachine ():
     #sql statement
     sql1 = '''INSERT INTO Machines (Machine_Name, Completion_Time)
         VALUES
-            ("Buddy Rich", "1"),
-            ("Candido", "2"),
-            ("Charlie Byrd", "2")'''
-
+            (?, ?)''',
+            (Ma
+            
     sql2 = '''CREATE TABLE IF NOT EXISTS Machines
                   (Machine_Name TEXT, Completion_Time TEXT)'''
 
     #Creates table if not created, otherwise will return machine name and time left
-    cursor.execute(sql1)
-    cursor.execute(sql2)            
+    cursor.execute(sql2)
+    cursor.execute(sql1)            
     setupDb.commit
+    
+    cursor.execute("SELECT * FROM Machines")
+    print(cursor.fetchall())
+    
     setupDb.close
 
-saveMachine()
+saveMachine("Tsugami 5", "3/15/2022")
