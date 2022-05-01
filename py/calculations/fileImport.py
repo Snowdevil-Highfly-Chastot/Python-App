@@ -19,23 +19,21 @@ def saveMachine (Machine_Name, Completion_Time):
     #Creates database if not created, otherwise connects to it
     setupDb = sql.connect('machineDatabase.db')
     cursor = setupDb.cursor()
-    
-    #sql statement
-    sql1 = '''INSERT INTO Machines (Machine_Name, Completion_Time)
-        VALUES
-            (?, ?)''',
-            (Ma
-            
-    sql2 = '''CREATE TABLE IF NOT EXISTS Machines
-                  (Machine_Name TEXT, Completion_Time TEXT)'''
 
     #Creates table if not created, otherwise will return machine name and time left
-    cursor.execute(sql2)
-    cursor.execute(sql1)            
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Machines
+    (Machine_Name TEXT, Completion_Time TEXT)''')
+    
+    cursor.execute('''INSERT INTO Machines (Machine_Name, Completion_Time) 
+    VALUES (?, ?)''', (Machine_Name, Completion_Time))
+     
     setupDb.commit
     
     cursor.execute("SELECT * FROM Machines")
-    print(cursor.fetchall())
+    rows = cursor.fetchall()
+    
+    for row in rows:
+    	print(rows)
     
     setupDb.close
 
