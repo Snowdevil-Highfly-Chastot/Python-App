@@ -21,20 +21,20 @@ def runTimeLeft(count, time):
     secondTimeLeft = timeMath(0) - ((minuteTimeLeft * 60) + (hourTimeLeft * 3600) + (dayTimeLeft * 86400))
 
 #Do not display variables with 0 and display separate time left values
-    if dayTimeLeft > 0:
-        print(dayTimeLeft, 'Days')
-    if hourTimeLeft > 0:
-        print(hourTimeLeft, 'Hours')
-    if minuteTimeLeft > 0:
-        print(minuteTimeLeft, 'Minutes')
-    if secondTimeLeft > 0:
-        print(secondTimeLeft, 'Seconds')
+    #if dayTimeLeft > 0:
+        #print(dayTimeLeft, 'Days')
+    #if hourTimeLeft > 0:
+        #print(hourTimeLeft, 'Hours')
+    #if minuteTimeLeft > 0:
+        #print(minuteTimeLeft, 'Minutes')
+    #if secondTimeLeft > 0:
+        #print(secondTimeLeft, 'Seconds')
         
 #Setting date/time variables to calculate finish date/time
     now = datetime.datetime.now()
     jobFinished = now + datetime.timedelta(seconds = count * time)
     
-    print(now, "Time now")
-    print(jobFinished, "Completion Time")
+    #print(now, "Time now")
+    #print(jobFinished, "Completion Time")
 
-    return (jobFinished, "Completion Time")
+    return (jobFinished)
