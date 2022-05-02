@@ -27,7 +27,7 @@ class machine:
         readMachine(self.name)
         
         
-machine1 = machine("Tsugami 5", 117, 950)
+machine1 = machine("Tsugami 5", 117, 6500)
 #machine1.postCompletionTime()
 machine1.pullCompletionTime()
 print(" ")
@@ -37,12 +37,12 @@ machine2 = machine("Tsugami 6", 12, 50)
 machine2.pullCompletionTime()
 print(" ")
 
-machine3 = machine("Tsugami 7", 55, 2400)
+machine3 = machine("Tsugami 7", 59, 3700)
 #machine3.postCompletionTime()
 machine3.pullCompletionTime()
 print(" ")
 
-machine4 = machine("Tsugami 8", 65, 1400)
+machine4 = machine("Tsugami 8", 42, 11000)
 #machine4.postCompletionTime()
 machine4.pullCompletionTime()
 print(" ")
