@@ -21,10 +21,10 @@ def saveMachine (Machine_Name, Completion_Time):
     cursor = setupDb.cursor()
 
     #Creates table if not created, otherwise will return machine name and time left
-    cursor.execute('''DELETE FROM Machines WHERE Machine_Name = '%s' ''' % Machine_Name)
-       
     cursor.execute('''CREATE TABLE IF NOT EXISTS Machines
-    (Machine_Name TEXT, Completion_Time INT)''')
+    (Machine_Name TEXT, Completion_Time TIMESTAMP)''')
+    
+    cursor.execute('''DELETE FROM Machines WHERE Machine_Name = '%s' ''' % Machine_Name)
     
     cursor.execute('''INSERT INTO Machines (Machine_Name, Completion_Time) 
     VALUES (?, ?)''', (Machine_Name, Completion_Time))
