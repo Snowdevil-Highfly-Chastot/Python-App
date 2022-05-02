@@ -30,13 +30,8 @@ def saveMachine (Machine_Name, Completion_Time):
     VALUES (?, ?)''', (Machine_Name, Completion_Time))
      
     setupDb.commit()
-    
-    cursor.execute("SELECT * FROM Machines")
-    print(cursor.fetchall())
-    
+    print("Post Complete")
     setupDb.close
-
-#saveMachine("Tsugami 5", "3/15/2022")
 
 def readMachine (Machine_Name):
     
@@ -53,11 +48,9 @@ def readMachine (Machine_Name):
     cursor = setupDb.cursor()
     
     cursor.execute('''SELECT * FROM Machines WHERE Machine_Name = '%s' ''' % Machine_Name)
-    rows = cursor.fetchall()
     
+    rows = cursor.fetchall()
     for row in rows:
     	print(rows)
     
     setupDb.close
-    
-#readMachine("Tsugami 5")
