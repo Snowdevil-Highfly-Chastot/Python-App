@@ -32,7 +32,7 @@ machine1 = machine("Tsugami 5", 117, 6500)
 machine1.pullCompletionTime()
 print(" ")
 
-machine2 = machine("Tsugami 6", 12, 50)
+machine2 = machine("Tsugami 6", 109, 3000)
 #machine2.postCompletionTime()
 machine2.pullCompletionTime()
 print(" ")
