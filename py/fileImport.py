@@ -13,7 +13,7 @@ def saveMachine (Machine_Name, Completion_Time):
     
     #Changes current directory to db directory in relation to this file
     os.chdir(currentPath)
-    climbDirectory(2)
+    climbDirectory(1)
     os.chdir('db')
 
     #Creates database if not created, otherwise connects to it
@@ -40,7 +40,7 @@ def readMachine (Machine_Name):
     
     #Changes current directory to db directory in relation to this file
     os.chdir(currentPath)
-    climbDirectory(2)
+    climbDirectory(1)
     os.chdir('db')
 
     #Creates database if not created, otherwise connects to it

@@ -1,24 +1,28 @@
-from functionRunTimeLeft import runTimeLeft
+from machineCalculations import (
+runTimeLeft,
+completionTime
+)
+
 from fileImport import (
 saveMachine,
 readMachine
 )
 
 class machine:
-    def __init__(self, name, partTime, partsNeeded):
+    def __init__(self, name, partsNeeded, partTime):
         self.name = name
         self.partTime = partTime
         self.partsNeeded = partsNeeded
     
     def jobFinished(self):
         
-        print(self.name)
-        runTimeLeft(self.partTime, self.partsNeeded)
+        print("Calculating...")
+        runTimeLeft(self.partsNeeded, self.partTime)
         
     def postCompletionTime(self):
     	
     	print("posting...")
-    	saveMachine(self.name, runTimeLeft(self.partTime, self.partsNeeded))
+    	saveMachine(self.name, completionTime(self.partTime, self.partsNeeded))
     	
 
     def pullCompletionTime(self):
@@ -27,22 +31,22 @@ class machine:
         readMachine(self.name)
         
         
-machine1 = machine("Tsugami 5", 117, 6500)
+machine1 = machine("Tsugami 5", 117, 117)
 #machine1.postCompletionTime()
 machine1.pullCompletionTime()
 print(" ")
 
-machine2 = machine("Tsugami 6", 109, 3000)
+machine2 = machine("Tsugami 6", 109, 109)
 #machine2.postCompletionTime()
 machine2.pullCompletionTime()
 print(" ")
 
-machine3 = machine("Tsugami 7", 59, 3700)
+machine3 = machine("Tsugami 7", 59, 59)
 #machine3.postCompletionTime()
 machine3.pullCompletionTime()
 print(" ")
 
-machine4 = machine("Tsugami 8", 42, 11000)
+machine4 = machine("Tsugami 8", 42, 42)
 #machine4.postCompletionTime()
 machine4.pullCompletionTime()
 print(" ")
