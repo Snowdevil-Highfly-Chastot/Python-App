@@ -9,13 +9,34 @@ class RootWidget(FloatLayout):
     def __init__(self, **kwargs):
         # make sure we aren't overriding any important functionality
         super(RootWidget, self).__init__(**kwargs)
+        
+        def callback(self):
+            print('The button <%s> is being pressed' % self.text)
+            self.text = ("Pressed")
+        
+        #button describing
+        btn1 = Button(
+            text="Button 1",
+            size_hint=(.90, .10),
+            pos_hint={'center_x': .5, 'center_y': .8})
+            
+        btn2 = Button(
+            text="Button 2",
+            size_hint=(.90, .10),
+            pos_hint={'center_x': .5, 'center_y': .7})
 
         # let's add a Widget to this layout
         self.add_widget(
             Button(
                 text="Hello World",
-                size_hint=(.80, .90),
-                pos_hint={'center_x': .5, 'center_y': .5}))
+                size_hint=(.90, .10),
+                pos_hint={'center_x': .5, 'center_y': .9})
+)
+                
+        self.add_widget(btn1)
+        btn1.bind(on_press=callback)
+        self.add_widget(btn2)
+        btn2.bind(on_press=callback)
 
 
 class MainApp(App):
