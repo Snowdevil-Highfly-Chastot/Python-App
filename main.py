@@ -11,8 +11,11 @@ class RootWidget(FloatLayout):
         super(RootWidget, self).__init__(**kwargs)
         
         def callback(self):
-            print('The button <%s> is being pressed' % self.text)
+            print('The button %s is being pressed' % self.text)
             self.text = ("Pressed")
+        def writeback(self):
+            print('The button %s is not being pressed anymore' % self.text)
+            self.text = ('Button %s' % self.text)
         
         #button describing
         btn1 = Button(
@@ -35,8 +38,10 @@ class RootWidget(FloatLayout):
                 
         self.add_widget(btn1)
         btn1.bind(on_press=callback)
+        btn1.bind(on_release=writeback)
         self.add_widget(btn2)
         btn2.bind(on_press=callback)
+        btn2.bind(on_release=writeback)
 
 
 class MainApp(App):
