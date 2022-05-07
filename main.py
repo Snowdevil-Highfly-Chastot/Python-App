@@ -2,6 +2,10 @@ from kivy.app import App
 from kivy.graphics import Color, Rectangle
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
+from kivy.core.window import Window
+from kivy.lang import Builder
 
 
 class StartWidget(FloatLayout):
@@ -16,26 +20,42 @@ class StartWidget(FloatLayout):
         def writeback(self):
             print('The button %s is not being pressed anymore' % self.text)
             self.text = ('Button %s' % self.text)
+        def on_enter(instance):
+            print('User pressed enter in', instance)
         
-        #button describing
+        #widget describing
+        header = Label(
+            text = 'Machine Test Calculations',
+            font_size = (28),
+            size_hint=(.90, .10),
+            pos_hint={'center_x': .5, 'center_y': .9})
+
         btn1 = Button(
             text="Button 1",
             size_hint=(.90, .10),
-            pos_hint={'center_x': .5, 'center_y': .8})
+            pos_hint={'center_x': .5, 'center_y': .7})
             
         btn2 = Button(
             text="Button 2",
             size_hint=(.90, .10),
-            pos_hint={'center_x': .5, 'center_y': .7})
+            pos_hint={'center_x': .5, 'center_y': .6})
 
-        #Label not working yet...
-        header = Label(text = 'Machine Test Calculations')
+        txtInput1 = TextInput(
+            text='Hello world',
+            multiline=False,
+            size_hint = (.90, .10),
+            pos_hint={'center_x': .5, 'center_y': .8})
 
         # Adding Widgets to this layout
         self.add_widget(header)
+
+        self.add_widget(txtInput1)
+        txtInput1.bind(on_text_validate=on_enter)
+
         self.add_widget(btn1)
         btn1.bind(on_press=callback)
         btn1.bind(on_release=writeback)
+
         self.add_widget(btn2)
         btn2.bind(on_press=callback)
         btn2.bind(on_release=writeback)
