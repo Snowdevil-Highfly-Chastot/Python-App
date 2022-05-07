@@ -27,9 +27,9 @@ class machine:
         runTimeLeft(self.partsNeeded, self.partTime)
         
     def postCompletionTime(self):
-    	
-    	print("posting...")
-    	saveMachine(self.name, completionTime(self.partTime, self.partsNeeded))
+        
+        print("posting...")
+        saveMachine(self.name, completionTime(self.partTime, self.partsNeeded))
 
     def pullCompletionTime(self):
 

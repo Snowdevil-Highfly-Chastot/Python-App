@@ -5,10 +5,10 @@ import datetime
 #Time is the amount of seconds it takes to machine a part
 
 def runTimeLeft(count, time):
-	
+    
 #Create blank dictionary
     totalTime = {}
-	
+    
 #Function to cut down on repeat math
     def timeMath(seconds):
 
@@ -33,14 +33,14 @@ def runTimeLeft(count, time):
         totalTime.update({"Minutes" : minuteTimeLeft})
     if secondTimeLeft > 0:
         totalTime.update({"Seconds" : secondTimeLeft})
-	
+    
     print(totalTime)
         
     return totalTime
 
 #Calculates date and time for the job to be done running
 def completionTime(count, time):
-	
+    
 #Setting date/time variables to calculate finish date/time
     now = datetime.datetime.now()
     jobFinished = now + datetime.timedelta(seconds = count * time)
@@ -49,11 +49,11 @@ def completionTime(count, time):
 
 #Calculates amount of parts possible to machine per bar	
 def barfeedParts(partLength, cutoffWidth, barfeedParameter, barLength):
-	
+    
 #Set variables and calculate parts needed to finish a bar
     actualPartLength = partLength + cutoffWidth
     actualBarLength = barLength - barfeedParameter
     totalParts = math.floor(actualBarLength / actualPartLength)
 
     return totalParts
-	
+    

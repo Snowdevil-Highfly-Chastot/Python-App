@@ -51,6 +51,6 @@ def readMachine (Machine_Name):
     
     rows = cursor.fetchall()
     for row in rows:
-    	print(rows)
+        print(rows)
     
     setupDb.close

@@ -4,11 +4,11 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.button import Button
 
 
-class RootWidget(FloatLayout):
+class StartWidget(FloatLayout):
 
     def __init__(self, **kwargs):
         # make sure we aren't overriding any important functionality
-        super(RootWidget, self).__init__(**kwargs)
+        super(StartWidget, self).__init__(**kwargs)
         
         def callback(self):
             print('The button %s is being pressed' % self.text)
@@ -28,14 +28,11 @@ class RootWidget(FloatLayout):
             size_hint=(.90, .10),
             pos_hint={'center_x': .5, 'center_y': .7})
 
-        # let's add a Widget to this layout
-        self.add_widget(
-            Button(
-                text="Hello World",
-                size_hint=(.90, .10),
-                pos_hint={'center_x': .5, 'center_y': .9})
-)
-                
+        #Label not working yet...
+        header = Label(text = 'Machine Test Calculations')
+
+        # Adding Widgets to this layout
+        self.add_widget(header)
         self.add_widget(btn1)
         btn1.bind(on_press=callback)
         btn1.bind(on_release=writeback)
@@ -47,7 +44,7 @@ class RootWidget(FloatLayout):
 class MainApp(App):
 
     def build(self):
-        self.root = root = RootWidget()
+        self.root = root = StartWidget()
         root.bind(size=self._update_rect, pos=self._update_rect)
 
         with root.canvas.before:
