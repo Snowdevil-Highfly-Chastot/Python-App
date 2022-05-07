@@ -1,11 +1,11 @@
 from kivy.app import App
 from kivy.graphics import Color, Rectangle
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
-from kivy.core.window import Window
-from kivy.lang import Builder
+from py.fileImport import readMachine
 
 
 class StartWidget(FloatLayout):
@@ -13,22 +13,30 @@ class StartWidget(FloatLayout):
     def __init__(self, **kwargs):
         # make sure we aren't overriding any important functionality
         super(StartWidget, self).__init__(**kwargs)
-        
-        def callback(self):
-            print('The button %s is being pressed' % self.text)
-            self.text = ("Pressed")
-        def writeback(self):
-            print('The button %s is not being pressed anymore' % self.text)
-            self.text = ('Button %s' % self.text)
-        def on_enter(instance):
-            print('User pressed enter in', instance)
+
+        #Widget functions
+        def readMachineFromDb ():
+            machine = self.machineNameI.text
+            readMachine(machine)
         
         #widget describing
-        header = Label(
+        headerL = Label(
             text = 'Machine Test Calculations',
             font_size = (28),
             size_hint=(.90, .10),
             pos_hint={'center_x': .5, 'center_y': .9})
+
+        machineNameL = Label(
+            text = 'Enter Machine Name: ',
+            font_size = (18),
+            size_hint=(.45, .05),
+            pos_hint={'center_x': .3, 'center_y': .8})
+
+        self.machineNameI = TextInput(
+            text = '',
+            multiline=False,
+            size_hint = (.45, .05),
+            pos_hint={'center_x': .7, 'center_y': .8})
 
         btn1 = Button(
             text="Button 1",
@@ -40,25 +48,18 @@ class StartWidget(FloatLayout):
             size_hint=(.90, .10),
             pos_hint={'center_x': .5, 'center_y': .6})
 
-        txtInput1 = TextInput(
-            text='Hello world',
-            multiline=False,
-            size_hint = (.90, .10),
-            pos_hint={'center_x': .5, 'center_y': .8})
-
         # Adding Widgets to this layout
-        self.add_widget(header)
+        self.add_widget(headerL)
 
-        self.add_widget(txtInput1)
-        txtInput1.bind(on_text_validate=on_enter)
+        self.add_widget(machineNameL)
+        self.add_widget(self.machineNameI)
 
-        self.add_widget(btn1)
-        btn1.bind(on_press=callback)
-        btn1.bind(on_release=writeback)
+        self.submit = (btn1)
+        self.submit.bind(on_press = lambda x:readMachineFromDb())
+        self.add_widget(self.submit)
 
-        self.add_widget(btn2)
-        btn2.bind(on_press=callback)
-        btn2.bind(on_release=writeback)
+
+
 
 
 class MainApp(App):
