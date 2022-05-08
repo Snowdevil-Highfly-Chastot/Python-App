@@ -21,58 +21,130 @@ class StartWidget(FloatLayout):
                 self.machineNameReturn.text = str(readMachine(machine))
             except:
                 print('Not Found')
-        
-        #widget describing
-        headerLabel = Label(
-            text = 'Machine Test Calculations',
-            font_size = self.width / 1.4,
-            size_hint=(.90, .10),
-            pos_hint={'center_x': .5, 'center_y': .9})
-
-        machineNameLabel = Label(
-            text = 'Enter Machine Name: ',
-            font_size = self.width / 3,
-            size_hint=(.45, .04),
-            pos_hint={'center_x': .3, 'center_y': .8})
-
-        self.machineNameInput = TextInput(
-            text = '',
-            font_size = self.width / 3,
-            padding_y = self.width / 5.5,
-            multiline = False,
-            size_hint = (.45, .04),
-            pos_hint={'center_x': .7, 'center_y': .8})
+                
+        def mainMachineOverview():
+            self.clear_widgets()
             
-        self.machineNameReturn = Label(
-            text = '',
-            font_size = self.width / 3,
-            size_hint=(.45, .04),
-            pos_hint={'center_x': .5, 'center_y': .6})
-
-        btn1 = Button(
-            text="Submit",
-            font_size = self.width / 2,
-            size_hint=(.90, .10),
-            pos_hint={'center_x': .5, 'center_y': .7})
+        def machineInfo():
+            self.clear_widgets()
             
-        btn2 = Button(
-            text="Button 2",
-            size_hint=(.90, .10),
-            pos_hint={'center_x': .5, 'center_y': .6})
+            #Describe widgets
+            layout = GridLayout(Col=2)
+            
+            headerLabel = Label(
+                text = 'Tsugami 5',
+                font_size = 55,
+                size_hint=(.90, .10),
+                pos_hint={'center_x': .4, 'center_y': .9})
+    
+            machineNameLabel = Label(
+                text = 'Enter Machine Name: ',
+                font_size = 40,
+                size_hint=(.45, .04),
+                pos_hint={'center_x': .3, 'center_y': .8})
+    
+            self.machineNameInput = TextInput(
+                text = '',
+                font_size = 40,
+                padding_y = 10,
+                multiline = False,
+                size_hint = (.45, .04),
+                pos_hint={'center_x': .7, 'center_y': .8})
+                
+            self.machineNameReturn = Label(
+                text = '',
+                font_size = 40,
+                size_hint=(.45, .04),
+                pos_hint={'center_x': .5, 'center_y': .6})
+    
+            btn1 = Button(
+                text="Submit",
+                font_size = 40,
+                size_hint=(.90, .10),
+                pos_hint={'center_x': .5, 'center_y': .7})
+                
+            btn2 = Button(
+                text="Next",
+                font_size = 40,
+                size_hint=(.90, .10),
+                pos_hint={'center_x': .5, 'center_y': .1})
+                
+            layout.add_widget(btn1)
+            layout.add_widget(btn2)
+                
+        def nextPage():
+            self.clear_widgets()
+            
+            btn2 = Button(
+                text="Previous",
+                font_size = 40,
+                size_hint=(.90, .10),
+                pos_hint={'center_x': .5, 'center_y': .1})
+            
+            self.submit = btn2
+            self.submit.bind(on_press = lambda x:firstPage())
+            self.add_widget(self.submit)
 
-        # Adding Widgets to this layout
-        self.add_widget(headerLabel)
-
-        self.add_widget(machineNameLabel)
-        self.add_widget(self.machineNameInput)
-
-        self.submit = (btn1)
-        self.submit.bind(on_press = lambda x:readMachineFromDb())
-        self.add_widget(self.submit)
-        self.add_widget(self.machineNameReturn)
-
-
-
+        def firstPage():
+            self.clear_widgets()
+            
+            #startup widget describing
+            headerLabel = Label(
+                text = 'Machine Test Calculations',
+                font_size = 45,
+                size_hint=(.90, .10),
+                pos_hint={'center_x': .5, 'center_y': .9})
+    
+            machineNameLabel = Label(
+                text = 'Enter Machine Name: ',
+                font_size = 40,
+                size_hint=(.45, .04),
+                pos_hint={'center_x': .3, 'center_y': .8})
+    
+            self.machineNameInput = TextInput(
+                text = '',
+                font_size = 40,
+                padding_y = 10,
+                multiline = False,
+                size_hint = (.45, .04),
+                pos_hint={'center_x': .7, 'center_y': .8})
+                
+            self.machineNameReturn = Label(
+                text = '',
+                font_size = 40,
+                size_hint=(.45, .04),
+                pos_hint={'center_x': .5, 'center_y': .6})
+    
+            btn1 = Button(
+                text="Submit",
+                font_size = 40,
+                size_hint=(.90, .10),
+                pos_hint={'center_x': .5, 'center_y': .7})
+                
+            btn2 = Button(
+                text="Next",
+                font_size = 40,
+                size_hint=(.90, .10),
+                pos_hint={'center_x': .5, 'center_y': .1})
+    
+            # Adding Widgets to this layout
+            self.add_widget(headerLabel)
+    
+            self.add_widget(machineNameLabel)
+            self.add_widget(self.machineNameInput)
+    
+            self.submit = btn1
+            self.submit.bind(on_press = lambda x:readMachineFromDb())
+            self.add_widget(self.submit)
+            
+            self.add_widget(self.machineNameReturn)
+            
+            self.submit = btn2
+            self.submit.bind(on_press = lambda x:nextPage())
+            self.add_widget(self.submit)
+            
+            
+        machineInfo()
 
 
 class MainApp(App):
