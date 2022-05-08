@@ -16,30 +16,42 @@ class StartWidget(FloatLayout):
 
         #Widget functions
         def readMachineFromDb ():
-            machine = self.machineNameI.text
-            readMachine(machine)
+            machine = self.machineNameInput.text
+            try:
+                self.machineNameReturn.text = str(readMachine(machine))
+            except:
+                print('Not Found')
         
         #widget describing
-        headerL = Label(
+        headerLabel = Label(
             text = 'Machine Test Calculations',
-            font_size = (28),
+            font_size = self.width / 1.4,
             size_hint=(.90, .10),
             pos_hint={'center_x': .5, 'center_y': .9})
 
-        machineNameL = Label(
+        machineNameLabel = Label(
             text = 'Enter Machine Name: ',
-            font_size = (18),
-            size_hint=(.45, .05),
+            font_size = self.width / 3,
+            size_hint=(.45, .04),
             pos_hint={'center_x': .3, 'center_y': .8})
 
-        self.machineNameI = TextInput(
+        self.machineNameInput = TextInput(
             text = '',
-            multiline=False,
-            size_hint = (.45, .05),
+            font_size = self.width / 3,
+            padding_y = self.width / 5.5,
+            multiline = False,
+            size_hint = (.45, .04),
             pos_hint={'center_x': .7, 'center_y': .8})
+            
+        self.machineNameReturn = Label(
+            text = '',
+            font_size = self.width / 3,
+            size_hint=(.45, .04),
+            pos_hint={'center_x': .5, 'center_y': .6})
 
         btn1 = Button(
-            text="Button 1",
+            text="Submit",
+            font_size = self.width / 2,
             size_hint=(.90, .10),
             pos_hint={'center_x': .5, 'center_y': .7})
             
@@ -49,14 +61,15 @@ class StartWidget(FloatLayout):
             pos_hint={'center_x': .5, 'center_y': .6})
 
         # Adding Widgets to this layout
-        self.add_widget(headerL)
+        self.add_widget(headerLabel)
 
-        self.add_widget(machineNameL)
-        self.add_widget(self.machineNameI)
+        self.add_widget(machineNameLabel)
+        self.add_widget(self.machineNameInput)
 
         self.submit = (btn1)
         self.submit.bind(on_press = lambda x:readMachineFromDb())
         self.add_widget(self.submit)
+        self.add_widget(self.machineNameReturn)
 
 
 
