@@ -13,16 +13,6 @@ class StartWidget(FloatLayout):
     def __init__(self, **kwargs):
         # make sure we aren't overriding any important functionality
         super(StartWidget, self).__init__(**kwargs)
-        
-        btn1 = Button(
-            text="Start",
-            font_size = 40,
-            size_hint=(1.50, .50),
-            pos_hint={'center_x': .5, 'center_y': .5})
-        
-        self.submit = btn1
-        self.submit.bind(on_press = lambda x:firstPage())
-        self.add_widget(self.submit)
 
         #Widget functions
         def readMachineFromDb ():
@@ -31,6 +21,56 @@ class StartWidget(FloatLayout):
                 self.machineNameReturn.text = str(readMachine(machine))
             except:
                 print('Not Found')
+                
+        def mainMachineOverview():
+            self.clear_widgets()
+            
+        def machineInfo():
+            self.clear_widgets()
+            
+            #Describe widgets
+            layout = GridLayout(Col=2)
+            
+            headerLabel = Label(
+                text = 'Tsugami 5',
+                font_size = 55,
+                size_hint=(.90, .10),
+                pos_hint={'center_x': .4, 'center_y': .9})
+    
+            machineNameLabel = Label(
+                text = 'Enter Machine Name: ',
+                font_size = 40,
+                size_hint=(.45, .04),
+                pos_hint={'center_x': .3, 'center_y': .8})
+    
+            self.machineNameInput = TextInput(
+                text = '',
+                font_size = 40,
+                padding_y = 10,
+                multiline = False,
+                size_hint = (.45, .04),
+                pos_hint={'center_x': .7, 'center_y': .8})
+                
+            self.machineNameReturn = Label(
+                text = '',
+                font_size = 40,
+                size_hint=(.45, .04),
+                pos_hint={'center_x': .5, 'center_y': .6})
+    
+            btn1 = Button(
+                text="Submit",
+                font_size = 40,
+                size_hint=(.90, .10),
+                pos_hint={'center_x': .5, 'center_y': .7})
+                
+            btn2 = Button(
+                text="Next",
+                font_size = 40,
+                size_hint=(.90, .10),
+                pos_hint={'center_x': .5, 'center_y': .1})
+                
+            layout.add_widget(btn1)
+            layout.add_widget(btn2)
                 
         def nextPage():
             self.clear_widgets()
@@ -104,7 +144,7 @@ class StartWidget(FloatLayout):
             self.add_widget(self.submit)
             
             
-
+        machineInfo()
 
 
 class MainApp(App):
