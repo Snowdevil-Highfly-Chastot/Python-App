@@ -7,7 +7,7 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from py.fileImport import readMachine
 from kivy.lang import Builder
-from kivy.uix.stacklayout import StackLayout
+from kivy.uix.anchorlayout import AnchorLayout
 
 
 

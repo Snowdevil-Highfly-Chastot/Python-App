@@ -1,37 +1,124 @@
 #:kivy 1.10.1
 <SubmitButton@Button>:
     text: 'Submit'
-    size_hint: None, None
-    size: 100, 50
+    size_hint: 1, .7
+    #size: 500, 150
 <CancelButton@Button>:
     text: 'Cancel'
-    size_hint: None, None
-    size: 100, 50
+    size_hint: 1, .7
+    #size: 500, 150
 <XButton@Button>:
     text: 'X'
     size_hint: None, None
-    size: 50, 50
+    #size: 50, 50
 <TextCollection@TextInput>:
     multiline: False
-    size_hint: None, None
-    size: 100, 50
+    size_hint: 1, .7
+    #size: 500, 100
+    font_size: self.width / 7
 
-<FloatLayout>: 
-
-    GridLayout:
-        cols: 2
-        row_force_default: True
-        row_default_height: 100
-        col_default_width: 100
-        padding: self.width / 10
+<FloatLayout>:
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
+        GridLayout:
+            cols: 1
+            rows: 2
+            row_force_default: True
+            row_default_height: self.width / 13
+            padding: self.width / 15
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'bottom'
+                Label:
+                    text: 'New Machine'
+                    text_size: self.size
+                    font_size: self.width / 12
+                    halign: 'center'
+                    valign: 'bottom'
+                  
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'top'
+                GridLayout:
+                    cols: 2
+                    row_force_default: True
+                    row_default_height: self.width / 8
+                    col_default_width: self.width / 4
+                    padding: self.width / 25
+                    spacing: self.width / 25, self.width / 50
+                    
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'center'
+                        Label:
+                            text: 'Name: '
+                            font_size: self.width / 6
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'center'
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'center'       
+                        TextCollection:
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'center'
+                        Label:
+                            text: 'Description: '
+                            font_size: self.width / 6
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'center'
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'center'    
+                        TextCollection:
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'center'
+                        Label:
+                            text: 'Type: '
+                            font_size: self.width / 6
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'center'
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'center'    
+                        TextCollection:
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'center'
+                        Label:
+                            text: 'Location: '
+                            font_size: self.width / 6
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'center'
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'center'    
+                        TextCollection:
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'center'
+                        Label:
+                            text: 'Color: '
+                            font_size: self.width / 6
+                            text_size: self.size
+                            halign: 'left'
+                            valign: 'center'
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'center'    
+                        TextCollection:
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'center'   
+                        CancelButton:
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'center'   
+                        SubmitButton:
         
-        Label:
-            text: 'Machine Name: '
-            size: 100, 50
-        TextCollection:
-        Label:
-            text: 'Description: '
-            size: 100, 50
-        TextCollection:
-        CancelButton:
-        SubmitButton:
