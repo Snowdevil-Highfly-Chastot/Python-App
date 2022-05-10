@@ -1,0 +1,37 @@
+#:kivy 1.10.1
+<SubmitButton@Button>:
+    text: 'Submit'
+    size_hint: None, None
+    size: 100, 50
+<CancelButton@Button>:
+    text: 'Cancel'
+    size_hint: None, None
+    size: 100, 50
+<XButton@Button>:
+    text: 'X'
+    size_hint: None, None
+    size: 50, 50
+<TextCollection@TextInput>:
+    multiline: False
+    size_hint: None, None
+    size: 100, 50
+
+<FloatLayout>: 
+
+    GridLayout:
+        cols: 2
+        row_force_default: True
+        row_default_height: 100
+        col_default_width: 100
+        padding: self.width / 10
+        
+        Label:
+            text: 'Machine Name: '
+            size: 100, 50
+        TextCollection:
+        Label:
+            text: 'Description: '
+            size: 100, 50
+        TextCollection:
+        CancelButton:
+        SubmitButton:
