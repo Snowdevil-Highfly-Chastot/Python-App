@@ -1,4 +1,7 @@
 #:kivy 1.10.1
+<AnchorGridCell@AnchorLayout>:
+    anchor_x: 'center'
+    anchor_y: 'center'
 <SubmitButton@Button>:
     text: 'Submit'
     font_size: self.width / 8
@@ -10,6 +13,11 @@
 <XButton@Button>:
     text: 'X'
     size_hint: None, None
+<InputLabel@Label>:
+    font_size: self.width / 8
+    text_size: self.size
+    halign: 'left'
+    valign: 'center'
 <TextCollection@TextInput>:
     multiline: False
     size_hint: 1, .7
@@ -46,77 +54,33 @@
                     padding: self.width / 25
                     spacing: self.width / 25, self.width / 50
                     
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'center'
-                        Label:
+                    AnchorGridCell:
+                        InputLabel:
                             text: 'Name: '
-                            font_size: self.width / 8
-                            text_size: self.size
-                            halign: 'left'
-                            valign: 'center'
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'center'       
+                    AnchorGridCell:
                         TextCollection:
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'center'
-                        Label:
+                    AnchorGridCell:
+                        InputLabel:
                             text: 'Description: '
-                            font_size: self.width / 8
-                            text_size: self.size
-                            halign: 'left'
-                            valign: 'center'
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'center'    
+                    AnchorGridCell:
                         TextCollection:
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'center'
-                        Label:
+                    AnchorGridCell:
+                        InputLabel:
                             text: 'Type: '
-                            font_size: self.width / 8
-                            text_size: self.size
-                            halign: 'left'
-                            valign: 'center'
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'center'    
+                    AnchorGridCell:
                         TextCollection:
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'center'
-                        Label:
+                    AnchorGridCell:
+                        InputLabel:
                             text: 'Location: '
-                            font_size: self.width / 8
-                            text_size: self.size
-                            halign: 'left'
-                            valign: 'center'
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'center'    
+                    AnchorGridCell:
                         TextCollection:
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'center'
-                        Label:
+                    AnchorGridCell:
+                        InputLabel:
                             text: 'Color: '
-                            font_size: self.width / 8
-                            text_size: self.size
-                            halign: 'left'
-                            valign: 'center'
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'center'    
+                    AnchorGridCell:
                         TextCollection:
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'center'   
+                    AnchorGridCell:
                         CancelButton:
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'center'   
+                    AnchorGridCell:
                         SubmitButton:
         
