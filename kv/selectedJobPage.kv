@@ -1,0 +1,98 @@
+#:kivy 1.10.1
+<AnchorGridCell@AnchorLayout>:
+    anchor_x: 'center'
+    anchor_y: 'center'
+<SubmitButton@Button>:
+    text: 'Submit'
+    font_size: self.width / 8
+    size_hint: .9, .9
+<CancelButton@Button>:
+    text: 'Cancel'
+    font_size: self.width / 8
+    size_hint: .9, .9
+<XButton@Button>:
+    text: 'X'
+    size_hint: None, None
+<InputLabel@Label>:
+    font_size: self.width / 8
+    text_size: self.size
+    halign: 'left'
+    valign: 'center'
+<TextCollection@TextInput>:
+    multiline: False
+    size_hint: 1, .7
+    font_size: self.width / 7
+
+<FloatLayout>:
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
+        GridLayout:
+            cols: 1
+            rows: 2
+            row_force_default: True
+            row_default_height: self.width / 13
+            padding: self.width / 15
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'bottom'
+                Label:
+                    text: 'Selected Job'
+                    text_size: self.size
+                    font_size: self.width / 12
+                    halign: 'center'
+                    valign: 'bottom'
+                  
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'top'
+                GridLayout:
+                    cols: 2
+                    row_force_default: True
+                    row_default_height: self.width / 8
+                    col_default_width: self.width / 4
+                    padding: self.width / 25
+                    spacing: self.width / 25, self.width / 50
+                    
+                    AnchorGridCell:
+                        InputLabel:
+                            text: 'Part Name/Num: '
+                    AnchorGridCell:
+                        Label:
+                    AnchorGridCell:
+                        InputLabel:
+                            text: 'Description: '
+                    AnchorGridCell:
+                        Label:
+                    AnchorGridCell:
+                        InputLabel:
+                            text: 'Current Part Count: '
+                    AnchorGridCell:
+                        Label:
+                    AnchorGridCell:
+                        InputLabel:
+                            text: 'Part Machine Time: '
+                    AnchorGridCell:
+                        Label:
+                    AnchorGridCell:
+                        InputLabel:
+                            text: 'Completion Time: '
+                    AnchorGridCell:
+                        Label:
+                    AnchorGridCell:
+                        InputLabel:
+                            text: 'Parts Per Bar: '
+                    AnchorGridCell:
+                        Label:
+                    AnchorGridCell:
+                        InputLabel:
+                            text: 'Time Per Bar: '
+                    AnchorGridCell:
+                        Label:
+                    AnchorGridCell:
+                        Button:
+                            text: 'Go Back'
+                            font_size: self.width / 8
+                            size_hint: .9, .9
+
+        

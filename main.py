@@ -9,13 +9,14 @@ from kivy.uix.colorpicker import ColorPicker
 from py.fileImport import readMachine
 from kivy.lang import Builder
 from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.stacklayout import StackLayout
 
 
 
 class OuterGridLayout(FloatLayout):
     pass
 
-Builder.load_file("kv/addJobPage.kv")
+Builder.load_file("kv/machineStatusPage.kv")
 class MainApp(App):
 
     def build(self):
