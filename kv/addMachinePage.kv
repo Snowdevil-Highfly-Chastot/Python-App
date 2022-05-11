@@ -1,20 +1,18 @@
 #:kivy 1.10.1
 <SubmitButton@Button>:
     text: 'Submit'
-    size_hint: 1, .7
-    #size: 500, 150
+    font_size: self.width / 8
+    size_hint: .9, .9
 <CancelButton@Button>:
     text: 'Cancel'
-    size_hint: 1, .7
-    #size: 500, 150
+    font_size: self.width / 8
+    size_hint: .9, .9
 <XButton@Button>:
     text: 'X'
     size_hint: None, None
-    #size: 50, 50
 <TextCollection@TextInput>:
     multiline: False
     size_hint: 1, .7
-    #size: 500, 100
     font_size: self.width / 7
 
 <FloatLayout>:
@@ -53,7 +51,7 @@
                         anchor_y: 'center'
                         Label:
                             text: 'Name: '
-                            font_size: self.width / 6
+                            font_size: self.width / 8
                             text_size: self.size
                             halign: 'left'
                             valign: 'center'
@@ -66,7 +64,7 @@
                         anchor_y: 'center'
                         Label:
                             text: 'Description: '
-                            font_size: self.width / 6
+                            font_size: self.width / 8
                             text_size: self.size
                             halign: 'left'
                             valign: 'center'
@@ -79,7 +77,7 @@
                         anchor_y: 'center'
                         Label:
                             text: 'Type: '
-                            font_size: self.width / 6
+                            font_size: self.width / 8
                             text_size: self.size
                             halign: 'left'
                             valign: 'center'
@@ -92,7 +90,7 @@
                         anchor_y: 'center'
                         Label:
                             text: 'Location: '
-                            font_size: self.width / 6
+                            font_size: self.width / 8
                             text_size: self.size
                             halign: 'left'
                             valign: 'center'
@@ -105,7 +103,7 @@
                         anchor_y: 'center'
                         Label:
                             text: 'Color: '
-                            font_size: self.width / 6
+                            font_size: self.width / 8
                             text_size: self.size
                             halign: 'left'
                             valign: 'center'
