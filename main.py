@@ -15,7 +15,7 @@ from kivy.uix.anchorlayout import AnchorLayout
 class OuterGridLayout(FloatLayout):
     pass
 
-Builder.load_file("kv/addMachinePage.kv")
+Builder.load_file("kv/addJobPage.kv")
 class MainApp(App):
 
     def build(self):
