@@ -10,17 +10,18 @@ from py.fileImport import readMachine
 from kivy.lang import Builder
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.stacklayout import StackLayout
+from kivy.uix.boxlayout import BoxLayout
 
 
 
-class OuterGridLayout(FloatLayout):
+class FrontEnd(FloatLayout):
     pass
 
 Builder.load_file("kv/machineStatusPage.kv")
 class MainApp(App):
 
     def build(self):
-        self.root = root = OuterGridLayout()
+        self.root = root = FrontEnd()
         root.bind(size=self._update_rect, pos=self._update_rect)
 
         with root.canvas.before:

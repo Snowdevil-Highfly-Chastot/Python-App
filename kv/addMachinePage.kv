@@ -5,11 +5,11 @@
 <SubmitButton@Button>:
     text: 'Submit'
     font_size: self.width / 8
-    size_hint: .9, .9
+    size_hint: .4, .1
 <CancelButton@Button>:
     text: 'Cancel'
     font_size: self.width / 8
-    size_hint: .9, .9
+    size_hint: .4, .1
 <XButton@Button>:
     text: 'X'
     size_hint: None, None
@@ -79,8 +79,11 @@
                             text: 'Color: '
                     AnchorGridCell:
                         TextCollection:
-                    AnchorGridCell:
-                        CancelButton:
-                    AnchorGridCell:
-                        SubmitButton:
-        
+    AnchorLayout:
+        anchor_x: 'left'
+        anchor_y: 'bottom'
+        CancelButton:
+    AnchorLayout:
+        anchor_x: 'right'
+        anchor_y: 'bottom'
+        SubmitButton:

@@ -5,11 +5,11 @@
 <SubmitButton@Button>:
     text: 'Submit'
     font_size: self.width / 8
-    size_hint: .9, .9
+    size_hint: .4, .1
 <CancelButton@Button>:
     text: 'Cancel'
     font_size: self.width / 8
-    size_hint: .9, .9
+    size_hint: .4, .1
 <XButton@Button>:
     text: 'X'
     size_hint: None, None
@@ -17,6 +17,11 @@
     font_size: self.width / 8
     text_size: self.size
     halign: 'left'
+    valign: 'center'
+<OutputLabel@Label>:
+    font_size: self.width / 8
+    text_size: self.size
+    halign: 'right'
     valign: 'center'
 <TextCollection@TextInput>:
     multiline: False
@@ -37,36 +42,45 @@
                 anchor_x: 'center'
                 anchor_y: 'bottom'
                 Label:
-                    text: 'Selected Machine'
+                    text: 'Selected Machine Status'
                     text_size: self.size
                     font_size: self.width / 12
                     halign: 'center'
                     valign: 'bottom'
                   
-
-            StackLayout:
-                orientation: 'tb-lr'
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'top'
                 GridLayout:
                     cols: 2
-                    row_force_default: False
+                    row_force_default: True
                     row_default_height: self.width / 8
                     col_default_width: self.width / 4
                     padding: self.width / 25
                     spacing: self.width / 25, self.width / 50
+                    
                     AnchorGridCell:
                         InputLabel:
-                            text: 'Part Name/Num: '
+                            text: 'Current Job: '
                     AnchorGridCell:
-                        Label:
+                        OutputLabel:
+                            text: '414-44-1'
                     AnchorGridCell:
                         InputLabel:
-                            text: 'Description: '
+                            text: 'Parts Left: '
                     AnchorGridCell:
-                        Label:
-                AnchorGridCell:
-                    Button:
-                        text: 'Go Back'
-                        font_size: self.width / 8
-                        size_hint: .9, .9
-    
-        
+                        OutputLabel:
+                            text: '250'
+                    AnchorGridCell:
+                        InputLabel:
+                            text: 'Time Left: '
+                    AnchorGridCell:
+                        OutputLabel:
+                            text: '3 Days'
+        AnchorLayout:
+            anchor_x: 'left'
+            anchor_y: 'bottom'
+            Button:
+                text: 'Go Back'
+                font_size: self.width / 8
+                size_hint: .4, .1
