@@ -13,11 +13,10 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen, ScreenManager
 
-
+Builder.load_file("kv/screenMaster.kv")
 
 class MainOverview(Screen):
-    def changer (self, screen, *args):
-        self.manager.current = screen
+    pass
 class MachineStatusPage(Screen):
     pass
 class AddMachinePage(Screen):
@@ -25,10 +24,6 @@ class AddMachinePage(Screen):
 class AddJobPage(Screen):
     pass
 
-def changer (self, *args):
-    self.manager.current = 'MainOverview'
-
-Builder.load_file("kv/mainOverview.kv")
 class MainApp(App):
 
     def build(self):
