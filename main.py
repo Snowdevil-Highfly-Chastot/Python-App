@@ -11,18 +11,37 @@ from kivy.lang import Builder
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.screenmanager import Screen, ScreenManager
 
 
 
-class FrontEnd(FloatLayout):
+class MainOverview(Screen):
+    def changer (self, screen, *args):
+        self.manager.current = screen
+class MachineStatusPage(Screen):
+    pass
+class AddMachinePage(Screen):
+    pass
+class AddJobPage(Screen):
     pass
 
-Builder.load_file("kv/machineStatusPage.kv")
+def changer (self, *args):
+    self.manager.current = 'MainOverview'
+
+Builder.load_file("kv/mainOverview.kv")
 class MainApp(App):
 
     def build(self):
-        self.root = root = FrontEnd()
+        self.root = root = ScreenManager()
         root.bind(size=self._update_rect, pos=self._update_rect)
+        screen1 = MainOverview(name='MainOverview')
+        screen2 = MachineStatusPage(name='MachineStatusPage')
+        screen3 = AddMachinePage(name='AddMachinePage')
+        screen4 = AddJobPage(name='AddJobPage')
+        root.add_widget(screen1)
+        root.add_widget(screen2)
+        root.add_widget(screen3)
+        root.add_widget(screen4)
 
         with root.canvas.before:
             Color(0, 1, 1, .6)  # colors range from 0-1 not 0-255

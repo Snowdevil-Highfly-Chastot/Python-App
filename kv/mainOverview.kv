@@ -10,6 +10,11 @@
     text: 'Cancel'
     font_size: self.width / 8
     size_hint: .4, .1
+<MachineButton@Button>:
+    font_size: self.width / 20
+    text_size: self.size
+    halign: 'center'
+    valign: 'center'
 <XButton@Button>:
     text: 'X'
     size_hint: None, None
@@ -28,59 +33,46 @@
     size_hint: 1, .7
     font_size: self.width / 7
 
-<FloatLayout>:
-    AnchorLayout:
-        anchor_x: 'center'
-        anchor_y: 'top'
-        GridLayout:
-            cols: 1
-            rows: 2
-            row_force_default: True
-            row_default_height: self.width / 13
-            padding: self.width / 15
-            AnchorLayout:
-                anchor_x: 'center'
-                anchor_y: 'bottom'
-                Label:
-                    text: 'Selected Machine Status'
-                    text_size: self.size
-                    font_size: self.width / 12
-                    halign: 'center'
-                    valign: 'bottom'
-                  
-            AnchorLayout:
-                anchor_x: 'center'
-                anchor_y: 'top'
-                GridLayout:
-                    cols: 2
-                    row_force_default: True
-                    row_default_height: self.width / 8
-                    col_default_width: self.width / 4
-                    padding: self.width / 25
-                    spacing: self.width / 25, self.width / 50
-                    
-                    AnchorGridCell:
-                        InputLabel:
-                            text: 'Current Job: '
-                    AnchorGridCell:
-                        OutputLabel:
-                            text: '414-44-1'
-                    AnchorGridCell:
-                        InputLabel:
-                            text: 'Parts Left: '
-                    AnchorGridCell:
-                        OutputLabel:
-                            text: '250'
-                    AnchorGridCell:
-                        InputLabel:
-                            text: 'Time Left: '
-                    AnchorGridCell:
-                        OutputLabel:
-                            text: '3 Days'
+<Screen>:
+    FloatLayout:
         AnchorLayout:
-            anchor_x: 'left'
-            anchor_y: 'bottom'
-            Button:
-                text: 'Go Back'
-                font_size: self.width / 8
-                size_hint: .4, .1
+            anchor_x: 'center'
+            anchor_y: 'top'
+            GridLayout:
+                cols: 1
+                row_force_default: True
+                row_default_height: self.width / 13
+                padding: self.width / 15
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'bottom'
+                    Label:
+                        text: 'All Currently Added Machines'
+                        text_size: self.size
+                        font_size: self.width / 16
+                        halign: 'center'
+                        valign: 'bottom'
+                    
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'top'
+                    GridLayout:
+                        cols: 1
+                        row_force_default: True
+                        row_default_height: self.width / 8
+                        col_default_width: self.width / 4
+                        padding: self.width / 25
+                        spacing: self.width / 25, self.width / 50
+                        AnchorGridCell:
+                            MachineButton:
+                                text: 'Tsugami 5'
+                                on_press: root.changer('MachineStatusPage')
+                        AnchorGridCell:
+                            MachineButton:
+                                text: 'Tsugami 6'
+                        AnchorGridCell:
+                            MachineButton:
+                                text: 'Tsugami 7'
+                        AnchorGridCell:
+                            MachineButton:
+                                text: 'Tsugami 8'
