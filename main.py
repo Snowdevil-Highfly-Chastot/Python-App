@@ -11,20 +11,21 @@ from kivy.lang import Builder
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.screenmanager import Screen, ScreenManager
+from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 
 Builder.load_file("kv/screenMaster.kv")
+#selectedMachine = MainOverview()
 
 class MainOverview(Screen):
-    pass
+    pass    
 class MachineStatusPage(Screen):
-    pass
+    labelText = str('Machine')
 class AddMachinePage(Screen):
     pass
 class AddJobPage(Screen):
     pass
 
-class MainApp(App):
+class MainApp(App):   
 
     def build(self):
         self.root = root = ScreenManager()
