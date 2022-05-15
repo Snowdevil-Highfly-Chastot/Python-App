@@ -43,8 +43,15 @@
     
 <ScreenManager>
     transition: NoTransition()
+<<<<<<< HEAD:kv/ScreenManagement.kv
     
     
+=======
+    MainOverview:
+        id: mainOverview
+    MachineStatusPage:
+        selectedMachine: mainOverview.selectedMachine
+>>>>>>> 9704b6d (Working on dynamic labeling):kv/screenMaster.kv
 <MainOverview>:
     button_1: b1
     FloatLayout:
@@ -77,11 +84,17 @@
                         spacing: self.width / 25, self.width / 50
                         AnchorGridCell:
                             MachineButton:
+<<<<<<< HEAD:kv/ScreenManagement.kv
                                 id: b1
                                 text: 'Tsugami 5'
                                 on_press:
                                     #root.manager.selectedMachine = self.text
                                     root.manager.current = 'MachineStatusPage'
+=======
+                                id: machine1
+                                text: "Tsugami 5"
+                                on_press: root.selectedMachine = machine1.text; root.manager.current = 'MachineStatusPage'
+>>>>>>> 9704b6d (Working on dynamic labeling):kv/screenMaster.kv
                         AnchorGridCell:
                             MachineButton:
                                 text: 'Tsugami 6'
@@ -119,8 +132,13 @@
                     anchor_x: 'center'
                     anchor_y: 'bottom'
                     Label:
+<<<<<<< HEAD:kv/ScreenManagement.kv
                         id: machineName
                         text: 'yo'
+=======
+                        id: selectedMachine
+                        text: root.selectedMachine
+>>>>>>> 9704b6d (Working on dynamic labeling):kv/screenMaster.kv
                         text_size: self.size
                         font_size: self.width / 12
                         halign: 'center'
