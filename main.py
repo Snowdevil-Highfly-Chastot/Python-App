@@ -12,22 +12,35 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
+from kivy.properties import StringProperty
 
-Builder.load_file("kv/screenMaster.kv")
-#selectedMachine = MainOverview()
+Builder.load_file("kv/ScreenManagement.kv")
+
 
 class MainOverview(Screen):
-    pass    
+    button_1 = ''
 class MachineStatusPage(Screen):
-    labelText = str('Machine')
+    selectedMachine = StringProperty()
+    def getInfo(self, selectedMachine):
+        button1 = MainOverview.button_1.text
+        self.selectedMachine.append(button1)
+        return selectedMachine
 class AddMachinePage(Screen):
     pass
 class AddJobPage(Screen):
     pass
 
+class Variables():
+    selectedMachine = StringProperty()
+    def getInfo(self, selectedMachine):
+        button1 = MainOverview.button_1.text
+        self.selectedMachine.append(button1)
+        return selectedMachine
+
 class MainApp(App):   
 
     def build(self):
+        
         self.root = root = ScreenManager()
         root.bind(size=self._update_rect, pos=self._update_rect)
         screen1 = MainOverview(name='MainOverview')
@@ -38,6 +51,9 @@ class MainApp(App):
         root.add_widget(screen2)
         root.add_widget(screen3)
         root.add_widget(screen4)
+        
+        #selectedMachine = StringProperty('test')
+        
 
         with root.canvas.before:
             Color(0, 1, 1, .6)  # colors range from 0-1 not 0-255
