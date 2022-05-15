@@ -13,6 +13,7 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.properties import StringProperty
+<<<<<<< HEAD
 
 Builder.load_file("kv/ScreenManagement.kv")
 
@@ -25,6 +26,15 @@ class MachineStatusPage(Screen):
         button1 = MainOverview.button_1.text
         self.selectedMachine.append(button1)
         return selectedMachine
+=======
+
+Builder.load_file("kv/screenMaster.kv")
+
+class MainOverview(Screen):
+    selectedMachine = StringProperty("")
+class MachineStatusPage(Screen):
+    selectedMachine = StringProperty("yo")
+>>>>>>> 9704b6d (Working on dynamic labeling)
 class AddMachinePage(Screen):
     pass
 class AddJobPage(Screen):
