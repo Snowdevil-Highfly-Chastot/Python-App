@@ -17,14 +17,14 @@ from kivy.properties import StringProperty
 Builder.load_file("kv/ScreenManagement.kv")
 
 class MainOverview(Screen):
-    selectedMachine = StringProperty("")
+    selectedMachine = StringProperty()
 class MachineStatusPage(Screen):
-    selectedMachine = StringProperty("yo")
+    selectedMachine = MainOverview.selectedMachine
 class AddMachinePage(Screen):
     pass
 class AddJobPage(Screen):
     pass
-
+    
 class MainApp(App):   
 
     def build(self):
