@@ -55,3 +55,54 @@ def readMachine (Machine_Name):
         return rows
     
     setupDb.close
+    
+    
+def saveJob(Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active):
+    
+    #Find current path of this folder
+    currentPath = os.path.join(ROOT_DIR)
+    
+    #Changes current directory to db directory in relation to this file
+    os.chdir(currentPath)
+    climbDirectory(1)
+    os.chdir('db')
+
+    #Creates database if not created, otherwise connects to it
+    setupDb = sql.connect('appDatabase.db')
+    cursor = setupDb.cursor()
+
+    #Creates table if not created, otherwise will return machine name and time left
+    cursor.execute('''CREATE TABLE IF NOT EXISTS Jobs
+    (Part_Name TEXT, Part_Desc TEXT, Machine_Name TEXT, Time_Per_Part INT, Completion_Time TIMESTAMP, Oal INT, Cut_Off_Width INT, Bar_Length INT, Bar_Parameter INT, Active BOOLEAN)''')
+    
+    cursor.execute('''DELETE FROM Jobs WHERE Part_Name = '%s' AND Machine_Name = '%s' ''' % Part_Name, Machine_Name)
+    
+    cursor.execute('''INSERT INTO Jobs (Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', (Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active))
+     
+    setupDb.commit()
+    print("Post Complete")
+    setupDb.close
+
+def readJob(Part_Name, Machine_Name, Active):
+    
+    #Find current path of this folder
+    currentPath = os.path.join(ROOT_DIR)
+    
+    #Changes current directory to db directory in relation to this file
+    os.chdir(currentPath)
+    climbDirectory(1)
+    os.chdir('db')
+
+    #Creates database if not created, otherwise connects to it
+    setupDb = sql.connect('appDatabase.db')
+    cursor = setupDb.cursor()
+    
+    cursor.execute('''SELECT * FROM Jobs WHERE Job_Name = '%s' AND Machine_Name = '%s' AND Active = '%s' ''' % Job_Name, Machine_Name, Active)
+    
+    rows = cursor.fetchall()
+    for row in rows:
+        print(rows)
+        return rows
+    
+    setupDb.close

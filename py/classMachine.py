@@ -7,7 +7,9 @@ barfeedParts
 
 from fileImport import (
 saveMachine,
-readMachine
+readMachine,
+saveJob,
+readJob
 )
 
 class machine:
@@ -69,19 +71,4 @@ machine1.barfeedParts()
 machine1.barfeedCompletionTime()
 machine1.barfeedTime()
 machine1.pullCompletionTime()
-print(" ")
-
-machine2 = machine("Tsugami 6", 4000, 109)
-#machine2.postCompletionTime()
-machine2.pullCompletionTime()
-print(" ")
-
-machine3 = machine("Tsugami 7", 1000, 59)
-#machine3.postCompletionTime()
-machine3.pullCompletionTime()
-print(" ")
-
-machine4 = machine("Tsugami 8", 6000, 42)
-#machine4.postCompletionTime()
-machine4.pullCompletionTime()
 print(" ")
