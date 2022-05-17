@@ -1,11 +1,11 @@
 import datetime
-from machineClassLibrary import (
+from .machineClassLibrary import (
 runTimeLeft,
 completionTime,
 barfeedParts
 )
 
-from fileImport import (
+from .fileImport import (
 saveMachine,
 readMachine,
 saveJob,
@@ -63,7 +63,7 @@ class machine:
         runTimeLeft(totalParts, self.partTime)
         
 class Job:
-    def __init__ (self, Machine_Name, Part_Name, Part_Desc = "", Time_Per_Part = 0, Completion_Time = "", Oal = 0, Cut_Off_Width = 0, Bar_Length = 0, Bar_Parameter = 0, Active = False):
+    def __init__ (self, Machine_Name, Part_Name, Part_Desc = "", Time_Per_Part = 0, Completion_Time = "", Oal = 0, Cut_Off_Width = 0, Bar_Length = 0, Bar_Parameter = 0, Active = "y"):
      
         self.Machine_Name = Machine_Name
         self.Part_Name = Part_Name
@@ -89,15 +89,15 @@ class Job:
 
        
 #Initializing Class below for testing
-job1 = Job("Tsugami 8", "404-44-1", "Diffuser from the 404 family", 70,"Tomorrow",2.25,.095,144,5.2,"y")
-job1.postJob()
-job1.grabJob(2)
-print("")
+#job1 = Job("Tsugami 8", "404-44-1", "Diffuser from the 404 family", 70,"Tomorrow",2.25,.095,144,5.2,"y")
+#job1.postJob()
+#job1.grabJob(2)
+#print("")
         
-machine1 = machine("Tsugami 5", 1200, 117, 2.625, 144, 0.95, 3.5)
+#machine1 = machine("Tsugami 5", 1200, 117, 2.625, 144, 0.95, 3.5)
 #machine1.postCompletionTime()
-machine1.barfeedParts()
-machine1.barfeedCompletionTime()
-machine1.barfeedTime()
-machine1.pullCompletionTime()
-print(" ")
+#machine1.barfeedParts()
+#machine1.barfeedCompletionTime()
+#machine1.barfeedTime()
+#machine1.pullCompletionTime()
+#print(" ")

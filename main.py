@@ -13,6 +13,7 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.properties import StringProperty, NumericProperty
+from py.classMachine import Job
 
 Builder.load_file("kv/ScreenManagement.kv")
 
@@ -25,7 +26,7 @@ class MachineStatusPage(Screen):
     Machine_Name = selectedMachine
     Part_Name = StringProperty("PartNameTest")
     Part_Desc = StringProperty("PartDescTest")
-    Time_Per_Part = NumericProperty(100)
+    Time_Per_Part = str(NumericProperty(100))
     Oal = NumericProperty(1.2)
     Cut_Off_Width = NumericProperty(.1)
     Bar_Length = NumericProperty(300)
@@ -38,7 +39,7 @@ class AddMachinePage(Screen):
     pass
 class AddJobPage(Screen):
     
-    Machine_Name = StringProperty()
+    Machine_Name = MainOverview.selectedMachine
     Part_Name = StringProperty()
     Part_Desc = StringProperty()
     Time_Per_Part = NumericProperty()
@@ -46,6 +47,11 @@ class AddJobPage(Screen):
     Cut_Off_Width = NumericProperty()
     Bar_Length = NumericProperty()
     Bar_Parameter = NumericProperty()
+    
+    def addNewJob():
+        newJob = Job(Machine_Name, Part_Name, Part_Desc, Time_Per_Part, "", Oal, Cut_Off_Width, Bar_Length, Bar_Parameter, Active = "y")
+        newJob.postJob()
+        
     
 class MainApp(App):   
 

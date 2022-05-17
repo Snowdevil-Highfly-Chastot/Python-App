@@ -145,16 +145,22 @@
                                 text: root.Part_Name
                         AnchorGridCell:
                             InputLabel:
-                                text: 'Parts Left: '
+                                text: 'Job Description'
                         AnchorGridCell:
                             OutputLabel:
-                                text: '250'
+                                text: root.Part_Desc
                         AnchorGridCell:
                             InputLabel:
                                 text: 'Time Left: '
                         AnchorGridCell:
                             OutputLabel:
-                                text: '3 Days'
+                                text: 'Need to setup calc'
+                        AnchorGridCell:
+                            InputLabel:
+                                text: 'Time Per Part: '
+                        AnchorGridCell:
+                            OutputLabel:
+                                text: root.Time_Per_Part
             AnchorLayout:
                 anchor_x: 'left'
                 anchor_y: 'bottom'
@@ -247,6 +253,15 @@
             anchor_x: 'right'
             anchor_y: 'bottom'
             SubmitButton:
+                on_press:
+                    root.Part_Name = "heh"
+                    root.Part_Desc = "testing here"
+                    root.Time_Per_Part = 34
+                    root.Oal = 49
+                    root.Cut_Off_Width = 20
+                    root.Bar_Length = 144
+                    root.Bar_Parameter = 5
+                    root.addNewJob()
                 
   
 <AddMachinePage>:

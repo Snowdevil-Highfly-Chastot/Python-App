@@ -1,7 +1,7 @@
 import sqlite3 as sql
 import os
 import os.path
-from config.definitions import (
+from .config.definitions import (
     ROOT_DIR,
     climbDirectory
 )
@@ -79,7 +79,6 @@ def saveJob(Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', (Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active))
      
     setupDb.commit()
-    print("Post Complete")
     setupDb.close
 
 def readJob(Column, Part_Name, Machine_Name, Active):
