@@ -82,16 +82,16 @@ class Job:
         saveJob(self.Part_Name, self.Part_Desc, self.Machine_Name, self.Time_Per_Part, self.Completion_Time, self.Oal,self.Cut_Off_Width, self.Bar_Length, self.Bar_Parameter, self.Active)
         print("Posted!")
         
-    def grabJob(self, col):
+    def grabJob(self, Column):
         print("Reading...")
-        results = readJob(self.Part_Name, self.Machine_Name, self.Active)
-        print(results[col])
+        result = readJob(Column, self.Part_Name, self.Machine_Name, self.Active)
+        print(result)
 
        
 #Initializing Class below for testing
 job1 = Job("Tsugami 8", "404-44-1", "Diffuser from the 404 family", 70,"Tomorrow",2.25,.095,144,5.2,"y")
 job1.postJob()
-job1.grabJob(0)
+job1.grabJob(2)
 print("")
         
 machine1 = machine("Tsugami 5", 1200, 117, 2.625, 144, 0.95, 3.5)

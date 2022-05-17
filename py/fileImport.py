@@ -52,10 +52,6 @@ def readMachine (Machine_Name):
     rows = cursor.fetchall()
     for row in rows:
         print(rows)
-        for i in rows[row].split(','):
-            print(i.strip())
-            return i.strip()
-    
     setupDb.close
     
     
@@ -86,7 +82,7 @@ def saveJob(Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, 
     print("Post Complete")
     setupDb.close
 
-def readJob(Part_Name, Machine_Name, Active):
+def readJob(Column, Part_Name, Machine_Name, Active):
     
     #Find current path of this folder
     currentPath = os.path.join(ROOT_DIR)
@@ -100,11 +96,8 @@ def readJob(Part_Name, Machine_Name, Active):
     setupDb = sql.connect('appDatabase.db')
     cursor = setupDb.cursor()
     
-    cursor.execute('''SELECT * FROM Jobs WHERE Part_Name = '%s' AND Machine_Name = '%s' AND Active = '%s' ''' % (Part_Name, Machine_Name, Active))
+    result = cursor.execute('''SELECT * FROM Jobs WHERE Part_Name = '%s' AND Machine_Name = '%s' AND Active = '%s' ''' % (Part_Name, Machine_Name, Active)).fetchone()[Column]
     
-    rows = cursor.fetchall()
-    for row in rows:
-        print(rows)
-        return rows
+    return result
     
     setupDb.close
