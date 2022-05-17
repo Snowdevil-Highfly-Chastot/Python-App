@@ -1,7 +1,7 @@
 import sqlite3 as sql
 import os
 import os.path
-from .config.definitions import (
+from config.definitions import (
     ROOT_DIR,
     climbDirectory
 )
@@ -52,7 +52,9 @@ def readMachine (Machine_Name):
     rows = cursor.fetchall()
     for row in rows:
         print(rows)
-        return rows
+        for i in rows[row].split(','):
+            print(i.strip())
+            return i.strip()
     
     setupDb.close
     
@@ -73,11 +75,11 @@ def saveJob(Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, 
 
     #Creates table if not created, otherwise will return machine name and time left
     cursor.execute('''CREATE TABLE IF NOT EXISTS Jobs
-    (Part_Name TEXT, Part_Desc TEXT, Machine_Name TEXT, Time_Per_Part INT, Completion_Time TIMESTAMP, Oal INT, Cut_Off_Width INT, Bar_Length INT, Bar_Parameter INT, Active BOOLEAN)''')
+    (Part_Name TEXT, Part_Desc TEXT, Machine_Name TEXT, Time_Per_Part INT, Completion_Time TIMESTAMP, Oal INT, Cut_Off_Width INT, Bar_Length INT, Bar_Parameter INT, Active TEXT)''')
     
-    cursor.execute('''DELETE FROM Jobs WHERE Part_Name = '%s' AND Machine_Name = '%s' ''' % Part_Name, Machine_Name)
+    cursor.execute('''DELETE FROM Jobs WHERE Part_Name = '%s' AND Machine_Name = '%s' ''' % (Part_Name, Machine_Name))
     
-    cursor.execute('''INSERT INTO Jobs (Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter) 
+    cursor.execute('''INSERT INTO Jobs (Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active) 
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', (Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active))
      
     setupDb.commit()
@@ -98,7 +100,7 @@ def readJob(Part_Name, Machine_Name, Active):
     setupDb = sql.connect('appDatabase.db')
     cursor = setupDb.cursor()
     
-    cursor.execute('''SELECT * FROM Jobs WHERE Job_Name = '%s' AND Machine_Name = '%s' AND Active = '%s' ''' % Job_Name, Machine_Name, Active)
+    cursor.execute('''SELECT * FROM Jobs WHERE Part_Name = '%s' AND Machine_Name = '%s' AND Active = '%s' ''' % (Part_Name, Machine_Name, Active))
     
     rows = cursor.fetchall()
     for row in rows:

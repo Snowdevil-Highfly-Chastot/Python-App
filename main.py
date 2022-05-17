@@ -12,18 +12,40 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, NumericProperty
 
 Builder.load_file("kv/ScreenManagement.kv")
 
 class MainOverview(Screen):
     selectedMachine = StringProperty()
+    
 class MachineStatusPage(Screen):
     selectedMachine = MainOverview.selectedMachine
+    
+    Machine_Name = selectedMachine
+    Part_Name = StringProperty("PartNameTest")
+    Part_Desc = StringProperty("PartDescTest")
+    Time_Per_Part = NumericProperty(100)
+    Oal = NumericProperty(1.2)
+    Cut_Off_Width = NumericProperty(.1)
+    Bar_Length = NumericProperty(300)
+    Bar_Parameter = NumericProperty(4.1)
+    
+    
+        
+    
 class AddMachinePage(Screen):
     pass
 class AddJobPage(Screen):
-    pass
+    
+    Machine_Name = StringProperty()
+    Part_Name = StringProperty()
+    Part_Desc = StringProperty()
+    Time_Per_Part = NumericProperty()
+    Oal = NumericProperty()
+    Cut_Off_Width = NumericProperty()
+    Bar_Length = NumericProperty()
+    Bar_Parameter = NumericProperty()
     
 class MainApp(App):   
 

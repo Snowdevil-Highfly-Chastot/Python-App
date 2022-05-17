@@ -61,9 +61,38 @@ class machine:
     
         totalParts = barfeedParts(self.partLength, self.cutoffWidth, self.barfeedParameter, self.barLength)
         runTimeLeft(totalParts, self.partTime)
- 
+        
+class Job:
+    def __init__ (self, Machine_Name, Part_Name, Part_Desc = "", Time_Per_Part = 0, Completion_Time = "", Oal = 0, Cut_Off_Width = 0, Bar_Length = 0, Bar_Parameter = 0, Active = False):
+     
+        self.Machine_Name = Machine_Name
+        self.Part_Name = Part_Name
+        self.Part_Desc = Part_Desc
+        self.Time_Per_Part = Time_Per_Part
+        self.Completion_Time = Completion_Time
+        self.Oal = Oal
+        self.Cut_Off_Width = Cut_Off_Width
+        self.Bar_Length = Bar_Length
+        self.Bar_Parameter = Bar_Parameter
+        self.Active = Active
+        
+    def postJob(self):
+        
+        print("Posting...")
+        saveJob(self.Part_Name, self.Part_Desc, self.Machine_Name, self.Time_Per_Part, self.Completion_Time, self.Oal,self.Cut_Off_Width, self.Bar_Length, self.Bar_Parameter, self.Active)
+        print("Posted!")
+        
+    def grabJob(self, col):
+        print("Reading...")
+        results = readJob(self.Part_Name, self.Machine_Name, self.Active)
+        print(results[col])
+
        
 #Initializing Class below for testing
+job1 = Job("Tsugami 8", "404-44-1", "Diffuser from the 404 family", 70,"Tomorrow",2.25,.095,144,5.2,"y")
+job1.postJob()
+job1.grabJob(0)
+print("")
         
 machine1 = machine("Tsugami 5", 1200, 117, 2.625, 144, 0.95, 3.5)
 #machine1.postCompletionTime()
