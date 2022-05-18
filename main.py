@@ -24,26 +24,29 @@ class MachineStatusPage(Screen):
 
     selectedMachine = MainOverview.selectedMachine
     Machine_Name = selectedMachine
-
-    def getCurrentJob (self):
-
-        currentJob = Job(self.Machine_Name)
-        
-        dbInfo = StringProperty(currentJob.grabJob(0))
-        
-        return dbInfo
     
-    Part_Name = StringProperty(getCurrentJob())
+    Part_Name = StringProperty('test')
     Part_Desc = StringProperty()
-    Time_Per_Part = str(NumericProperty())
+    Time_Per_Part = StringProperty()
 
     Oal = NumericProperty()
     Cut_Off_Width = NumericProperty()
     Bar_Length = NumericProperty()
     Bar_Parameter = NumericProperty()
 
+    def getCurrentJob (self):
 
+        currentJob = Job(self.Machine_Name)
         
+        try:
+            self.Part_Name = str(currentJob.grabJob(0))
+            self.Part_Desc = str(currentJob.grabJob(1))
+            self.Time_Per_Part = str(currentJob.grabJob(3))
+        except:
+            self.Part_Name = "None"
+            self.Part_Desc = "None"
+            self.Time_Per_Part = "None"
+                
         
     
 class AddMachinePage(Screen):

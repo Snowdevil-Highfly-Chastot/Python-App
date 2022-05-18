@@ -83,9 +83,9 @@ class Job:
         print("Posted!")
         
     def grabJob(self, Column):
-        print("Reading...")
+        #print("Reading...")
         result = readJob(Column, self.Machine_Name)
-        print(result)
+        return result
 
        
 #Initializing Class below for testing

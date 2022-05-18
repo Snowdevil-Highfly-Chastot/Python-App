@@ -95,7 +95,12 @@ def readJob(Column, Machine_Name):
     setupDb = sql.connect('appDatabase.db')
     cursor = setupDb.cursor()
     
-    result = cursor.execute('''SELECT * FROM Jobs WHERE Machine_Name = '%s' ''' % Machine_Name).fetchone()[Column]
+    query = cursor.execute('''SELECT * FROM Jobs WHERE Machine_Name = '%s' ''' % Machine_Name)
+    
+    item = list(query.fetchone())
+    result = str(item[Column])
+    
+    #print(result)
     
     return result
     
