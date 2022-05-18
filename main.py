@@ -21,6 +21,7 @@ class MainOverview(Screen):
     selectedMachine = StringProperty()
     
 class MachineStatusPage(Screen):
+    
     selectedMachine = MainOverview.selectedMachine
     
     Machine_Name = selectedMachine
@@ -39,7 +40,9 @@ class AddMachinePage(Screen):
     pass
 class AddJobPage(Screen):
     
-    Machine_Name = MainOverview.selectedMachine
+    selectedMachine = MainOverview.selectedMachine
+    
+    Machine_Name = selectedMachine
     Part_Name = StringProperty()
     Part_Desc = StringProperty()
     Time_Per_Part = NumericProperty()
@@ -48,8 +51,8 @@ class AddJobPage(Screen):
     Bar_Length = NumericProperty()
     Bar_Parameter = NumericProperty()
     
-    def addNewJob():
-        newJob = Job(Machine_Name, Part_Name, Part_Desc, Time_Per_Part, "", Oal, Cut_Off_Width, Bar_Length, Bar_Parameter, Active = "y")
+    def addNewJob(self):
+        newJob = Job(self.Machine_Name, self.Part_Name, self.Part_Desc, self.Time_Per_Part, "", self.Oal, self.Cut_Off_Width, self.Bar_Length, self.Bar_Parameter)
         newJob.postJob()
         
     
