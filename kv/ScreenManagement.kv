@@ -78,6 +78,7 @@
                                 on_press:
                                     root.manager.current = 'MachineStatusPage'
                                     root.manager.current_screen.selectedMachine = self.text
+                                    root.manager.current_screen.getCurrentJob()
                         AnchorGridCell:
                             MachineButton:
                                 text: 'Tsugami 6'

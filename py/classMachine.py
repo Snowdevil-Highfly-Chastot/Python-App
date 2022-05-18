@@ -63,7 +63,7 @@ class machine:
         runTimeLeft(totalParts, self.partTime)
         
 class Job:
-    def __init__ (self, Machine_Name, Part_Name, Part_Desc = "", Time_Per_Part = 0, Completion_Time = "", Oal = 0, Cut_Off_Width = 0, Bar_Length = 0, Bar_Parameter = 0, Active = "y"):
+    def __init__ (self, Machine_Name, Part_Name = "", Part_Desc = "", Time_Per_Part = 0, Completion_Time = "", Oal = 0, Cut_Off_Width = 0, Bar_Length = 0, Bar_Parameter = 0, Active = "y"):
      
         self.Machine_Name = Machine_Name
         self.Part_Name = Part_Name
@@ -84,7 +84,7 @@ class Job:
         
     def grabJob(self, Column):
         print("Reading...")
-        result = readJob(Column, self.Part_Name, self.Machine_Name, self.Active)
+        result = readJob(Column, self.Machine_Name)
         print(result)
 
        

@@ -81,7 +81,7 @@ def saveJob(Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, 
     setupDb.commit()
     setupDb.close
 
-def readJob(Column, Part_Name, Machine_Name, Active):
+def readJob(Column, Machine_Name):
     
     #Find current path of this folder
     currentPath = os.path.join(ROOT_DIR)
@@ -95,7 +95,7 @@ def readJob(Column, Part_Name, Machine_Name, Active):
     setupDb = sql.connect('appDatabase.db')
     cursor = setupDb.cursor()
     
-    result = cursor.execute('''SELECT * FROM Jobs WHERE Part_Name = '%s' AND Machine_Name = '%s' AND Active = '%s' ''' % (Part_Name, Machine_Name, Active)).fetchone()[Column]
+    result = cursor.execute('''SELECT * FROM Jobs WHERE Machine_Name = '%s' ''' % Machine_Name).fetchone()[Column]
     
     return result
     

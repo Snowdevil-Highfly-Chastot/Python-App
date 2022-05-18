@@ -21,19 +21,29 @@ class MainOverview(Screen):
     selectedMachine = StringProperty()
     
 class MachineStatusPage(Screen):
-    
+
     selectedMachine = MainOverview.selectedMachine
-    
     Machine_Name = selectedMachine
-    Part_Name = StringProperty("PartNameTest")
-    Part_Desc = StringProperty("PartDescTest")
-    Time_Per_Part = str(NumericProperty(100))
-    Oal = NumericProperty(1.2)
-    Cut_Off_Width = NumericProperty(.1)
-    Bar_Length = NumericProperty(300)
-    Bar_Parameter = NumericProperty(4.1)
+
+    def getCurrentJob (self):
+
+        currentJob = Job(self.Machine_Name)
+        
+        dbInfo = StringProperty(currentJob.grabJob(0))
+        
+        return dbInfo
     
-    
+    Part_Name = StringProperty(getCurrentJob())
+    Part_Desc = StringProperty()
+    Time_Per_Part = str(NumericProperty())
+
+    Oal = NumericProperty()
+    Cut_Off_Width = NumericProperty()
+    Bar_Length = NumericProperty()
+    Bar_Parameter = NumericProperty()
+
+
+        
         
     
 class AddMachinePage(Screen):
