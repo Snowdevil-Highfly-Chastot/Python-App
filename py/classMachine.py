@@ -22,21 +22,6 @@ class machine:
         self.barLength = barLength
         self.cutoffWidth = cutoffWidth
         self.barfeedParameter = barfeedParameter
-    
-    def jobFinished(self):
-        
-        print("Calculating...")
-        runTimeLeft(self.partsNeeded, self.partTime)
-        
-    def postCompletionTime(self):
-        
-        print("posting...")
-        saveMachine(self.name, completionTime(self.partTime, self.partsNeeded))
-
-    def pullCompletionTime(self):
-
-        print("fetching...")
-        readMachine(self.name)
         
     def barfeedParts(self):
         
@@ -63,11 +48,12 @@ class machine:
         runTimeLeft(totalParts, self.partTime)
         
 class Job:
-    def __init__ (self, Machine_Name, Part_Name = "", Part_Desc = "", Time_Per_Part = 0, Completion_Time = "", Oal = 0, Cut_Off_Width = 0, Bar_Length = 0, Bar_Parameter = 0, Active = "y"):
+    def __init__ (self, Machine_Name, Part_Name = "", Part_Desc = "", Time_Per_Part = 0, Parts_Needed = 0, Completion_Time = "", Oal = 0, Cut_Off_Width = 0, Bar_Length = 0, Bar_Parameter = 0, Active = "y"):
      
         self.Machine_Name = Machine_Name
         self.Part_Name = Part_Name
         self.Part_Desc = Part_Desc
+        self.Parts_Needed = Parts_Needed
         self.Time_Per_Part = Time_Per_Part
         self.Completion_Time = Completion_Time
         self.Oal = Oal
@@ -78,15 +64,32 @@ class Job:
         
     def postJob(self):
         
-        print("Posting...")
-        saveJob(self.Part_Name, self.Part_Desc, self.Machine_Name, self.Time_Per_Part, self.Completion_Time, self.Oal,self.Cut_Off_Width, self.Bar_Length, self.Bar_Parameter, self.Active)
-        print("Posted!")
+        #print("Posting...")
+        saveJob(self.Part_Name, self.Part_Desc, self.Machine_Name, self.Parts_Needed, self.Time_Per_Part, self.Oal,self.Cut_Off_Width, self.Bar_Length, self.Bar_Parameter, self.Active)
+        #print("Posted!")
         
     def grabJob(self, Column):
         #print("Reading...")
         result = readJob(Column, self.Machine_Name)
         return result
 
+    def jobFinished(self):
+        
+        #print("Calculating...")
+        result = runTimeLeft(self.Parts_Needed, self.Time_Per_Part)
+        return result
+        
+    def postCompletionTime(self):
+        
+        #print("posting...")
+        saveMachine(self.name, completionTime(self.partTime, self.partsNeeded))
+
+    def pullCompletionTime(self):
+
+        #print("fetching...")
+        result = readMachine(self.name)
+        return result
+        
        
 #Initializing Class below for testing
 #job1 = Job("Tsugami 8", "404-44-1", "Diffuser from the 404 family", 70,"Tomorrow",2.25,.095,144,5.2,"y")

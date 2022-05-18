@@ -13,9 +13,9 @@ def runTimeLeft(count, time):
     def timeMath(seconds):
 
         if seconds == 0:
-            return math.floor(count * time)
+            return math.floor(int(count) * int(time))
         else:
-            return math.floor(count * time / seconds)
+            return math.floor(int(count) * int(time) / seconds)
     
 #Math to convert total seconds to Days, Hours, Minutes, and Seconds.
 
@@ -34,7 +34,7 @@ def runTimeLeft(count, time):
     if secondTimeLeft > 0:
         totalTime.update({"Seconds" : secondTimeLeft})
     
-    print(totalTime)
+    #print(totalTime)
         
     return totalTime
 

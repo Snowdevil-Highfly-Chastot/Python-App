@@ -5,6 +5,7 @@ from .config.definitions import (
     ROOT_DIR,
     climbDirectory
 )
+from .machineClassLibrary import completionTime
 
 def saveMachine (Machine_Name, Completion_Time):
     
@@ -55,7 +56,9 @@ def readMachine (Machine_Name):
     setupDb.close
     
     
-def saveJob(Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active):
+def saveJob(Part_Name, Part_Desc, Machine_Name, Parts_Needed, Time_Per_Part, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active):
+    
+    Completion_Time = completionTime(int(Parts_Needed), int(Time_Per_Part))
     
     #Find current path of this folder
     currentPath = os.path.join(ROOT_DIR)
@@ -71,12 +74,12 @@ def saveJob(Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, 
 
     #Creates table if not created, otherwise will return machine name and time left
     cursor.execute('''CREATE TABLE IF NOT EXISTS Jobs
-    (Part_Name TEXT, Part_Desc TEXT, Machine_Name TEXT, Time_Per_Part INT, Completion_Time TIMESTAMP, Oal INT, Cut_Off_Width INT, Bar_Length INT, Bar_Parameter INT, Active TEXT)''')
+    (Part_Name TEXT, Part_Desc TEXT, Machine_Name TEXT, Parts_Needed INT, Time_Per_Part INT, Completion_Time TIMESTAMP, Oal INT, Cut_Off_Width INT, Bar_Length INT, Bar_Parameter INT, Active TEXT)''')
     
     cursor.execute('''DELETE FROM Jobs WHERE Part_Name = '%s' OR Machine_Name = '%s' ''' % (Part_Name, Machine_Name))
     
-    cursor.execute('''INSERT INTO Jobs (Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', (Part_Name, Part_Desc, Machine_Name, Time_Per_Part, Completion_Time, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active))
+    cursor.execute('''INSERT INTO Jobs (Part_Name, Part_Desc, Machine_Name, Parts_Needed, Time_Per_Part, Completion_Time, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', (Part_Name, Part_Desc, Machine_Name, Parts_Needed, Time_Per_Part, Completion_Time, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active))
      
     setupDb.commit()
     setupDb.close
