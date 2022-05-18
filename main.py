@@ -29,10 +29,10 @@ class MachineStatusPage(Screen):
     Part_Desc = StringProperty()
     Time_Per_Part = StringProperty()
 
-    Oal = NumericProperty()
-    Cut_Off_Width = NumericProperty()
-    Bar_Length = NumericProperty()
-    Bar_Parameter = NumericProperty()
+    Oal = StringProperty()
+    Cut_Off_Width = StringProperty()
+    Bar_Length = StringProperty()
+    Bar_Parameter = StringProperty()
 
     def getCurrentJob (self):
 
@@ -42,10 +42,20 @@ class MachineStatusPage(Screen):
             self.Part_Name = str(currentJob.grabJob(0))
             self.Part_Desc = str(currentJob.grabJob(1))
             self.Time_Per_Part = str(currentJob.grabJob(3))
+            
+            self.Oal = currentJob.grabJob(5)
+            self.Cut_Off_Width = currentJob.grabJob(6)
+            self.Bar_Length = currentJob.grabJob(7)
+            self.Bar_Parameter = currentJob.grabJob(8)
         except:
             self.Part_Name = "None"
             self.Part_Desc = "None"
             self.Time_Per_Part = "None"
+            
+            self.Oal = "0"
+            self.Cut_Off_Width = "0"
+            self.Bar_Length = "0"
+            self.Bar_Parameter = "0"
                 
         
     
@@ -58,11 +68,15 @@ class AddJobPage(Screen):
     Machine_Name = selectedMachine
     Part_Name = StringProperty()
     Part_Desc = StringProperty()
-    Time_Per_Part = NumericProperty()
-    Oal = NumericProperty()
-    Cut_Off_Width = NumericProperty()
-    Bar_Length = NumericProperty()
-    Bar_Parameter = NumericProperty()
+    Time_Per_Part = StringProperty()
+    Oal = StringProperty()
+    Cut_Off_Width = StringProperty()
+    Bar_Length = StringProperty()
+    Bar_Parameter = StringProperty()
+    
+    def editJob(self):
+        
+        jobEdit = Job()
     
     def addNewJob(self):
         newJob = Job(self.Machine_Name, self.Part_Name, self.Part_Desc, self.Time_Per_Part, "", self.Oal, self.Cut_Off_Width, self.Bar_Length, self.Bar_Parameter)

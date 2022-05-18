@@ -174,15 +174,40 @@
                     size_hint: .4, .1
                     on_press: root.manager.current = 'MainOverview'
             AnchorLayout:
-                anchor_x: 'right'
+                anchor_x: 'center'
                 anchor_y: 'bottom'
                 Button:
-                    text: 'Add New Job'
+                    text: 'Edit Job'
                     font_size: self.width / 8
                     size_hint: .4, .1
                     on_press:
                         root.manager.current = 'AddJobPage'
                         root.manager.current_screen.selectedMachine = selectedMachine.text
+                        root.manager.current_screen.Part_Name = root.Part_Name
+                        root.manager.current_screen.Part_Desc = root.Part_Desc
+                        root.manager.current_screen.Time_Per_Part = root.Time_Per_Part
+                        root.manager.current_screen.Oal = root.Oal
+                        root.manager.current_screen.Cut_Off_Width = root.Cut_Off_Width
+                        root.manager.current_screen.Bar_Length = root.Bar_Length
+                        root.manager.current_screen.Bar_Parameter = root.Bar_Parameter
+            AnchorLayout:
+                anchor_x: 'right'
+                anchor_y: 'bottom'
+                Button:
+                    text: 'New Job'
+                    font_size: self.width / 8
+                    size_hint: .4, .1
+                    on_press:
+                        root.manager.current = 'AddJobPage'
+                        root.manager.current_screen.selectedMachine = selectedMachine.text
+                        root.manager.current_screen.Part_Name = ""
+                        root.manager.current_screen.Part_Desc = ""
+                        root.manager.current_screen.Time_Per_Part = ""
+                        root.manager.current_screen.Oal = ""
+                        root.manager.current_screen.Cut_Off_Width = ""
+                        root.manager.current_screen.Bar_Length = ""
+                        root.manager.current_screen.Bar_Parameter = ""
+                        
                     
                     
 <AddJobPage>:
@@ -200,7 +225,7 @@
                     anchor_x: 'center'
                     anchor_y: 'bottom'
                     Label:
-                        text: root.selectedMachine +' ' + 'New Job'
+                        text: root.selectedMachine + " " + "Add/Edit Job"
                         text_size: self.size
                         font_size: self.width / 12
                         halign: 'center'
@@ -221,42 +246,49 @@
                         AnchorGridCell:
                             TextCollection:
                                 id: part_name
+                                text: root.Part_Name
                         AnchorGridCell:
                             InputLabel:
                                 text: 'Description: '
                         AnchorGridCell:
                             TextCollection:
                                 id: part_desc
+                                text: root.Part_Desc
                         AnchorGridCell:
                             InputLabel:
                                 text: 'Machining Time (sec): '
                         AnchorGridCell:
                             TextCollection:
                                 id: time_per_part
+                                text: root.Time_Per_Part
                         AnchorGridCell:
                             InputLabel:
                                 text: 'OAL (in): '
                         AnchorGridCell:
                             TextCollection:
                                 id: oal
+                                text: root.Oal
                         AnchorGridCell:
                             InputLabel:
                                 text: 'Cutoff Width (in): '
                         AnchorGridCell:
                             TextCollection:
                                 id: cut_off_width
+                                text: root.Cut_Off_Width
                         AnchorGridCell:
                             InputLabel:
                                 text: 'Length Of Bar (in): '
                         AnchorGridCell:
                             TextCollection:
                                 id: bar_length
+                                text: root.Bar_Length
                         AnchorGridCell:
                             InputLabel:
                                 text: 'Bar Remnant Parameter (in): '
                         AnchorGridCell:
                             TextCollection:
                                 id: bar_parameter
+                                text: root.Bar_Parameter
         AnchorLayout:
             anchor_x: 'left'
             anchor_y: 'bottom'
