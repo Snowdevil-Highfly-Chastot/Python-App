@@ -46,6 +46,7 @@ def completionTime(count, time):
     jobFinished = now + datetime.timedelta(seconds = count * time)
 
     return jobFinished
+    
 
 #Calculates amount of parts possible to machine per bar	
 def barfeedParts(partLength, cutoffWidth, barfeedParameter, barLength):

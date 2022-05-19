@@ -27,19 +27,19 @@
     text: 'X'
     size_hint: None, None
 <InputLabel@Label>:
-    font_size: self.width / 8
+    font_size: self.width / 10
     text_size: self.size
     halign: 'left'
     valign: 'center'
 <OutputLabel@Label>:
-    font_size: self.width / 8
+    font_size: self.width / 10
     text_size: self.size
     halign: 'right'
     valign: 'center'
 <TextCollection@TextInput>:
     multiline: False
     size_hint: 1, .7
-    font_size: self.width / 7
+    font_size: self.width / 9
     
 <ScreenManager>
     transition: NoTransition()
@@ -197,6 +197,7 @@
                         root.manager.current_screen.selectedMachine = selectedMachine.text
                         root.manager.current_screen.Part_Name = root.Part_Name
                         root.manager.current_screen.Part_Desc = root.Part_Desc
+                        root.manager.current_screen.Parts_Needed = root.Parts_Needed
                         root.manager.current_screen.Time_Per_Part = root.Time_Per_Part
                         root.manager.current_screen.Oal = root.Oal
                         root.manager.current_screen.Cut_Off_Width = root.Cut_Off_Width
@@ -214,6 +215,7 @@
                         root.manager.current_screen.selectedMachine = selectedMachine.text
                         root.manager.current_screen.Part_Name = ""
                         root.manager.current_screen.Part_Desc = ""
+                        root.manager.current_screen.Parts_Needed = ""
                         root.manager.current_screen.Time_Per_Part = ""
                         root.manager.current_screen.Oal = ""
                         root.manager.current_screen.Cut_Off_Width = ""
@@ -328,6 +330,7 @@
                     root.Bar_Parameter = bar_parameter.text
                     root.addNewJob()
                     root.manager.current = 'MachineStatusPage'
+                    root.manager.current_screen.getCurrentJob()
                 
   
 <AddMachinePage>:

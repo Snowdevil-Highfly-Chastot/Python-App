@@ -58,7 +58,11 @@ def readMachine (Machine_Name):
     
 def saveJob(Part_Name, Part_Desc, Machine_Name, Parts_Needed, Time_Per_Part, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active):
     
-    Completion_Time = completionTime(int(Parts_Needed), int(Time_Per_Part))
+    Completion_Time = "yo"
+    try:
+        Completion_Time = completionTime(int(Parts_Needed), int(Time_Per_Part))
+    except:
+        Completion_Time = "No time or count entered"
     
     #Find current path of this folder
     currentPath = os.path.join(ROOT_DIR)
