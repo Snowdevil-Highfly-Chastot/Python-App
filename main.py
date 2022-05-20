@@ -5,14 +5,13 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
-from kivy.uix.colorpicker import ColorPicker
 from py.fileImport import readMachine
 from kivy.lang import Builder
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
-from kivy.properties import StringProperty, NumericProperty
+from kivy.properties import StringProperty
 from py.classMachine import Job
 
 Builder.load_file("kv/ScreenManagement.kv")
@@ -49,7 +48,7 @@ class MachineStatusPage(Screen):
             self.Part_Desc = str(currentJob.grabJob(1))
             self.Parts_Needed = str(currentJob.grabJob(4))
             self.Time_Per_Part = str(currentJob.grabJob(3))
-            self.Completion_Time = str(currentJob.grabJob(5))
+            self.CompletionTime = str(currentJob.grabJob(5))
             
             self.Oal = currentJob.grabJob(6)
             self.Cut_Off_Width = currentJob.grabJob(7)
@@ -60,8 +59,6 @@ class MachineStatusPage(Screen):
             self.Part_Desc = "None"
             self.Time_Per_Part = "None"
             self.Parts_Needed = "None"
-            self.Completion_Time = "None"
-            self.Time_Left = "None"
             
             self.Oal = "0"
             self.Cut_Off_Width = "0"
@@ -76,7 +73,6 @@ class MachineStatusPage(Screen):
                
 class AddMachinePage(Screen):
     pass
-    
 class AddJobPage(Screen):
     
     selectedMachine = MainOverview.selectedMachine
@@ -92,7 +88,7 @@ class AddJobPage(Screen):
     Bar_Parameter = StringProperty()
     
     def addNewJob(self):
-        newJob = Job(self.Machine_Name, self.Part_Name, self.Part_Desc, self.Parts_Needed, self.Time_Per_Part, self.Oal, self.Cut_Off_Width, self.Bar_Length, self.Bar_Parameter)
+        newJob = Job(self.Machine_Name, self.Part_Name, self.Part_Desc, self.Parts_Needed, self.Time_Per_Part, "", self.Oal, self.Cut_Off_Width, self.Bar_Length, self.Bar_Parameter)
         newJob.postJob()
         
     

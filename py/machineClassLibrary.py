@@ -1,10 +1,8 @@
 import math
 import datetime
 
-#Count is how many parts are left to be made
-#Time is the amount of seconds it takes to machine a part
-
-def runTimeLeft(count, time):
+#Calculates time left on a job using the count and seconds per part
+def runTimeLeft(partCount, partTime):
     
 #Create blank dictionary
     totalTime = {}
@@ -13,12 +11,11 @@ def runTimeLeft(count, time):
     def timeMath(seconds):
 
         if seconds == 0:
-            return math.floor(int(count) * int(time))
+            return math.floor(int(partCount) * int(partTime))
         else:
-            return math.floor(int(count) * int(time) / seconds)
+            return math.floor(int(partCount) * int(partTime) / seconds)
     
 #Math to convert total seconds to Days, Hours, Minutes, and Seconds.
-
     dayTimeLeft = timeMath(86400)
     hourTimeLeft = timeMath(3600) - (dayTimeLeft * 24)
     minuteTimeLeft = timeMath(60) - ((hourTimeLeft * 60) + (dayTimeLeft * 1440))
@@ -33,17 +30,15 @@ def runTimeLeft(count, time):
         totalTime.update({"Minutes" : minuteTimeLeft})
     if secondTimeLeft > 0:
         totalTime.update({"Seconds" : secondTimeLeft})
-    
-    #print(totalTime)
         
     return totalTime
 
 #Calculates date and time for the job to be done running
-def completionTime(count, time):
+def completionTime(partCount, partTime):
     
-#Setting date/time variables to calculate finish date/time
+#Setting date/partTime variables to calculate finish date/partTime
     now = datetime.datetime.now()
-    jobFinished = now + datetime.timedelta(seconds = count * time)
+    jobFinished = now + datetime.timedelta(seconds = partCount * partTime)
 
     return jobFinished
     
