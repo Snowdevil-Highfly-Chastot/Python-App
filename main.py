@@ -11,10 +11,27 @@ from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, NumericProperty
 from py.classMachine import Job
+from kivy.clock import Clock
+import time
 
 Builder.load_file("kv/ScreenManagement.kv")
+
+class CountDownLbl(Label):
+
+    startCount = NumericProperty(20)
+    Count = NumericProperty()
+
+    def __init__(self, **kwargs):
+        super(CountDownLbl, self).__init__(**kwargs)
+        Clock.schedule_once(self.countdown)
+        self.Count = self.startCount
+
+    def countdown(self, dt):
+        self.Count = self.Count - 1
+        if self.Count > 0:
+            Clock.schedule_once(self.countdown, 1)
 
 class MainOverview(Screen):
     selectedMachine = StringProperty()

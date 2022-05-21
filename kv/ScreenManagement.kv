@@ -177,6 +177,13 @@
                         AnchorGridCell:
                             OutputLabel:
                                 text: root.Time_Left
+                        AnchorGridCell:
+                            InputLabel:
+                                text: 'Countdown: '
+                        AnchorGridCell:
+                            CountDownLbl:
+                                text: str(self.Count)
+                                font_size: self.width / 8
             AnchorLayout:
                 anchor_x: 'left'
                 anchor_y: 'bottom'
