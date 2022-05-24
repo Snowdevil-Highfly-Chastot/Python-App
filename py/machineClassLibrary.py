@@ -42,6 +42,18 @@ def completionTime(partCount, partTime):
 
     return jobFinished
     
+def partsRemaining(completionTime, secondsPerPart):
+    #Gets current date and time
+    now = datetime.datetime.now()
+    
+    #Calculates total seconds between now and the completion time
+    totalSeconds = (completionTime - now).total_seconds()
+    
+    #Calculates approx. parts left from the total seconds and seconds to make each part
+    currentPartCount = math.ceil(totalSeconds / secondsPerPart)
+    
+    return currentPartCount
+    
 
 #Calculates amount of parts possible to machine per bar	
 def barfeedParts(partLength, cutoffWidth, barfeedParameter, barLength):

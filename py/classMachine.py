@@ -2,6 +2,7 @@ import datetime
 from .machineClassLibrary import (
 runTimeLeft,
 completionTime,
+partsRemaining,
 barfeedParts
 )
 
@@ -54,6 +55,12 @@ class Job:
         
         #Calculates how many D:H:M:S are left in a job
         result = runTimeLeft(self.Parts_Needed, self.Time_Per_Part)
+        return result
+        
+    def partsLeft(self):
+    
+        completionTime = readJob(5, self.Machine_Name)
+        result = partsRemaining(completionTime, self.Time_Per_Part)
         return result
         
     def barfeedParts(self):

@@ -54,6 +54,7 @@ class MachineStatusPage(Screen):
     
     Completion_Time = StringProperty()
     Time_Left = StringProperty()
+    Parts_Left = StringProperty()
     
 
     def getCurrentJob (self):
@@ -85,8 +86,10 @@ class MachineStatusPage(Screen):
         updatedCurrentJob = Job(self.Machine_Name, " ", " ", self.Time_Per_Part, self.Parts_Needed)
         try:
             self.Time_Left = str(updatedCurrentJob.jobFinished())
+            self.Parts_Left = str(currentJob.partsLeft())
         except:
             self.Time_Left = "None"
+            self.Parts_Left = "None"
                
 class AddMachinePage(Screen):
     pass
