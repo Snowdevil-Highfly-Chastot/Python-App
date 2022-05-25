@@ -84,9 +84,10 @@ class MachineStatusPage(Screen):
             self.Bar_Parameter = "0"
             
         updatedCurrentJob = Job(self.Machine_Name, " ", " ", self.Time_Per_Part, self.Parts_Needed)
+        self.Parts_Left = str(updatedCurrentJob.partsLeft())
         try:
             self.Time_Left = str(updatedCurrentJob.jobFinished())
-            self.Parts_Left = str(currentJob.partsLeft())
+            self.Parts_Left = str(updatedCurrentJob.partsLeft())
         except:
             self.Time_Left = "None"
             self.Parts_Left = "None"

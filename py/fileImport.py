@@ -112,7 +112,7 @@ def readJob(Column, Machine_Name):
     item = list(query.fetchone())
 
     #Sets the result as the individual item queried using the inputted column paramter
-    result = str(item[Column])
+    result = item[Column]
     
     #Closes db and returns the desired cell item
     setupDb.close

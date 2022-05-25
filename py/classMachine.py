@@ -59,7 +59,9 @@ class Job:
         
     def partsLeft(self):
     
-        completionTime = readJob(5, self.Machine_Name)
+        #Calculates amount of parts left on run by using the completion time in database
+        completionTime = datetime.datetime(readJob(5, self.Machine_Name))
+        print(completionTime)
         result = partsRemaining(completionTime, self.Time_Per_Part)
         return result
         
