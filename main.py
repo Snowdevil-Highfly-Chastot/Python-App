@@ -18,6 +18,7 @@ import time
 
 Builder.load_file("kv/ScreenManagement.kv")
 
+#Custom countdown kivy label
 class CountDownLbl(Label):
 
     startCount = NumericProperty(20)
@@ -33,9 +34,12 @@ class CountDownLbl(Label):
         if self.Count > 0:
             Clock.schedule_once(self.countdown, 1)
 
+#First screen on app open, complete overview of all machines
 class MainOverview(Screen):
     selectedMachine = StringProperty()
     
+#Dynamic status page for the selected machine. Loads data based upon the
+#name of the machine selected
 class MachineStatusPage(Screen):
 
     selectedMachine = MainOverview.selectedMachine
@@ -47,10 +51,10 @@ class MachineStatusPage(Screen):
     Time_Per_Part = StringProperty()
     
 
-    Oal = StringProperty()
-    Cut_Off_Width = StringProperty()
-    Bar_Length = StringProperty()
-    Bar_Parameter = StringProperty()
+    # Oal = StringProperty()
+    # Cut_Off_Width = StringProperty()
+    # Bar_Length = StringProperty()
+    # Bar_Parameter = StringProperty()
     
     Completion_Time = StringProperty()
     Time_Left = StringProperty()
@@ -68,10 +72,10 @@ class MachineStatusPage(Screen):
             self.Time_Per_Part = str(currentJob.grabJob(3))
             self.CompletionTime = str(currentJob.grabJob(5))
             
-            self.Oal = currentJob.grabJob(6)
-            self.Cut_Off_Width = currentJob.grabJob(7)
-            self.Bar_Length = currentJob.grabJob(8)
-            self.Bar_Parameter = currentJob.grabJob(9)
+            self.Oal = str(currentJob.grabJob(6))
+            self.Cut_Off_Width = str(currentJob.grabJob(7))
+            self.Bar_Length = str(currentJob.grabJob(8))
+            self.Bar_Parameter = str(currentJob.grabJob(9))
         except:
             self.Part_Name = "None"
             self.Part_Desc = "None"
@@ -84,7 +88,7 @@ class MachineStatusPage(Screen):
             self.Bar_Parameter = "0"
             
         updatedCurrentJob = Job(self.Machine_Name, " ", " ", self.Time_Per_Part, self.Parts_Needed)
-        self.Parts_Left = str(updatedCurrentJob.partsLeft())
+        
         try:
             self.Time_Left = str(updatedCurrentJob.jobFinished())
             self.Parts_Left = str(updatedCurrentJob.partsLeft())
@@ -92,8 +96,11 @@ class MachineStatusPage(Screen):
             self.Time_Left = "None"
             self.Parts_Left = "None"
                
+#Form to add new machines to the app/database
 class AddMachinePage(Screen):
     pass
+
+#Form to add new jobs to the respective machine
 class AddJobPage(Screen):
     
     selectedMachine = MainOverview.selectedMachine
@@ -112,7 +119,8 @@ class AddJobPage(Screen):
         newJob = Job(self.Machine_Name, self.Part_Name, self.Part_Desc, self.Parts_Needed, self.Time_Per_Part, "", self.Oal, self.Cut_Off_Width, self.Bar_Length, self.Bar_Parameter)
         newJob.postJob()
         
-    
+#Root application, screen manager is defined along with the different screens,
+#and app background. Anything set here takes place all over.
 class MainApp(App):   
 
     def build(self):

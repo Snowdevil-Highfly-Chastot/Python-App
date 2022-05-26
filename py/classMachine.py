@@ -60,32 +60,32 @@ class Job:
     def partsLeft(self):
     
         #Calculates amount of parts left on run by using the completion time in database
-        completionTime = datetime.datetime(readJob(5, self.Machine_Name))
-        print(completionTime)
-        result = partsRemaining(completionTime, self.Time_Per_Part)
+        completionTimeString = readJob(5, self.Machine_Name)
+        completionTimeDateFormat = datetime.datetime.strptime(completionTimeString, '%Y-%m-%d %H:%M:%S')
+        result = partsRemaining(completionTimeDateFormat, self.Time_Per_Part)
         return result
         
-    def barfeedParts(self):
+    # def barfeedParts(self):
         
-        totalParts = barfeedParts(self.partLength, self.cutoffWidth, self.barfeedParameter, self.barLength)
+    #     totalParts = barfeedParts(self.partLength, self.cutoffWidth, self.barfeedParameter, self.barLength)
         
-        print(totalParts, "Parts Per Bar")
-        return totalParts
+    #     print(totalParts, "Parts Per Bar")
+    #     return totalParts
         
-    def barfeedCompletionTime(self):
+    # def barfeedCompletionTime(self):
     
-        totalParts = barfeedParts(self.partLength, self.cutoffWidth, self.barfeedParameter, self.barLength)
+    #     totalParts = barfeedParts(self.partLength, self.cutoffWidth, self.barfeedParameter, self.barLength)
     
-        #Set variables and calculate timing
-        totalTime = self.partTime * totalParts
-        now = datetime.datetime.now()
-        timeCompleted = now + datetime.timedelta(seconds = totalTime)
+    #     #Set variables and calculate timing
+    #     totalTime = self.partTime * totalParts
+    #     now = datetime.datetime.now()
+    #     timeCompleted = now + datetime.timedelta(seconds = totalTime)
         
-        print(timeCompleted, "End of bar")
-        return timeCompleted
+    #     print(timeCompleted, "End of bar")
+    #     return timeCompleted
         
-    def barfeedTime(self):
+    # def barfeedTime(self):
     
-        totalParts = barfeedParts(self.partLength, self.cutoffWidth, self.barfeedParameter, self.barLength)
-        runTimeLeft(totalParts, self.partTime)
+    #     totalParts = barfeedParts(self.partLength, self.cutoffWidth, self.barfeedParameter, self.barLength)
+    #     runTimeLeft(totalParts, self.partTime)
         

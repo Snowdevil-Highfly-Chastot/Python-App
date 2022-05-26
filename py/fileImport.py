@@ -78,7 +78,7 @@ def saveJob(Part_Name, Part_Desc, Machine_Name, Parts_Needed, Time_Per_Part, Oal
 
     #Creates table if not created, otherwise will return machine name and time left
     cursor.execute('''CREATE TABLE IF NOT EXISTS Jobs
-    (Part_Name TEXT, Part_Desc TEXT, Machine_Name TEXT, Parts_Needed INT, Time_Per_Part INT, Completion_Time TIMESTAMP, Oal INT, Cut_Off_Width INT, Bar_Length INT, Bar_Parameter INT, Active TEXT)''')
+    (Part_Name TEXT, Part_Desc TEXT, Machine_Name TEXT, Parts_Needed INT, Time_Per_Part INT, Completion_Time TEXT, Oal INT, Cut_Off_Width INT, Bar_Length INT, Bar_Parameter INT, Active TEXT)''')
     
     #Deletes the existing job row to avoid overpopulating db with unused entries
     cursor.execute('''DELETE FROM Jobs WHERE Part_Name = '%s' OR Machine_Name = '%s' ''' % (Part_Name, Machine_Name))
@@ -102,7 +102,7 @@ def readJob(Column, Machine_Name):
     os.chdir('db')
 
     #Creates database if not created, otherwise connects to it
-    setupDb = sql.connect('appDatabase.db')
+    setupDb = sql.connect('appDatabase.db', detect_types=sql.PARSE_DECLTYPES)
     cursor = setupDb.cursor()
     
     #Assigns the query to a variable

@@ -39,18 +39,20 @@ def completionTime(partCount, partTime):
 #Setting date/partTime variables to calculate finish date/partTime
     now = datetime.datetime.now()
     jobFinished = now + datetime.timedelta(seconds = partCount * partTime)
+    result = jobFinished.replace(microsecond = 0)
 
-    return jobFinished
+    return result
     
 def partsRemaining(completionTime, secondsPerPart):
     #Gets current date and time
     now = datetime.datetime.now()
     
     #Calculates total seconds between now and the completion time
-    totalSeconds = (completionTime - now).total_seconds()
+    timeDifference = (completionTime - now)
+    secondsDifference = timeDifference.total_seconds()
     
     #Calculates approx. parts left from the total seconds and seconds to make each part
-    currentPartCount = math.ceil(totalSeconds / secondsPerPart)
+    currentPartCount = math.ceil(int(secondsDifference) / int(secondsPerPart))
     
     return currentPartCount
     
