@@ -3,6 +3,7 @@ from .machineClassLibrary import (
 runTimeLeft,
 completionTime,
 partsRemaining,
+timeRemaining,
 barfeedParts
 )
 
@@ -63,6 +64,14 @@ class Job:
         completionTimeString = readJob(5, self.Machine_Name)
         completionTimeDateFormat = datetime.datetime.strptime(completionTimeString, '%Y-%m-%d %H:%M:%S')
         result = partsRemaining(completionTimeDateFormat, self.Time_Per_Part)
+        return result
+        
+    def timeLeft(self):
+        
+        #Calculates total time left down to tge second
+        completionTimeString = readJob(5, self.Machine_Name)
+        completionTimeDateFormat = datetime.datetime.strptime(completionTimeString, '%Y-%m-%d %H:%M:%S')
+        result = timeRemaining(completionTimeDateFormat)
         return result
         
     # def barfeedParts(self):

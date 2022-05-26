@@ -56,6 +56,44 @@ def partsRemaining(completionTime, secondsPerPart):
     
     return currentPartCount
     
+def timeRemaining(completionTime):
+
+    #Gets current date and time
+    now = datetime.datetime.now()
+    
+    #Calculates total seconds between now and the completion time
+    timeDifference = (completionTime - now)
+    secondsDifference = timeDifference.total_seconds()
+    
+    #Create blank dictionary
+    totalTime = {}
+    
+#Function to cut down on repeat math
+    def timeMath(seconds):
+
+        if seconds == 0:
+            return math.floor(int(secondsDifference))
+        else:
+            return math.floor(int(secondsDifference) / seconds)
+    
+#Math to convert total seconds to Days, Hours, Minutes, and Seconds.
+    dayTimeLeft = timeMath(86400)
+    hourTimeLeft = timeMath(3600) - (dayTimeLeft * 24)
+    minuteTimeLeft = timeMath(60) - ((hourTimeLeft * 60) + (dayTimeLeft * 1440))
+    secondTimeLeft = timeMath(0) - ((minuteTimeLeft * 60) + (hourTimeLeft * 3600) + (dayTimeLeft * 86400))
+
+#Do not return variables with 0 and display separate time left values
+    if dayTimeLeft > 0:
+        totalTime.update({"Days" : dayTimeLeft})
+    if hourTimeLeft > 0:
+        totalTime.update({"Hours" : hourTimeLeft})
+    if minuteTimeLeft > 0:
+        totalTime.update({"Minutes" : minuteTimeLeft})
+    if secondTimeLeft > 0:
+        totalTime.update({"Seconds" : secondTimeLeft})
+        
+    return totalTime
+    
 
 #Calculates amount of parts possible to machine per bar	
 def barfeedParts(partLength, cutoffWidth, barfeedParameter, barLength):
