@@ -78,28 +78,28 @@
                                 on_press:
                                     root.manager.current = 'MachineStatusPage'
                                     root.manager.current_screen.selectedMachine = self.text
-                                    root.manager.current_screen.getCurrentJob()
+                                    root.manager.current_screen.start()
                         AnchorGridCell:
                             MachineButton:
                                 text: 'Tsugami 6'
                                 on_press:
                                     root.manager.current = 'MachineStatusPage'
                                     root.manager.current_screen.selectedMachine = self.text
-                                    root.manager.current_screen.getCurrentJob()
+                                    root.manager.current_screen.start()
                         AnchorGridCell:
                             MachineButton:
                                 text: 'Tsugami 7'
                                 on_press:
                                     root.manager.current = 'MachineStatusPage'
                                     root.manager.current_screen.selectedMachine = self.text
-                                    root.manager.current_screen.getCurrentJob()
+                                    root.manager.current_screen.start()
                         AnchorGridCell:
                             MachineButton:
                                 text: 'Tsugami 8'
                                 on_press:
                                     root.manager.current = 'MachineStatusPage'
                                     root.manager.current_screen.selectedMachine = self.text
-                                    root.manager.current_screen.getCurrentJob()
+                                    root.manager.current_screen.start()
             AnchorLayout:
                 anchor_x: 'right'
                 anchor_y: 'bottom'
@@ -183,13 +183,6 @@
                         AnchorGridCell:
                             OutputLabel:
                                 text: root.Time_Left
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Countdown: '
-                        AnchorGridCell:
-                            CountDownLbl:
-                                text: str(self.Count)
-                                font_size: self.width / 8
             AnchorLayout:
                 anchor_x: 'left'
                 anchor_y: 'bottom'
@@ -343,7 +336,7 @@
                     root.Bar_Parameter = bar_parameter.text
                     root.addNewJob()
                     root.manager.current = 'MachineStatusPage'
-                    root.manager.current_screen.getCurrentJob()
+                    root.manager.current_screen.start()
                 
   
 <AddMachinePage>:
