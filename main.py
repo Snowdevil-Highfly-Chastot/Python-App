@@ -52,7 +52,7 @@ class MachineStatusPage(Screen):
         self.getCurrentJob()
         try:
             if int(self.Parts_Left) > 0:
-                Clock.schedule_once(self.countdown, 0.5)
+                Clock.schedule_once(self.countdown, 0.1)
         except:
             self.getCurrentJob()
 
@@ -67,10 +67,10 @@ class MachineStatusPage(Screen):
             self.Time_Per_Part = str(currentJob.grabJob(3))
             self.Completion_Time = str(currentJob.grabJob(5))
             
-            self.Oal = str(currentJob.grabJob(6))
-            self.Cut_Off_Width = str(currentJob.grabJob(7))
-            self.Bar_Length = str(currentJob.grabJob(8))
-            self.Bar_Parameter = str(currentJob.grabJob(9))
+            self.Oal = str(currentJob.grabJob(7))
+            self.Cut_Off_Width = str(currentJob.grabJob(8))
+            self.Bar_Length = str(currentJob.grabJob(9))
+            self.Bar_Parameter = str(currentJob.grabJob(10))
         except:
             self.Part_Name = "None"
             self.Part_Desc = "None"
