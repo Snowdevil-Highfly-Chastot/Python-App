@@ -44,6 +44,8 @@
 <ScreenManager>
     transition: NoTransition()
 <MainOverview>:
+    on_enter: root.start()
+    on_leave: root.stop()
     FloatLayout:
         AnchorLayout:
             anchor_x: 'center'
@@ -66,36 +68,13 @@
                     anchor_x: 'center'
                     anchor_y: 'top'
                     GridLayout:
+                        id: machineButtons
                         cols: 1
                         row_force_default: True
                         row_default_height: self.width / 8
                         col_default_width: self.width / 4
                         padding: self.width / 25
                         spacing: self.width / 25, self.width / 50
-                        AnchorGridCell:
-                            MachineButton:
-                                text: "Tsugami 5"
-                                on_press:
-                                    root.manager.current = 'MachineStatusPage'
-                                    root.manager.current_screen.selectedMachine = self.text
-                        AnchorGridCell:
-                            MachineButton:
-                                text: 'Tsugami 6'
-                                on_press:
-                                    root.manager.current = 'MachineStatusPage'
-                                    root.manager.current_screen.selectedMachine = self.text
-                        AnchorGridCell:
-                            MachineButton:
-                                text: 'Tsugami 7'
-                                on_press:
-                                    root.manager.current = 'MachineStatusPage'
-                                    root.manager.current_screen.selectedMachine = self.text
-                        AnchorGridCell:
-                            MachineButton:
-                                text: 'Tsugami 8'
-                                on_press:
-                                    root.manager.current = 'MachineStatusPage'
-                                    root.manager.current_screen.selectedMachine = self.text
             AnchorLayout:
                 anchor_x: 'right'
                 anchor_y: 'bottom'
@@ -385,11 +364,6 @@
                         AnchorGridCell:
                             InputLabel:
                                 text: 'Location: '
-                        AnchorGridCell:
-                            TextCollection:
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Color: '
                         AnchorGridCell:
                             TextCollection:
         AnchorLayout:

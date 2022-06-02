@@ -7,7 +7,7 @@ from .config.definitions import (
 )
 from .machineClassLibrary import completionTime
 
-def saveMachine (Machine_Name, Completion_Time):
+def saveMachine (Machine_Name, Description, Machine_Type, Location):
     
     #Find current path of this folder
     currentPath = os.path.join(ROOT_DIR)
@@ -18,23 +18,22 @@ def saveMachine (Machine_Name, Completion_Time):
     os.chdir('db')
 
     #Creates database if not created, otherwise connects to it
-    setupDb = sql.connect('machineDatabase.db')
+    setupDb = sql.connect('appDatabase.db')
     cursor = setupDb.cursor()
 
     #Creates table if not created, otherwise will return machine name and time left
     cursor.execute('''CREATE TABLE IF NOT EXISTS Machines
-    (Machine_Name TEXT, Completion_Time TIMESTAMP)''')
+    (Machine_Name TEXT, Description TEXT, Machine_Type TEXT, Location TEXT)''')
     
     cursor.execute('''DELETE FROM Machines WHERE Machine_Name = '%s' ''' % Machine_Name)
     
-    cursor.execute('''INSERT INTO Machines (Machine_Name, Completion_Time) 
-    VALUES (?, ?)''', (Machine_Name, Completion_Time))
+    cursor.execute('''INSERT INTO Machines (Machine_Name, Description, Machine_Type, Location) 
+    VALUES (?, ?, ?, ?)''', (Machine_Name, Description, Machine_Type, Location))
      
     setupDb.commit()
-    print("Post Complete")
     setupDb.close
 
-def readMachine (Machine_Name):
+def readMachine (Column, Machine_Name):
     
     #Find current path of this folder
     currentPath = os.path.join(ROOT_DIR)
@@ -45,15 +44,21 @@ def readMachine (Machine_Name):
     os.chdir('db')
 
     #Creates database if not created, otherwise connects to it
-    setupDb = sql.connect('machineDatabase.db')
+    setupDb = sql.connect('appDatabase.db', detect_types=sql.PARSE_DECLTYPES)
     cursor = setupDb.cursor()
     
-    cursor.execute('''SELECT * FROM Machines WHERE Machine_Name = '%s' ''' % Machine_Name)
+    #Assigns the query to a variable
+    query = cursor.execute('''SELECT * FROM Machines WHERE Machine_Name = '%s' ''' % Machine_Name)
     
-    rows = cursor.fetchall()
-    for row in rows:
-        print(rows)
+    #Turns the queried information into a Python list to access individual cell items easier
+    item = list(query.fetchone())
+
+    #Sets the result as the individual item queried using the inputted column paramter
+    result = item[Column]
+    
+    #Closes db and returns the desired cell item
     setupDb.close
+    return result
     
     
 def saveJob(Part_Name, Part_Desc, Machine_Name, Parts_Needed, Time_Per_Part, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active):

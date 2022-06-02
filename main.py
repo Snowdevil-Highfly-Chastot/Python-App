@@ -20,7 +20,30 @@ Builder.load_file("kv/ScreenManagement.kv")
 
 #First screen on app open, complete overview of all machines
 class MainOverview(Screen):
+
     selectedMachine = StringProperty()
+    app = App.get_running_app()
+
+    machineNames = list(["Tsugami 5", "Tsugami 6", "Tsugami 7", "Tsugami 8"])
+
+    machineButtonGroup = Builder.load_string('''
+AnchorGridCell:
+    MachineButton:
+        text: "Tsugami 5"
+        on_press:
+            app.root.current = 'MachineStatusPage'
+            app.root.current_screen.selectedMachine = self.text
+    ''')
+
+    def start(self, **kwargs):
+        Clock.schedule_once(self.loadMachines)
+
+    def loadMachines(self, dt):
+        self.ids["machineButtons"].add_widget(self.machineButtonGroup)
+
+    def stop(self):
+        self.ids["machineButtons"].clear_widgets()
+
     
 #Dynamic status page for the selected machine. Loads data based upon the
 #name of the machine selected

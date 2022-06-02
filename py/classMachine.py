@@ -16,19 +16,29 @@ readJob
 
 #Creates Machine class for handling all of the machines
 class Machine:
-    def __init__(self, name, desc, type, location, currentJob, pastJob):
+    def __init__(self, machineName, desc, machineType, location):
         
-        self.name = name
+        self.machineName = machineName
         self.desc = desc
-        self.type = type
+        self.machineType = machineType
         self.location = location
-        self.currentJob = currentJob
-        self.pastJob = pastJob
+
+    def postMachine(self):
+        
+        #Saves the classes information into the database
+        saveMachine(self.machineName, self.desc, self.machineType, self.location)
+        
+    def grabMachine(self, Column):
+
+        #Returns a single item by using the machine name to get the row, and the column parameter
+        result = readMachine(Column, self.machineName)
+        return result
 
         
 #Creates the job class for handling all machine jobs
 class Job:
-    def __init__ (self, Machine_Name, Part_Name = "", Part_Desc = "", Time_Per_Part = 0, Parts_Needed = 0, Oal = 0, Cut_Off_Width = 0, Bar_Length = 0, Bar_Parameter = 0, Active = "y"):
+    def __init__ (self, Machine_Name, Part_Name = "", Part_Desc = "", Time_Per_Part = 0, 
+    Parts_Needed = 0, Oal = 0, Cut_Off_Width = 0, Bar_Length = 0, Bar_Parameter = 0, Active = "y"):
      
         self.Machine_Name = Machine_Name
         self.Part_Name = Part_Name
