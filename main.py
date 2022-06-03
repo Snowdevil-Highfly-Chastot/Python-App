@@ -12,7 +12,7 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.properties import StringProperty, NumericProperty
-from py.classMachine import Job
+from py.classMachine import Job, Machine
 from kivy.clock import Clock
 import time
 
@@ -137,7 +137,15 @@ class MachineStatusPage(Screen):
 
 #Form to add new machines to the app/database
 class AddMachinePage(Screen):
-    pass
+
+    machineName = StringProperty()
+    desc = StringProperty()
+    machineType = StringProperty()
+    location = StringProperty()
+    
+    def addNewMachine(self):
+        newMachine = Machine(self.machineName, self.desc, self.machineType, self.location)
+        newMachine.postMachine()
 
 #Form to add new jobs to the respective machine
 class AddJobPage(Screen):
@@ -154,7 +162,7 @@ class AddJobPage(Screen):
     Bar_Length = StringProperty()
     Bar_Parameter = StringProperty()
     
-    def addNewJob(self):
+    def addNewMachine(self):
         newJob = Job(self.Machine_Name, self.Part_Name, self.Part_Desc, self.Parts_Needed, self.Time_Per_Part, "", self.Oal, self.Cut_Off_Width, self.Bar_Length, self.Bar_Parameter)
         newJob.postJob()
 

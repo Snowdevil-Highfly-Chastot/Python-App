@@ -313,7 +313,6 @@
                     root.Bar_Parameter = bar_parameter.text
                     root.addNewJob()
                     root.manager.current = 'MachineStatusPage'
-                    root.manager.current_screen.start()
                 
   
 <AddMachinePage>:
@@ -351,21 +350,25 @@
                                 text: 'Name: '
                         AnchorGridCell:
                             TextCollection:
+                                id: machineName
                         AnchorGridCell:
                             InputLabel:
                                 text: 'Description: '
                         AnchorGridCell:
                             TextCollection:
+                                id: desc
                         AnchorGridCell:
                             InputLabel:
                                 text: 'Type: '
                         AnchorGridCell:
                             TextCollection:
+                                id: machineType
                         AnchorGridCell:
                             InputLabel:
                                 text: 'Location: '
                         AnchorGridCell:
                             TextCollection:
+                                id: location
         AnchorLayout:
             anchor_x: 'left'
             anchor_y: 'bottom'
@@ -375,3 +378,10 @@
             anchor_x: 'right'
             anchor_y: 'bottom'
             SubmitButton:
+                on_press:
+                    root.machineName = machineName.text
+                    root.desc = desc.text
+                    root.machineType = machineType.text
+                    root.location = location.text
+                    root.addNewMachine()
+                    root.manager.current = 'MainOverview'
