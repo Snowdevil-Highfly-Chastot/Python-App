@@ -82,7 +82,7 @@
                     text: 'Add New Machine'
                     font_size: self.width / 8
                     size_hint: .4, .1
-                    on_press: root.manager.current = 'AddMachinePage'
+                    on_release: root.manager.current = 'AddMachinePage'
                                     
                                 
 <MachineStatusPage>:
@@ -167,7 +167,7 @@
                     text: 'Go Back'
                     font_size: self.width / 8
                     size_hint: .4, .1
-                    on_press: root.manager.current = 'MainOverview'
+                    on_release: root.manager.current = 'MainOverview'
             AnchorLayout:
                 anchor_x: 'center'
                 anchor_y: 'bottom'
@@ -175,7 +175,7 @@
                     text: 'Edit Job'
                     font_size: self.width / 8
                     size_hint: .4, .1
-                    on_press:
+                    on_release:
                         root.manager.current = 'AddJobPage'
                         root.manager.current_screen.selectedMachine = selectedMachine.text
                         root.manager.current_screen.Part_Name = root.Part_Name
@@ -193,7 +193,7 @@
                     text: 'New Job'
                     font_size: self.width / 8
                     size_hint: .4, .1
-                    on_press:
+                    on_release:
                         root.manager.current = 'AddJobPage'
                         root.manager.current_screen.selectedMachine = selectedMachine.text
                         root.manager.current_screen.Part_Name = ""
@@ -297,12 +297,12 @@
             anchor_x: 'left'
             anchor_y: 'bottom'
             CancelButton:
-                on_press: root.manager.current = 'MachineStatusPage'
+                on_release: root.manager.current = 'MachineStatusPage'
         AnchorLayout:
             anchor_x: 'right'
             anchor_y: 'bottom'
             SubmitButton:
-                on_press:
+                on_release:
                     root.Part_Name = part_name.text
                     root.Part_Desc = part_desc.text
                     root.Parts_Needed = parts_needed.text
@@ -373,12 +373,12 @@
             anchor_x: 'left'
             anchor_y: 'bottom'
             CancelButton:
-                on_press: root.manager.current = 'MainOverview'
+                on_release: root.manager.current = 'MainOverview'
         AnchorLayout:
             anchor_x: 'right'
             anchor_y: 'bottom'
             SubmitButton:
-                on_press:
+                on_release:
                     root.machineName = machineName.text
                     root.desc = desc.text
                     root.machineType = machineType.text

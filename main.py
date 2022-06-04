@@ -54,7 +54,7 @@ class MainOverview(Screen):
             machineButtonGroup = Builder.load_string('''
 AnchorGridCell:
     MachineButton:
-        on_press:
+        on_release:
             app.root.current = 'MachineStatusPage'
             app.root.current_screen.selectedMachine = self.text
     ''')
