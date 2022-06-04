@@ -16,6 +16,9 @@ from py.classMachine import Job, Machine
 from kivy.clock import Clock
 from py.mainLibrary import readMachines
 import time
+from kivy.app import runTouchApp
+from kivy.uix.scrollview import ScrollView
+from kivy.core.window import Window
 
 Builder.load_file("kv/ScreenManagement.kv")
 
