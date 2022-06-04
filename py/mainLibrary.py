@@ -18,19 +18,20 @@ def readMachines(Column):
 
     #Creates database if not created, otherwise connects to it
     setupDb = sql.connect('appDatabase.db', detect_types=sql.PARSE_DECLTYPES)
+    setupDb.text_factory = str
     cursor = setupDb.cursor()
     
     #Assigns the query to a variable
-    query = cursor.execute('''SELECT * FROM Machines''')
+    query = cursor.execute('''SELECT Machine_Name FROM Machines''')
     
     #Turns the queried information into a Python list to access individual cell items easier
-    item = list(query.fetchone())
+    item = query.fetchall()
 
     #Sets the result as the individual item queried using the inputted column paramter
-    result = item[Column]
+    result = item[Column][0]
     
     #Closes db and returns the desired cell item
     setupDb.close
-    return result
+    return str(result)
     
     

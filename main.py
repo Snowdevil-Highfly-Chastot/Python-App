@@ -14,6 +14,7 @@ from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.properties import StringProperty, NumericProperty
 from py.classMachine import Job, Machine
 from kivy.clock import Clock
+from py.mainLibrary import readMachines
 import time
 
 Builder.load_file("kv/ScreenManagement.kv")
@@ -23,8 +24,6 @@ class MainOverview(Screen):
 
     selectedMachine = StringProperty()
     app = App.get_running_app()
-
-    machineNames = list(["Tsugami 5", "Tsugami 6", "Tsugami 7", "Tsugami 8"])
     
 
     def start(self, **kwargs):
@@ -33,7 +32,24 @@ class MainOverview(Screen):
 
     def loadMachines(self, dt):
         
-        for x in self.machineNames:
+        machineNames = []
+        testindex = 0
+        machineCount = 0
+        index = 0
+
+        try:
+            while True:
+                readMachines(testindex)
+                testindex += 1
+                machineCount += 1
+        except:
+            pass
+        
+        while index < machineCount:
+            machineNames.append(readMachines(index))
+            index += 1
+        
+        for machine in machineNames:
             
             machineButtonGroup = Builder.load_string('''
 AnchorGridCell:
@@ -43,7 +59,7 @@ AnchorGridCell:
             app.root.current_screen.selectedMachine = self.text
     ''')
             self.ids["machineButtons"].add_widget(machineButtonGroup)      
-            self.ids["machineButtons"].children[0].children[0].text = x
+            self.ids["machineButtons"].children[0].children[0].text = machine
 
     def stop(self):
         self.ids["machineButtons"].clear_widgets()
