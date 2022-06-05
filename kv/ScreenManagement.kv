@@ -70,13 +70,12 @@
                     ScrollView:
                         do_scroll_x: False
                         do_scroll_y: True
-                        size_hint_y: 20
+                        size_hint_y: self.width * 2
                         GridLayout:
                             id: machineButtons
                             cols: 1
-                            height: self.minimum_height
+                            height: self.minimum_height * 2
                             size_hint_y: None
-                            #row_force_default: True
                             row_default_height: self.width / 8
                             col_default_width: self.width / 4
                             padding: self.width / 25
