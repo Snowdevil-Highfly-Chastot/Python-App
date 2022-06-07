@@ -40,6 +40,7 @@
     multiline: False
     size_hint: 1, .7
     font_size: self.width / 9
+<ButtonBoxLayout>:
     
 <ScreenManager>
     transition: NoTransition()
@@ -70,13 +71,13 @@
                     ScrollView:
                         do_scroll_x: False
                         do_scroll_y: True
-                        size_hint_y: 15
+                        size_hint_y: 20
                         GridLayout:
                             id: machineButtons
                             cols: 1
                             height: self.minimum_height
                             size_hint_y: None
-                            row_default_height: self.width / 8
+                            row_default_height: self.width / 4
                             col_default_width: self.width / 4
                             padding: self.width / 25
                             spacing: self.width / 25, self.width / 50

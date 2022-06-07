@@ -18,9 +18,13 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.uix.scrollview import ScrollView
+from kivy.uix.behaviors import ButtonBehavior
 
 #Loads kivy screenmanager file that has the entire application static UI/UX
 Builder.load_file("kv/ScreenManagement.kv")
+
+class ButtonBoxLayout(ButtonBehavior, BoxLayout):
+    pass
 
 #First screen on app open, complete overview of all machines
 class MainOverview(Screen):
@@ -68,13 +72,36 @@ class MainOverview(Screen):
             #Kivy widget group, some widgets are custom classes which are named at the top of the ScreenManagement.kv file
             machineButtonGroup = Builder.load_string('''
 AnchorGridCell:
-    MachineButton:
+    ButtonBoxLayout:
         on_release:
             app.root.current = 'MachineStatusPage'
-            app.root.current_screen.selectedMachine = self.text
+            app.root.current_screen.selectedMachine = machineLabel.text
+        orientation: 'vertical'
+        BoxLayout:
+            orientation: 'horizontal'
+            Label:
+                id: machineLabel
+                text: "Machine"
+                font_size: self.width / 13
+                text_size: self.size
+                halign: 'center'
+        BoxLayout:
+            orientation: 'vertical'
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: "information"
+                    font_size: self.width / 15
+                    text_size: self.size
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    text: "more information"
+                    font_size: self.width / 15
+                    text_size: self.size
     ''')
             self.ids["machineButtons"].add_widget(machineButtonGroup)      
-            self.ids["machineButtons"].children[0].children[0].text = machine
+            self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = machine
 
     #This runs on screen exit, will not only save data, but also allow an easier refresh incase of new machines added or old ones deleted
     def stop(self):
@@ -220,7 +247,7 @@ class AddJobPage(Screen):
     Bar_Parameter = StringProperty()
     
     #Definition to run on submit press
-    def addNewMachine(self):
+    def addNewJob(self):
         #Creates class for the new job with all the collected information
         newJob = Job(self.Machine_Name, self.Part_Name, self.Part_Desc, self.Parts_Needed, self.Time_Per_Part, "", self.Oal, self.Cut_Off_Width, self.Bar_Length, self.Bar_Parameter)
         #Posts all collected data to db
