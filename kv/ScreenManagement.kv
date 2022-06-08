@@ -21,6 +21,12 @@
             pos: self.pos
             radius: [(20, 20), (20, 20), (20, 20), (20, 20)]
 
+<HeaderLabel@Label>:
+    text_size: self.size
+    font_size: self.width / 12
+    halign: 'center'
+    valign: 'bottom'
+
 <InputLabel@Label>:
     font_size: self.width / 10
     text_size: self.size
@@ -48,16 +54,14 @@
             pos: self.pos
             radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
 
-# Attempt at setting up gridlayout to have a bg
-#
-# <StyledAnchorLayout@AnchorLayout>:
-#     canvas.before:
-#         Color:
-#             rgb: utils.get_color_from_hex("4F5D75")
-#         RoundedRectangle:
-#             size: self.size
-#             pos: self.pos
-#             radius: [(20, 20), (20, 20), (20, 20), (20, 20)]
+<StyledGridLayout@GridLayout>:
+    canvas.before:
+        Color:
+            rgb: utils.get_color_from_hex("4F5D75")
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [(20, 20), (20, 20), (20, 20), (20, 20)]
     
 <ScreenManager>
     transition: NoTransition()
@@ -72,15 +76,13 @@
                 row_force_default: True
                 row_default_height: self.width / 13
                 padding: self.width / 15
+                spacing: self.width / 20
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'bottom'
-                    Label:
+                    HeaderLabel:
                         text: 'All Currently Added Machines'
-                        text_size: self.size
-                        font_size: self.width / 16
-                        halign: 'center'
-                        valign: 'bottom'
+                        font_size: self.width / 15
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'top'
@@ -115,25 +117,23 @@
             anchor_y: 'top'
             GridLayout:
                 cols: 1
-                rows: 2
                 row_force_default: True
                 row_default_height: self.width / 13
-                padding: self.width / 8
+                padding: self.width / 15
+                spacing: self.width / 20
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'bottom'
-                    Label:
+                    HeaderLabel:
                         id: selectedMachine
                         text: root.selectedMachine
-                        text_size: self.size
-                        font_size: self.width / 12
-                        halign: 'center'
-                        valign: 'bottom'
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'top'
-                    GridLayout:
+                    StyledGridLayout:
                         cols: 2
+                        height: self.minimum_height
+                        size_hint_y: None
                         row_force_default: True
                         row_default_height: self.width / 6
                         col_default_width: self.width / 4
@@ -233,20 +233,19 @@
                 row_force_default: True
                 row_default_height: self.width / 13
                 padding: self.width / 15
+                spacing: self.width / 20
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'bottom'
-                    Label:
+                    HeaderLabel:
                         text: root.selectedMachine + " " + "Add/Edit Job"
-                        text_size: self.size
-                        font_size: self.width / 12
-                        halign: 'center'
-                        valign: 'bottom'
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'top'
-                    GridLayout:
+                    StyledGridLayout:
                         cols: 2
+                        height: self.minimum_height
+                        size_hint_y: None
                         row_force_default: True
                         row_default_height: self.width / 8
                         col_default_width: self.width / 4
@@ -343,20 +342,19 @@
                 row_force_default: True
                 row_default_height: self.width / 13
                 padding: self.width / 15
+                spacing: self.width / 20
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'bottom'
-                    Label:
+                    HeaderLabel:
                         text: 'New Machine'
-                        text_size: self.size
-                        font_size: self.width / 12
-                        halign: 'center'
-                        valign: 'bottom'
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'top'
-                    GridLayout:
+                    StyledGridLayout:
                         cols: 2
+                        height: self.minimum_height
+                        size_hint_y: None
                         row_force_default: True
                         row_default_height: self.width / 8
                         col_default_width: self.width / 4

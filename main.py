@@ -94,26 +94,42 @@ AnchorGridCell:
                 spacing: self.width / 3 * -1
                 Label:
                     text: "Current Job: "
-                    font_size: self.width / 15
+                    font_size: self.width / 20
                     text_size: self.size
                 Label:
                     text: "Job Name"
-                    font_size: self.width / 15
+                    font_size: self.width / 20
                     text_size: self.size
             StackLayout:
                 orientation: 'tb-lr'
                 spacing: self.width / 3 * -1
                 Label:
-                    text: "Job Time Left: "
-                    font_size: self.width / 15
+                    text: "Completion Time: "
+                    font_size: self.width / 20
                     text_size: self.size
                 Label:
                     text: "Time Left"
-                    font_size: self.width / 15
+                    font_size: self.width / 20
                     text_size: self.size
+                    multiline: True
     ''')
-            self.ids["machineButtons"].add_widget(machineButtonGroup)      
+            #Add above widget to layout
+            self.ids["machineButtons"].add_widget(machineButtonGroup)
+            #Change header to the machine name
             self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = machine
+            #Grab current job
+            currentMachineJob = Job(machine)
+            #Set text to Job Name
+            try:
+                self.ids["machineButtons"].children[0].children[0].children[0].children[1].children[0].text = str(currentMachineJob.grabJob(0))
+            except:
+                self.ids["machineButtons"].children[0].children[0].children[0].children[1].children[0].text = "None"
+                
+            #Set text to completion time
+            try:
+                self.ids["machineButtons"].children[0].children[0].children[0].children[0].children[0].text = str(currentMachineJob.grabJob(5))
+            except:
+                self.ids["machineButtons"].children[0].children[0].children[0].children[1].children[0].text = "None"
 
     #This runs on screen exit, will not only save data, but also allow an easier refresh incase of new machines added or old ones deleted
     def stop(self):
