@@ -5,31 +5,8 @@
 <AnchorGridCell@AnchorLayout>:
     anchor_x: 'center'
     anchor_y: 'center'
-<SubmitButton@Button>:
-    text: 'Submit'
-    font_size: self.width / 6
-    size_hint: 0.25, 0.1
-    background_color: 0,0,0,0
-    canvas.before:
-        Color:
-            rgb: utils.get_color_from_hex("4F5D75")
-        RoundedRectangle:
-            size: self.size
-            pos: self.pos
-            radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
-<CancelButton@Button>:
-    text: 'Cancel'
-    font_size: self.width / 6
-    size_hint: 0.25, 0.1
-    background_color: 0,0,0,0
-    canvas.before:
-        Color:
-            rgb: utils.get_color_from_hex("4F5D75")
-        RoundedRectangle:
-            size: self.size
-            pos: self.pos
-            radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
-<MachineButton@Button>:
+
+<UiButton@Button>:
     font_size: self.width / 6
     text_size: self.size
     size_hint: 0.25, 0.1
@@ -42,42 +19,49 @@
         RoundedRectangle:
             size: self.size
             pos: self.pos
-            radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
-<MachineStatusButton@Button>:
-    font_size: self.width / 6
-    text_size: self.size
-    halign: 'center'
-    valign: 'center'
-    size_hint: .25, .1
-    background_color: 0,0,0,0
-    canvas.before:
-        Color:
-            rgb: utils.get_color_from_hex("4F5D75")
-        RoundedRectangle:
-            size: self.size
-            pos: self.pos
-            radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
-<XButton@Button>:
-    text: 'X'
-    size_hint: None, None
+            radius: [(20, 20), (20, 20), (20, 20), (20, 20)]
+
 <InputLabel@Label>:
     font_size: self.width / 10
     text_size: self.size
     halign: 'left'
     valign: 'center'
+
 <OutputLabel@Label>:
     font_size: self.width / 10
     text_size: self.size
     halign: 'right'
     valign: 'center'
+
 <TextCollection@TextInput>:
     multiline: False
     size_hint: 1, .7
     font_size: self.width / 9
+
 <ButtonBoxLayout>:
+    padding: self.width / 40
+    canvas.before:
+        Color:
+            rgb: utils.get_color_from_hex("#4F5D75")
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
+
+# Attempt at setting up gridlayout to have a bg
+#
+# <StyledAnchorLayout@AnchorLayout>:
+#     canvas.before:
+#         Color:
+#             rgb: utils.get_color_from_hex("4F5D75")
+#         RoundedRectangle:
+#             size: self.size
+#             pos: self.pos
+#             radius: [(20, 20), (20, 20), (20, 20), (20, 20)]
     
 <ScreenManager>
     transition: NoTransition()
+
 <MainOverview>:
     on_enter: root.start()
     on_leave: root.stop()
@@ -119,10 +103,8 @@
             AnchorLayout:
                 anchor_x: 'right'
                 anchor_y: 'bottom'
-                MachineButton:
+                UiButton:
                     text: 'Add New Machine'
-                    #font_size: self.width / 8
-                    #size_hint: .4, .1
                     on_release: root.manager.current = 'AddMachinePage'
                                     
                                 
@@ -204,18 +186,14 @@
             AnchorLayout:
                 anchor_x: 'left'
                 anchor_y: 'bottom'
-                MachineButton:
+                UiButton:
                     text: 'Go Back'
-                    #font_size: self.width / 8
-                    #size_hint: .4, .1
                     on_release: root.manager.current = 'MainOverview'
             AnchorLayout:
                 anchor_x: 'center'
                 anchor_y: 'bottom'
-                MachineButton:
+                UiButton:
                     text: 'Edit Job'
-                    #font_size: self.width / 8
-                    #size_hint: .4, .1
                     on_release:
                         root.manager.current = 'AddJobPage'
                         root.manager.current_screen.selectedMachine = selectedMachine.text
@@ -230,10 +208,8 @@
             AnchorLayout:
                 anchor_x: 'right'
                 anchor_y: 'bottom'
-                MachineButton:
+                UiButton:
                     text: 'New Job'
-                    #font_size: self.width / 8
-                    #size_hint: .4, .1
                     on_release:
                         root.manager.current = 'AddJobPage'
                         root.manager.current_screen.selectedMachine = selectedMachine.text
@@ -337,12 +313,14 @@
         AnchorLayout:
             anchor_x: 'left'
             anchor_y: 'bottom'
-            CancelButton:
+            UiButton:
+                text: "Cancel"
                 on_release: root.manager.current = 'MachineStatusPage'
         AnchorLayout:
             anchor_x: 'right'
             anchor_y: 'bottom'
-            SubmitButton:
+            UiButton:
+                text: "Submit"
                 on_release:
                     root.Part_Name = part_name.text
                     root.Part_Desc = part_desc.text
@@ -413,12 +391,14 @@
         AnchorLayout:
             anchor_x: 'left'
             anchor_y: 'bottom'
-            CancelButton:
+            UiButton:
+                text: "Cancel"
                 on_release: root.manager.current = 'MainOverview'
         AnchorLayout:
             anchor_x: 'right'
             anchor_y: 'bottom'
-            SubmitButton:
+            UiButton:
+                text: "Submit"
                 on_release:
                     root.machineName = machineName.text
                     root.desc = desc.text

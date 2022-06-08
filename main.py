@@ -74,14 +74,6 @@ class MainOverview(Screen):
             machineButtonGroup = Builder.load_string('''
 AnchorGridCell:
     ButtonBoxLayout:
-        padding: self.width / 40
-        canvas.before:
-            Color:
-                rgb: utils.get_color_from_hex("#4F5D75")
-            RoundedRectangle:
-                size: self.size
-                pos: self.pos
-                radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
         on_release:
             app.root.current = 'MachineStatusPage'
             app.root.current_screen.selectedMachine = machineLabel.text
