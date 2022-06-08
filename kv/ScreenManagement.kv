@@ -1,28 +1,62 @@
 #:kivy 1.10.1
 #: import NoTransition kivy.uix.screenmanager.NoTransition
+#: import utils kivy.utils
 
 <AnchorGridCell@AnchorLayout>:
     anchor_x: 'center'
     anchor_y: 'center'
 <SubmitButton@Button>:
     text: 'Submit'
-    font_size: self.width / 8
-    size_hint: .4, .1
+    font_size: self.width / 6
+    size_hint: 0.25, 0.1
+    background_color: 0,0,0,0
+    canvas.before:
+        Color:
+            rgb: utils.get_color_from_hex("4F5D75")
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
 <CancelButton@Button>:
     text: 'Cancel'
-    font_size: self.width / 8
-    size_hint: .4, .1
+    font_size: self.width / 6
+    size_hint: 0.25, 0.1
+    background_color: 0,0,0,0
+    canvas.before:
+        Color:
+            rgb: utils.get_color_from_hex("4F5D75")
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
 <MachineButton@Button>:
-    font_size: self.width / 20
+    font_size: self.width / 6
     text_size: self.size
+    size_hint: 0.25, 0.1
     halign: 'center'
     valign: 'center'
+    background_color: 0,0,0,0
+    canvas.before:
+        Color:
+            rgb: utils.get_color_from_hex("4F5D75")
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
 <MachineStatusButton@Button>:
-    font_size: self.width / 9
+    font_size: self.width / 6
     text_size: self.size
     halign: 'center'
     valign: 'center'
-    size_hint: .3, .06
+    size_hint: .25, .1
+    background_color: 0,0,0,0
+    canvas.before:
+        Color:
+            rgb: utils.get_color_from_hex("4F5D75")
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
 <XButton@Button>:
     text: 'X'
     size_hint: None, None
@@ -76,8 +110,9 @@
                             id: machineButtons
                             cols: 1
                             height: self.minimum_height
+                            row_force_default: True
                             size_hint_y: None
-                            row_default_height: self.width / 4
+                            row_default_height: self.width / 3
                             col_default_width: self.width / 4
                             padding: self.width / 25
                             spacing: self.width / 25, self.width / 50
@@ -86,8 +121,8 @@
                 anchor_y: 'bottom'
                 MachineButton:
                     text: 'Add New Machine'
-                    font_size: self.width / 8
-                    size_hint: .4, .1
+                    #font_size: self.width / 8
+                    #size_hint: .4, .1
                     on_release: root.manager.current = 'AddMachinePage'
                                     
                                 
@@ -169,18 +204,18 @@
             AnchorLayout:
                 anchor_x: 'left'
                 anchor_y: 'bottom'
-                Button:
+                MachineButton:
                     text: 'Go Back'
-                    font_size: self.width / 8
-                    size_hint: .4, .1
+                    #font_size: self.width / 8
+                    #size_hint: .4, .1
                     on_release: root.manager.current = 'MainOverview'
             AnchorLayout:
                 anchor_x: 'center'
                 anchor_y: 'bottom'
-                Button:
+                MachineButton:
                     text: 'Edit Job'
-                    font_size: self.width / 8
-                    size_hint: .4, .1
+                    #font_size: self.width / 8
+                    #size_hint: .4, .1
                     on_release:
                         root.manager.current = 'AddJobPage'
                         root.manager.current_screen.selectedMachine = selectedMachine.text
@@ -195,10 +230,10 @@
             AnchorLayout:
                 anchor_x: 'right'
                 anchor_y: 'bottom'
-                Button:
+                MachineButton:
                     text: 'New Job'
-                    font_size: self.width / 8
-                    size_hint: .4, .1
+                    #font_size: self.width / 8
+                    #size_hint: .4, .1
                     on_release:
                         root.manager.current = 'AddJobPage'
                         root.manager.current_screen.selectedMachine = selectedMachine.text

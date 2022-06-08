@@ -7,6 +7,7 @@ from kivy.graphics import Color, Rectangle
 from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.properties import StringProperty, NumericProperty
+from kivy.utils import get_color_from_hex
 from kivy.core.window import Window
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
@@ -73,6 +74,14 @@ class MainOverview(Screen):
             machineButtonGroup = Builder.load_string('''
 AnchorGridCell:
     ButtonBoxLayout:
+        padding: self.width / 40
+        canvas.before:
+            Color:
+                rgb: utils.get_color_from_hex("#4F5D75")
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
         on_release:
             app.root.current = 'MachineStatusPage'
             app.root.current_screen.selectedMachine = machineLabel.text
@@ -82,21 +91,32 @@ AnchorGridCell:
             Label:
                 id: machineLabel
                 text: "Machine"
-                font_size: self.width / 13
+                font_size: self.width / 15
                 text_size: self.size
                 halign: 'center'
+                valign: 'top'
         BoxLayout:
             orientation: 'vertical'
-            BoxLayout:
-                orientation: 'horizontal'
+            StackLayout:
+                orientation: 'tb-lr'
+                spacing: self.width / 3 * -1
                 Label:
-                    text: "information"
+                    text: "Current Job: "
                     font_size: self.width / 15
                     text_size: self.size
-            BoxLayout:
-                orientation: 'horizontal'
                 Label:
-                    text: "more information"
+                    text: "Job Name"
+                    font_size: self.width / 15
+                    text_size: self.size
+            StackLayout:
+                orientation: 'tb-lr'
+                spacing: self.width / 3 * -1
+                Label:
+                    text: "Job Time Left: "
+                    font_size: self.width / 15
+                    text_size: self.size
+                Label:
+                    text: "Time Left"
                     font_size: self.width / 15
                     text_size: self.size
     ''')
@@ -276,7 +296,7 @@ class MainApp(App):
 
         #Creates the actual background rectangle and colors it
         with root.canvas.before:
-            Color(0, 1, 1, .6)  # colors range from 0-1 not 0-255
+            Color(*get_color_from_hex('2D3142'))  # colors range from 0-1 not 0-255
             self.rect = Rectangle(size=root.size, pos=root.pos)
         return root
 
