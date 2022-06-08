@@ -63,8 +63,6 @@
     transition: NoTransition()
 
 <MainOverview>:
-    on_enter: root.start()
-    on_leave: root.stop()
     FloatLayout:
         AnchorLayout:
             anchor_x: 'center'
@@ -406,3 +404,5 @@
                     root.location = location.text
                     root.addNewMachine()
                     root.manager.current = 'MainOverview'
+                    root.manager.current_screen.stop()
+                    root.manager.current_screen.start()
