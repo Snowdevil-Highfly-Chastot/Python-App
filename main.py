@@ -74,6 +74,7 @@ class MainOverview(Screen):
             machineButtonGroup = Builder.load_string('''
 AnchorGridCell:
     ButtonBoxLayout:
+        padding: self.width / 20, self.width / 30
         on_release:
             app.root.current = 'MachineStatusPage'
             app.root.current_screen.selectedMachine = machineLabel.text

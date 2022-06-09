@@ -71,25 +71,26 @@
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'top'
-            GridLayout:
-                cols: 1
-                row_force_default: True
-                row_default_height: self.width / 13
-                padding: self.width / 15
-                spacing: self.width / 20
-                AnchorLayout:
-                    anchor_x: 'center'
-                    anchor_y: 'bottom'
-                    HeaderLabel:
-                        text: 'All Currently Added Machines'
-                        font_size: self.width / 15
-                AnchorLayout:
-                    anchor_x: 'center'
-                    anchor_y: 'top'
-                    ScrollView:
-                        do_scroll_x: False
-                        do_scroll_y: True
-                        size_hint_y: 20
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                GridLayout:
+                    cols: 1
+                    row_force_default: True
+                    row_default_height: self.width / 13
+                    padding: self.width / 15
+                    spacing: self.width / 20
+                    height: machineButtons.minimum_height + self.minimum_height
+                    size_hint_y: None
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'bottom'
+                        HeaderLabel:
+                            text: 'All Currently Added Machines'
+                            font_size: self.width / 15
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'top'
                         GridLayout:
                             id: machineButtons
                             cols: 1
@@ -130,57 +131,63 @@
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'top'
-                    StyledGridLayout:
-                        cols: 2
-                        height: self.minimum_height
-                        size_hint_y: None
-                        row_force_default: True
-                        row_default_height: self.width / 6
-                        col_default_width: self.width / 4
-                        padding: self.width / 25
-                        spacing: self.width / 25, self.width / 50
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Current Job: '
-                        AnchorGridCell:
-                            OutputLabel:
-                                text: root.Part_Name
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Job Description'
-                        AnchorGridCell:
-                            OutputLabel:
-                                text: root.Part_Desc
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Parts Needed: '
-                        AnchorGridCell:
-                            OutputLabel:
-                                text: root.Parts_Needed
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Parts Remaining: '
-                        AnchorGridCell:
-                            OutputLabel:
-                                text: root.Parts_Left
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Time Per Part: '
-                        AnchorGridCell:
-                            OutputLabel:
-                                text: root.Time_Per_Part
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Completion Time: '
-                        AnchorGridCell:
-                            OutputLabel:
-                                text: root.Completion_Time
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Time Left: '
-                        AnchorGridCell:
-                            OutputLabel:
-                                text: root.Time_Left
+                    ScrollView:
+                        do_scroll_x: False
+                        do_scroll_y: True
+                        size_hint_y: 20
+                        # HeaderLabel:
+                        #     text: "Current Job"
+                        StyledGridLayout:
+                            cols: 2
+                            height: self.minimum_height
+                            size_hint_y: None
+                            row_force_default: True
+                            row_default_height: self.width / 6
+                            col_default_width: self.width / 4
+                            padding: self.width / 25
+                            spacing: self.width / 25, self.width / 50
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Current Job: '
+                            AnchorGridCell:
+                                OutputLabel:
+                                    text: root.Part_Name
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Job Description'
+                            AnchorGridCell:
+                                OutputLabel:
+                                    text: root.Part_Desc
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Parts Needed: '
+                            AnchorGridCell:
+                                OutputLabel:
+                                    text: root.Parts_Needed
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Parts Remaining: '
+                            AnchorGridCell:
+                                OutputLabel:
+                                    text: root.Parts_Left
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Time Per Part: '
+                            AnchorGridCell:
+                                OutputLabel:
+                                    text: root.Time_Per_Part
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Completion Time: '
+                            AnchorGridCell:
+                                OutputLabel:
+                                    text: root.Completion_Time
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Time Left: '
+                            AnchorGridCell:
+                                OutputLabel:
+                                    text: root.Time_Left
             AnchorLayout:
                 anchor_x: 'left'
                 anchor_y: 'bottom'
