@@ -6,12 +6,13 @@ from kivy.app import App, runTouchApp
 from kivy.graphics import Color, Rectangle
 from kivy.lang import Builder
 from kivy.clock import Clock
-from kivy.properties import StringProperty, NumericProperty
+from kivy.properties import StringProperty, NumericProperty, ObjectProperty
 from kivy.utils import get_color_from_hex
 from kivy.core.window import Window
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
+from kivy.uix.dropdown import DropDown
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.anchorlayout import AnchorLayout
@@ -140,6 +141,18 @@ AnchorGridCell:
 #Dynamic status page for the selected machine. Loads data based upon the
 #name of the machine selected
 class MachineStatusPage(Screen):
+    
+    #Bind back button to go back to the Overview
+    app = App.get_running_app()
+    def __init__(self,**kwargs):
+        super(MachineStatusPage,self).__init__(**kwargs)
+            #code goes here and add:
+        Window.bind(on_keyboard=self.Android_back_click)
+
+    def Android_back_click(self,window,key,*largs):
+        if key == 27:
+            self.manager.current='MainOverview'#you can create a method here to cache in a list the number of screens and then pop the last visited screen.
+            return True
 
     #For some reason I wasn't able to use Machine_Name = MainOverview.selectedMachine, so this is a workaround.
     #Collects the selected machine from the overview to be able to pull and display the corresponding data.

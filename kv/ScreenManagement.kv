@@ -9,7 +9,7 @@
 <UiButton@Button>:
     font_size: self.width / 6
     text_size: self.size
-    size_hint: 0.25, 0.1
+    size_hint: .2, .9
     halign: 'center'
     valign: 'center'
     background_color: 0,0,0,0
@@ -77,9 +77,9 @@
                 GridLayout:
                     cols: 1
                     row_force_default: True
-                    row_default_height: self.width / 13
+                    row_default_height: self.width / 10
                     padding: self.width / 15
-                    spacing: self.width / 20
+                    spacing: self.width / 40
                     height: machineButtons.minimum_height + self.minimum_height
                     size_hint_y: None
                     AnchorLayout:
@@ -88,6 +88,25 @@
                         HeaderLabel:
                             text: 'All Currently Added Machines'
                             font_size: self.width / 15
+                    StackLayout:
+                        orientation: 'lr-tb'
+                        spacing: self.width / 50
+                        UiButton:
+                            text: 'Add Machine'
+                            size_hint: .2, .9
+                            on_release: root.manager.current = 'AddMachinePage'
+                        UiButton:
+                            text: 'Delete Machine'
+                            size_hint: .2, .9
+                        Label:
+                            text: 'Sort By'
+                            text_size: self.size
+                            halign: 'right'
+                            valign: 'center'
+                            size_hint: .25, .9
+                        UiButton:
+                            text: 'Name'
+                            size_hint: .3, .9
                     AnchorLayout:
                         anchor_x: 'center'
                         anchor_y: 'top'
@@ -101,12 +120,7 @@
                             col_default_width: self.width / 4
                             padding: self.width / 25
                             spacing: self.width / 25, self.width / 50
-            AnchorLayout:
-                anchor_x: 'right'
-                anchor_y: 'bottom'
-                UiButton:
-                    text: 'Add New Machine'
-                    on_release: root.manager.current = 'AddMachinePage'
+            
                                     
                                 
 <MachineStatusPage>:
@@ -133,6 +147,38 @@
                         HeaderLabel:
                             id: selectedMachine
                             text: root.selectedMachine
+                    StackLayout:
+                        orientation: 'lr-tb'
+                        spacing: self.width / 50
+                        UiButton:
+                            text: 'Go Back'
+                            on_release: root.manager.current = 'MainOverview'
+                        UiButton:
+                            text: 'Edit Job'
+                            on_release:
+                                root.manager.current = 'AddJobPage'
+                                root.manager.current_screen.selectedMachine = selectedMachine.text
+                                root.manager.current_screen.Part_Name = root.Part_Name
+                                root.manager.current_screen.Part_Desc = root.Part_Desc
+                                root.manager.current_screen.Parts_Needed = root.Parts_Needed
+                                root.manager.current_screen.Time_Per_Part = root.Time_Per_Part
+                                root.manager.current_screen.Oal = root.Oal
+                                root.manager.current_screen.Cut_Off_Width = root.Cut_Off_Width
+                                root.manager.current_screen.Bar_Length = root.Bar_Length
+                                root.manager.current_screen.Bar_Parameter = root.Bar_Parameter
+                        UiButton:
+                            text: 'New Job'
+                            on_release:
+                                root.manager.current = 'AddJobPage'
+                                root.manager.current_screen.selectedMachine = selectedMachine.text
+                                root.manager.current_screen.Part_Name = ""
+                                root.manager.current_screen.Part_Desc = ""
+                                root.manager.current_screen.Parts_Needed = ""
+                                root.manager.current_screen.Time_Per_Part = ""
+                                root.manager.current_screen.Oal = ""
+                                root.manager.current_screen.Cut_Off_Width = ""
+                                root.manager.current_screen.Bar_Length = ""
+                                root.manager.current_screen.Bar_Parameter = ""
                     AnchorLayout:
                         anchor_x: 'center'
                         anchor_y: 'top'
@@ -190,226 +236,189 @@
                             AnchorGridCell:
                                 OutputLabel:
                                     text: root.Time_Left
-            AnchorLayout:
-                anchor_x: 'left'
-                anchor_y: 'bottom'
-                UiButton:
-                    text: 'Go Back'
-                    on_release: root.manager.current = 'MainOverview'
-            AnchorLayout:
-                anchor_x: 'center'
-                anchor_y: 'bottom'
-                UiButton:
-                    text: 'Edit Job'
-                    on_release:
-                        root.manager.current = 'AddJobPage'
-                        root.manager.current_screen.selectedMachine = selectedMachine.text
-                        root.manager.current_screen.Part_Name = root.Part_Name
-                        root.manager.current_screen.Part_Desc = root.Part_Desc
-                        root.manager.current_screen.Parts_Needed = root.Parts_Needed
-                        root.manager.current_screen.Time_Per_Part = root.Time_Per_Part
-                        root.manager.current_screen.Oal = root.Oal
-                        root.manager.current_screen.Cut_Off_Width = root.Cut_Off_Width
-                        root.manager.current_screen.Bar_Length = root.Bar_Length
-                        root.manager.current_screen.Bar_Parameter = root.Bar_Parameter
-            AnchorLayout:
-                anchor_x: 'right'
-                anchor_y: 'bottom'
-                UiButton:
-                    text: 'New Job'
-                    on_release:
-                        root.manager.current = 'AddJobPage'
-                        root.manager.current_screen.selectedMachine = selectedMachine.text
-                        root.manager.current_screen.Part_Name = ""
-                        root.manager.current_screen.Part_Desc = ""
-                        root.manager.current_screen.Parts_Needed = ""
-                        root.manager.current_screen.Time_Per_Part = ""
-                        root.manager.current_screen.Oal = ""
-                        root.manager.current_screen.Cut_Off_Width = ""
-                        root.manager.current_screen.Bar_Length = ""
-                        root.manager.current_screen.Bar_Parameter = ""
-                        
-                    
                     
 <AddJobPage>:
     FloatLayout:
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'top'
-            GridLayout:
-                cols: 1
-                rows: 2
-                row_force_default: True
-                row_default_height: self.width / 13
-                padding: self.width / 15
-                spacing: self.width / 20
-                AnchorLayout:
-                    anchor_x: 'center'
-                    anchor_y: 'bottom'
-                    HeaderLabel:
-                        text: root.selectedMachine + " " + "Add/Edit Job"
-                AnchorLayout:
-                    anchor_x: 'center'
-                    anchor_y: 'top'
-                    StyledGridLayout:
-                        cols: 2
-                        height: self.minimum_height
-                        size_hint_y: None
-                        row_force_default: True
-                        row_default_height: self.width / 8
-                        col_default_width: self.width / 4
-                        padding: self.width / 25
-                        spacing: self.width / 25, self.width / 50
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Part Name/Num: '
-                        AnchorGridCell:
-                            TextCollection:
-                                id: part_name
-                                text: root.Part_Name
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Description: '
-                        AnchorGridCell:
-                            TextCollection:
-                                id: part_desc
-                                text: root.Part_Desc
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Parts Needed: '
-                        AnchorGridCell:
-                            TextCollection:
-                                id: parts_needed
-                                text: root.Parts_Needed
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Machining Time (sec): '
-                        AnchorGridCell:
-                            TextCollection:
-                                id: time_per_part
-                                text: root.Time_Per_Part
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'OAL (in): '
-                        AnchorGridCell:
-                            TextCollection:
-                                id: oal
-                                text: root.Oal
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Cutoff Width (in): '
-                        AnchorGridCell:
-                            TextCollection:
-                                id: cut_off_width
-                                text: root.Cut_Off_Width
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Length Of Bar (in): '
-                        AnchorGridCell:
-                            TextCollection:
-                                id: bar_length
-                                text: root.Bar_Length
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Bar Remnant Parameter (in): '
-                        AnchorGridCell:
-                            TextCollection:
-                                id: bar_parameter
-                                text: root.Bar_Parameter
-        AnchorLayout:
-            anchor_x: 'left'
-            anchor_y: 'bottom'
-            UiButton:
-                text: "Cancel"
-                on_release: root.manager.current = 'MachineStatusPage'
-        AnchorLayout:
-            anchor_x: 'right'
-            anchor_y: 'bottom'
-            UiButton:
-                text: "Submit"
-                on_release:
-                    root.Part_Name = part_name.text
-                    root.Part_Desc = part_desc.text
-                    root.Parts_Needed = parts_needed.text
-                    root.Time_Per_Part = time_per_part.text
-                    root.Oal = oal.text
-                    root.Cut_Off_Width = cut_off_width.text
-                    root.Bar_Length = bar_length.text
-                    root.Bar_Parameter = bar_parameter.text
-                    root.addNewJob()
-                    root.manager.current = 'MachineStatusPage'
-                
-  
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                GridLayout:
+                    cols: 1
+                    height: self.minimum_height
+                    size_hint_y: None
+                    row_force_default: True
+                    row_default_height: self.width / 13
+                    padding: self.width / 15
+                    spacing: self.width / 20
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'bottom'
+                        HeaderLabel:
+                            text: root.selectedMachine + " " + "Add/Edit Job"
+                    StackLayout:
+                        orientation: 'lr-tb'
+                        spacing: self.width / 50
+                        UiButton:
+                            text: "Cancel"
+                            on_release: root.manager.current = 'MachineStatusPage'
+                        UiButton:
+                            text: "Submit"
+                            on_release:
+                                root.Part_Name = part_name.text
+                                root.Part_Desc = part_desc.text
+                                root.Parts_Needed = parts_needed.text
+                                root.Time_Per_Part = time_per_part.text
+                                root.Oal = oal.text
+                                root.Cut_Off_Width = cut_off_width.text
+                                root.Bar_Length = bar_length.text
+                                root.Bar_Parameter = bar_parameter.text
+                                root.addNewJob()
+                                root.manager.current = 'MachineStatusPage'
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'top'
+                        StyledGridLayout:
+                            cols: 2
+                            height: self.minimum_height
+                            size_hint_y: None
+                            row_force_default: True
+                            row_default_height: self.width / 8
+                            col_default_width: self.width / 4
+                            padding: self.width / 25
+                            spacing: self.width / 25, self.width / 50
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Part Name/Num: '
+                            AnchorGridCell:
+                                TextCollection:
+                                    id: part_name
+                                    text: root.Part_Name
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Description: '
+                            AnchorGridCell:
+                                TextCollection:
+                                    id: part_desc
+                                    text: root.Part_Desc
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Parts Needed: '
+                            AnchorGridCell:
+                                TextCollection:
+                                    id: parts_needed
+                                    text: root.Parts_Needed
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Machining Time (sec): '
+                            AnchorGridCell:
+                                TextCollection:
+                                    id: time_per_part
+                                    text: root.Time_Per_Part
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'OAL (in): '
+                            AnchorGridCell:
+                                TextCollection:
+                                    id: oal
+                                    text: root.Oal
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Cutoff Width (in): '
+                            AnchorGridCell:
+                                TextCollection:
+                                    id: cut_off_width
+                                    text: root.Cut_Off_Width
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Length Of Bar (in): '
+                            AnchorGridCell:
+                                TextCollection:
+                                    id: bar_length
+                                    text: root.Bar_Length
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Bar Remnant Parameter (in): '
+                            AnchorGridCell:
+                                TextCollection:
+                                    id: bar_parameter
+                                    text: root.Bar_Parameter
+      
 <AddMachinePage>:
     FloatLayout:
         AnchorLayout:
             anchor_x: 'center'
             anchor_y: 'top'
-            GridLayout:
-                cols: 1
-                rows: 2
-                row_force_default: True
-                row_default_height: self.width / 13
-                padding: self.width / 15
-                spacing: self.width / 20
-                AnchorLayout:
-                    anchor_x: 'center'
-                    anchor_y: 'bottom'
-                    HeaderLabel:
-                        text: 'New Machine'
-                AnchorLayout:
-                    anchor_x: 'center'
-                    anchor_y: 'top'
-                    StyledGridLayout:
-                        cols: 2
-                        height: self.minimum_height
-                        size_hint_y: None
-                        row_force_default: True
-                        row_default_height: self.width / 8
-                        col_default_width: self.width / 4
-                        padding: self.width / 25
-                        spacing: self.width / 25, self.width / 50
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Name: '
-                        AnchorGridCell:
-                            TextCollection:
-                                id: machineName
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Description: '
-                        AnchorGridCell:
-                            TextCollection:
-                                id: desc
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Type: '
-                        AnchorGridCell:
-                            TextCollection:
-                                id: machineType
-                        AnchorGridCell:
-                            InputLabel:
-                                text: 'Location: '
-                        AnchorGridCell:
-                            TextCollection:
-                                id: location
-        AnchorLayout:
-            anchor_x: 'left'
-            anchor_y: 'bottom'
-            UiButton:
-                text: "Cancel"
-                on_release: root.manager.current = 'MainOverview'
-        AnchorLayout:
-            anchor_x: 'right'
-            anchor_y: 'bottom'
-            UiButton:
-                text: "Submit"
-                on_release:
-                    root.machineName = machineName.text
-                    root.desc = desc.text
-                    root.machineType = machineType.text
-                    root.location = location.text
-                    root.addNewMachine()
-                    root.manager.current = 'MainOverview'
-                    root.manager.current_screen.stop()
-                    root.manager.current_screen.start()
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                GridLayout:
+                    cols: 1
+                    height: self.minimum_height + body.minimum_height
+                    size_hint_y: None
+                    row_force_default: True
+                    row_default_height: self.width / 13
+                    padding: self.width / 15
+                    spacing: self.width / 20
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'bottom'
+                        HeaderLabel:
+                            text: 'New Machine'
+                    AnchorLayout:
+                        anchor_x: 'center'
+                        anchor_y: 'top'
+                        StyledGridLayout:
+                            id: body
+                            cols: 2
+                            height: self.minimum_height
+                            size_hint_y: None
+                            row_force_default: True
+                            row_default_height: self.width / 8
+                            col_default_width: self.width / 4
+                            padding: self.width / 25
+                            spacing: self.width / 25, self.width / 50
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Name: '
+                            AnchorGridCell:
+                                TextCollection:
+                                    id: machineName
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Description: '
+                            AnchorGridCell:
+                                TextCollection:
+                                    id: desc
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Type: '
+                            AnchorGridCell:
+                                TextCollection:
+                                    id: machineType
+                            AnchorGridCell:
+                                InputLabel:
+                                    text: 'Location: '
+                            AnchorGridCell:
+                                TextCollection:
+                                    id: location
+                    StackLayout:
+                        orientation: 'lr-tb'
+                        spacing: self.width / 50
+                        UiButton:
+                            text: "Cancel"
+                            on_release: root.manager.current = 'MainOverview'
+                        UiButton:
+                            text: "Submit"
+                            on_release:
+                                root.machineName = machineName.text
+                                root.desc = desc.text
+                                root.machineType = machineType.text
+                                root.location = location.text
+                                root.addNewMachine()
+                                root.manager.current = 'MainOverview'
+                                root.manager.current_screen.stop()
+                                root.manager.current_screen.start()   
+            
