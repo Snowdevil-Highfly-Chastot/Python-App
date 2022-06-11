@@ -99,7 +99,7 @@ AnchorGridCell:
                     font_size: self.width / 20
                     text_size: self.size
                 Label:
-                    text: "Job Name"
+                    text: "None"
                     font_size: self.width / 20
                     text_size: self.size
             StackLayout:
@@ -110,7 +110,7 @@ AnchorGridCell:
                     font_size: self.width / 20
                     text_size: self.size
                 Label:
-                    text: "Time Left"
+                    text: "None"
                     font_size: self.width / 20
                     text_size: self.size
                     multiline: True

@@ -9,7 +9,7 @@
 <UiButton@Button>:
     font_size: self.width / 6
     text_size: self.size
-    size_hint: .2, .9
+    size_hint: .25, 1
     halign: 'center'
     valign: 'center'
     background_color: 0,0,0,0
@@ -135,103 +135,79 @@
 <MachineStatusPage>:
     on_enter: root.start()
     on_leave: root.stop()
-    FloatLayout:
-        AnchorLayout:
-            anchor_x: 'center'
-            anchor_y: 'top'
-            ScrollView:
-                do_scroll_x: False
-                do_scroll_y: True
-                PageGridLayout:
-                    height: self.minimum_height + body.minimum_height
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'bottom'
-                        HeaderLabel:
-                            id: selectedMachine
-                            text: root.selectedMachine
-                    StackLayout:
-                        orientation: 'lr-tb'
-                        spacing: self.width / 50
-                        UiButton:
-                            text: 'Go Back'
-                            on_release: root.manager.current = 'MainOverview'
-                        UiButton:
-                            text: 'Edit Job'
-                            on_release:
-                                root.manager.current = 'AddJobPage'
-                                root.manager.current_screen.selectedMachine = selectedMachine.text
-                                root.manager.current_screen.Part_Name = root.Part_Name
-                                root.manager.current_screen.Part_Desc = root.Part_Desc
-                                root.manager.current_screen.Parts_Needed = root.Parts_Needed
-                                root.manager.current_screen.Time_Per_Part = root.Time_Per_Part
-                                root.manager.current_screen.Oal = root.Oal
-                                root.manager.current_screen.Cut_Off_Width = root.Cut_Off_Width
-                                root.manager.current_screen.Bar_Length = root.Bar_Length
-                                root.manager.current_screen.Bar_Parameter = root.Bar_Parameter
-                        UiButton:
-                            text: 'New Job'
-                            on_release:
-                                root.manager.current = 'AddJobPage'
-                                root.manager.current_screen.selectedMachine = selectedMachine.text
-                                root.manager.current_screen.Part_Name = ""
-                                root.manager.current_screen.Part_Desc = ""
-                                root.manager.current_screen.Parts_Needed = ""
-                                root.manager.current_screen.Time_Per_Part = ""
-                                root.manager.current_screen.Oal = ""
-                                root.manager.current_screen.Cut_Off_Width = ""
-                                root.manager.current_screen.Bar_Length = ""
-                                root.manager.current_screen.Bar_Parameter = ""
-                    AnchorLayout:
-                        anchor_x: 'center'
-                        anchor_y: 'top'
-                        HeaderLabel:
-                            text: "Current Job"
-                        StyledGridLayout:
-                            id: body
-                            AnchorGridCell:
-                                InputLabel:
-                                    text: 'Current Job: '
-                            AnchorGridCell:
-                                OutputLabel:
-                                    text: root.Part_Name
-                            AnchorGridCell:
-                                InputLabel:
-                                    text: 'Job Description'
-                            AnchorGridCell:
-                                OutputLabel:
-                                    text: root.Part_Desc
-                            AnchorGridCell:
-                                InputLabel:
-                                    text: 'Parts Needed: '
-                            AnchorGridCell:
-                                OutputLabel:
-                                    text: root.Parts_Needed
-                            AnchorGridCell:
-                                InputLabel:
-                                    text: 'Parts Remaining: '
-                            AnchorGridCell:
-                                OutputLabel:
-                                    text: root.Parts_Left
-                            AnchorGridCell:
-                                InputLabel:
-                                    text: 'Time Per Part: '
-                            AnchorGridCell:
-                                OutputLabel:
-                                    text: root.Time_Per_Part
-                            AnchorGridCell:
-                                InputLabel:
-                                    text: 'Completion Time: '
-                            AnchorGridCell:
-                                OutputLabel:
-                                    text: root.Completion_Time
-                            AnchorGridCell:
-                                InputLabel:
-                                    text: 'Time Left: '
-                            AnchorGridCell:
-                                OutputLabel:
-                                    text: root.Time_Left
-                    
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            PageGridLayout:
+                row_force_default: False
+                HeaderLabel:
+                    id: selectedMachine
+                    text: root.selectedMachine
+                StyledGridLayout:
+                    InputLabel:
+                        text: 'Current Job: '
+                    OutputLabel:
+                        text: root.Part_Name
+                    InputLabel:
+                        text: 'Job Description'
+                    OutputLabel:
+                        text: root.Part_Desc
+                    InputLabel:
+                        text: 'Parts Needed: '
+                    OutputLabel:
+                        text: root.Parts_Needed
+                    InputLabel:
+                        text: 'Parts Remaining: '
+                    OutputLabel:
+                        text: root.Parts_Left
+                    InputLabel:
+                        text: 'Time Per Part: '
+                    OutputLabel:
+                        text: root.Time_Per_Part
+                    InputLabel:
+                        text: 'Completion Time: '
+                    OutputLabel:
+                        text: root.Completion_Time
+                    InputLabel:
+                        text: 'Time Left: '
+                    OutputLabel:
+                        text: root.Time_Left
+                StackLayout:
+                    orientation: 'lr-tb'
+                    spacing: self.width / 50
+                    UiButton:
+                        text: 'Go Back'
+                        on_release: root.manager.current = 'MainOverview'
+                    UiButton:
+                        text: 'Edit Job'
+                        on_release:
+                            root.manager.current = 'AddJobPage'
+                            root.manager.current_screen.selectedMachine = selectedMachine.text
+                            root.manager.current_screen.Part_Name = root.Part_Name
+                            root.manager.current_screen.Part_Desc = root.Part_Desc
+                            root.manager.current_screen.Parts_Needed = root.Parts_Needed
+                            root.manager.current_screen.Time_Per_Part = root.Time_Per_Part
+                            root.manager.current_screen.Oal = root.Oal
+                            root.manager.current_screen.Cut_Off_Width = root.Cut_Off_Width
+                            root.manager.current_screen.Bar_Length = root.Bar_Length
+                            root.manager.current_screen.Bar_Parameter = root.Bar_Parameter
+                    UiButton:
+                        text: 'New Job'
+                        on_release:
+                            root.manager.current = 'AddJobPage'
+                            root.manager.current_screen.selectedMachine = selectedMachine.text
+                            root.manager.current_screen.Part_Name = ""
+                            root.manager.current_screen.Part_Desc = ""
+                            root.manager.current_screen.Parts_Needed = ""
+                            root.manager.current_screen.Time_Per_Part = ""
+                            root.manager.current_screen.Oal = ""
+                            root.manager.current_screen.Cut_Off_Width = ""
+                            root.manager.current_screen.Bar_Length = ""
+                            root.manager.current_screen.Bar_Parameter = ""
+                
 <AddJobPage>:
     FloatLayout:
         AnchorLayout:
