@@ -55,6 +55,14 @@
             radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
 
 <StyledGridLayout@GridLayout>:
+    cols: 2
+    height: self.minimum_height
+    size_hint_y: None
+    row_force_default: True
+    row_default_height: self.width / 8
+    col_default_width: self.width / 4
+    padding: self.width / 25
+    spacing: self.width / 25, self.width / 50
     canvas.before:
         Color:
             rgb: utils.get_color_from_hex("4F5D75")
@@ -62,6 +70,15 @@
             size: self.size
             pos: self.pos
             radius: [(20, 20), (20, 20), (20, 20), (20, 20)]
+
+<PageGridLayout@GridLayout>:
+    cols: 1
+    height: self.minimum_height
+    size_hint_y: None
+    row_force_default: True
+    row_default_height: self.width / 13
+    padding: self.width / 15
+    spacing: self.width / 20
     
 <ScreenManager>
     transition: NoTransition()
@@ -74,14 +91,8 @@
             ScrollView:
                 do_scroll_x: False
                 do_scroll_y: True
-                GridLayout:
-                    cols: 1
-                    row_force_default: True
-                    row_default_height: self.width / 10
-                    padding: self.width / 15
-                    spacing: self.width / 40
+                PageGridLayout:
                     height: machineButtons.minimum_height + self.minimum_height
-                    size_hint_y: None
                     AnchorLayout:
                         anchor_x: 'center'
                         anchor_y: 'bottom'
@@ -133,14 +144,8 @@
             ScrollView:
                 do_scroll_x: False
                 do_scroll_y: True
-                GridLayout:
-                    cols: 1
-                    height: self.minimum_height + jobInfoBody.minimum_height
-                    size_hint_y: None
-                    row_force_default: True
-                    row_default_height: self.width / 13
-                    padding: self.width / 15
-                    spacing: self.width / 20
+                PageGridLayout:
+                    height: self.minimum_height + body.minimum_height
                     AnchorLayout:
                         anchor_x: 'center'
                         anchor_y: 'bottom'
@@ -185,15 +190,7 @@
                         HeaderLabel:
                             text: "Current Job"
                         StyledGridLayout:
-                            id: jobInfoBody
-                            cols: 2
-                            height: self.minimum_height
-                            size_hint_y: None
-                            row_force_default: True
-                            row_default_height: self.width / 6
-                            col_default_width: self.width / 4
-                            padding: self.width / 25
-                            spacing: self.width / 25, self.width / 50
+                            id: body
                             AnchorGridCell:
                                 InputLabel:
                                     text: 'Current Job: '
@@ -245,14 +242,8 @@
             ScrollView:
                 do_scroll_x: False
                 do_scroll_y: True
-                GridLayout:
-                    cols: 1
-                    height: self.minimum_height
-                    size_hint_y: None
-                    row_force_default: True
-                    row_default_height: self.width / 13
-                    padding: self.width / 15
-                    spacing: self.width / 20
+                PageGridLayout:
+                    height: self.minimum_height + body.minimum_height
                     AnchorLayout:
                         anchor_x: 'center'
                         anchor_y: 'bottom'
@@ -281,14 +272,7 @@
                         anchor_x: 'center'
                         anchor_y: 'top'
                         StyledGridLayout:
-                            cols: 2
-                            height: self.minimum_height
-                            size_hint_y: None
-                            row_force_default: True
-                            row_default_height: self.width / 8
-                            col_default_width: self.width / 4
-                            padding: self.width / 25
-                            spacing: self.width / 25, self.width / 50
+                            id: body
                             AnchorGridCell:
                                 InputLabel:
                                     text: 'Part Name/Num: '
@@ -354,32 +338,35 @@
             ScrollView:
                 do_scroll_x: False
                 do_scroll_y: True
-                GridLayout:
-                    cols: 1
+                PageGridLayout:
                     height: self.minimum_height + body.minimum_height
-                    size_hint_y: None
-                    row_force_default: True
-                    row_default_height: self.width / 13
-                    padding: self.width / 15
-                    spacing: self.width / 20
                     AnchorLayout:
                         anchor_x: 'center'
                         anchor_y: 'bottom'
                         HeaderLabel:
                             text: 'New Machine'
+                    StackLayout:
+                        orientation: 'lr-tb'
+                        spacing: self.width / 50
+                        UiButton:
+                            text: "Cancel"
+                            on_release: root.manager.current = 'MainOverview'
+                        UiButton:
+                            text: "Submit"
+                            on_release:
+                                root.machineName = machineName.text
+                                root.desc = desc.text
+                                root.machineType = machineType.text
+                                root.location = location.text
+                                root.addNewMachine()
+                                root.manager.current = 'MainOverview'
+                                root.manager.current_screen.stop()
+                                root.manager.current_screen.start()  
                     AnchorLayout:
                         anchor_x: 'center'
                         anchor_y: 'top'
                         StyledGridLayout:
                             id: body
-                            cols: 2
-                            height: self.minimum_height
-                            size_hint_y: None
-                            row_force_default: True
-                            row_default_height: self.width / 8
-                            col_default_width: self.width / 4
-                            padding: self.width / 25
-                            spacing: self.width / 25, self.width / 50
                             AnchorGridCell:
                                 InputLabel:
                                     text: 'Name: '
@@ -404,21 +391,5 @@
                             AnchorGridCell:
                                 TextCollection:
                                     id: location
-                    StackLayout:
-                        orientation: 'lr-tb'
-                        spacing: self.width / 50
-                        UiButton:
-                            text: "Cancel"
-                            on_release: root.manager.current = 'MainOverview'
-                        UiButton:
-                            text: "Submit"
-                            on_release:
-                                root.machineName = machineName.text
-                                root.desc = desc.text
-                                root.machineType = machineType.text
-                                root.location = location.text
-                                root.addNewMachine()
-                                root.manager.current = 'MainOverview'
-                                root.manager.current_screen.stop()
-                                root.manager.current_screen.start()   
+                     
             
