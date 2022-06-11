@@ -1,5 +1,5 @@
 import datetime
-from .machineClassLibrary import (
+from .classLibrary import (
 runTimeLeft,
 completionTime,
 partsRemaining,
@@ -7,7 +7,7 @@ timeRemaining,
 barfeedParts
 )
 
-from .fileImport import (
+from .sqlite import (
 saveMachine,
 readMachine,
 saveJob,

@@ -1,7 +1,7 @@
 import sqlite3 as sql
 import os
 import os.path
-from .config.definitions import (
+from .config.configLibrary import (
     ROOT_DIR,
     climbDirectory
 )

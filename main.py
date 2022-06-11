@@ -1,7 +1,7 @@
 import time
-from py.classMachine import Job, Machine
+from py.classes import Job, Machine
 from py.mainLibrary import readMachines
-from py.fileImport import readMachine
+from py.sqlite import readMachine
 from kivy.app import App, runTouchApp
 from kivy.graphics import Color, Rectangle
 from kivy.lang import Builder
