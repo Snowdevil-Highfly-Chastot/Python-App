@@ -73,65 +73,64 @@ class MainOverview(Screen):
             
             #Kivy widget group, some widgets are custom classes which are named at the top of the ScreenManagement.kv file
             machineButtonGroup = Builder.load_string('''
-AnchorGridCell:
-    ButtonBoxLayout:
-        padding: self.width / 20, self.width / 30
-        on_release:
-            app.root.current = 'MachineStatusPage'
-            app.root.current_screen.selectedMachine = machineLabel.text
+ButtonBoxLayout:
+    padding: self.width / 20, self.width / 30
+    on_release:
+        app.root.current = 'MachineStatusPage'
+        app.root.current_screen.selectedMachine = machineLabel.text
+    orientation: 'vertical'
+    BoxLayout:
+        orientation: 'horizontal'
+        Label:
+            id: machineLabel
+            text: "Machine"
+            font_size: self.width / 15
+            text_size: self.size
+            halign: 'center'
+            valign: 'top'
+    BoxLayout:
         orientation: 'vertical'
-        BoxLayout:
-            orientation: 'horizontal'
+        StackLayout:
+            orientation: 'tb-lr'
+            spacing: self.width / 3 * -1
             Label:
-                id: machineLabel
-                text: "Machine"
-                font_size: self.width / 15
+                text: "Current Job: "
+                font_size: self.width / 20
                 text_size: self.size
-                halign: 'center'
-                valign: 'top'
-        BoxLayout:
-            orientation: 'vertical'
-            StackLayout:
-                orientation: 'tb-lr'
-                spacing: self.width / 3 * -1
-                Label:
-                    text: "Current Job: "
-                    font_size: self.width / 20
-                    text_size: self.size
-                Label:
-                    text: "None"
-                    font_size: self.width / 20
-                    text_size: self.size
-            StackLayout:
-                orientation: 'tb-lr'
-                spacing: self.width / 3 * -1
-                Label:
-                    text: "Completion Time: "
-                    font_size: self.width / 20
-                    text_size: self.size
-                Label:
-                    text: "None"
-                    font_size: self.width / 20
-                    text_size: self.size
-                    multiline: True
+            Label:
+                text: "None"
+                font_size: self.width / 20
+                text_size: self.size
+        StackLayout:
+            orientation: 'tb-lr'
+            spacing: self.width / 3 * -1
+            Label:
+                text: "Completion Time: "
+                font_size: self.width / 20
+                text_size: self.size
+            Label:
+                text: "None"
+                font_size: self.width / 20
+                text_size: self.size
+                multiline: True
     ''')
             #Add above widget to layout
             self.ids["machineButtons"].add_widget(machineButtonGroup)
             #Change header to the machine name
-            self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = machine
+            self.ids["machineButtons"].children[0].children[1].children[0].text = machine
             #Grab current job
             currentMachineJob = Job(machine)
             #Set text to Job Name
             try:
-                self.ids["machineButtons"].children[0].children[0].children[0].children[1].children[0].text = str(currentMachineJob.grabJob(0))
+                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = str(currentMachineJob.grabJob(0))
             except:
-                self.ids["machineButtons"].children[0].children[0].children[0].children[1].children[0].text = "None"
+                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = "None"
                 
             #Set text to completion time
             try:
-                self.ids["machineButtons"].children[0].children[0].children[0].children[0].children[0].text = str(currentMachineJob.grabJob(5))
+                self.ids["machineButtons"].children[0].children[0].children[0].children[0].text = str(currentMachineJob.grabJob(5))
             except:
-                self.ids["machineButtons"].children[0].children[0].children[0].children[1].children[0].text = "None"
+                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = "None"
 
     #This runs on screen exit, will not only save data, but also allow an easier refresh incase of new machines added or old ones deleted
     def stop(self):
