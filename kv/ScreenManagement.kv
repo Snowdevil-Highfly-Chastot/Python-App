@@ -196,6 +196,7 @@
                             root.manager.current_screen.Bar_Parameter = ""
                 
 <AddJobPage>:
+    on_enter: root.start()
     AnchorLayout:
         anchor_x: 'center'
         anchor_y: 'top'
@@ -269,6 +270,7 @@
                             root.manager.current = 'MachineStatusPage'
       
 <AddMachinePage>:
+    on_enter: root.start()
     AnchorLayout:
         anchor_x: 'center'
         anchor_y: 'top'

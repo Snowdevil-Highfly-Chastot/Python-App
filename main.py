@@ -25,11 +25,15 @@ from kivy.uix.behaviors import ButtonBehavior
 #Loads kivy screenmanager file that has the entire application static UI/UX
 Builder.load_file("kv/ScreenManagement.kv")
 
+#The ButtonBoxLayout is used to encase the machine buttons on the Overview, and have clicking attributes
 class ButtonBoxLayout(ButtonBehavior, BoxLayout):
     pass
 
 #First screen on app open, complete overview of all machines
 class MainOverview(Screen):
+
+    #Object variable for button binding / screen switching in functions
+    manager = ObjectProperty(None)
 
     #Varables, selected machine is for the app to know which machine is active in sub-screens
     #app is used in this screens definitions
@@ -141,17 +145,8 @@ ButtonBoxLayout:
 #name of the machine selected
 class MachineStatusPage(Screen):
     
-    #Bind back button to go back to the Overview
-    app = App.get_running_app()
-    def __init__(self,**kwargs):
-        super(MachineStatusPage,self).__init__(**kwargs)
-            #code goes here and add:
-        Window.bind(on_keyboard=self.Android_back_click)
-
-    def Android_back_click(self,window,key,*largs):
-        if key == 27:
-            self.manager.current='MainOverview'#you can create a method here to cache in a list the number of screens and then pop the last visited screen.
-            return True
+    #Object variable for button binding / screen switching in functions
+    manager = ObjectProperty(None)
 
     #For some reason I wasn't able to use Machine_Name = MainOverview.selectedMachine, so this is a workaround.
     #Collects the selected machine from the overview to be able to pull and display the corresponding data.
@@ -179,6 +174,15 @@ class MachineStatusPage(Screen):
     def start(self, **kwargs):
         #Starts coundown() loop
         Clock.schedule_once(self.countdown)
+        #Unbinds and re-Bind back button to go back to the Overview
+        Window.unbind(on_keyboard=self.Android_back_click)
+        Window.bind(on_keyboard=self.Android_back_click)
+
+    #This callback binds the back/esc key to the previous page, and when returned true, will go to that page
+    def Android_back_click(self,window,key,*largs):
+        if key == 27:
+            self.manager.current='MainOverview'
+            return True
 
     def countdown(self, dt):
         #Gets current job data before loop incase if job is finished or not active
@@ -255,6 +259,21 @@ class MachineStatusPage(Screen):
 #Form to add new machines to the app/database
 class AddMachinePage(Screen):
 
+    #Object variable for button binding / screen switching in functions
+    manager = ObjectProperty(None)
+
+    #Runs on screen open
+    def start(self, **kwargs):
+        #Unbinds and re-Bind back button to go back to the Overview
+        Window.unbind(on_keyboard=self.Android_back_click)
+        Window.bind(on_keyboard=self.Android_back_click)
+
+    #This callback binds the back/esc key to the previous page, and when returned true, will go to that page
+    def Android_back_click(self,window,key,*largs):
+        if key == 27:
+            self.manager.current='MainOverview'
+            return True
+
     #Variables used for collecting data for uploading to db
     machineName = StringProperty()
     desc = StringProperty()
@@ -270,6 +289,20 @@ class AddMachinePage(Screen):
 
 #Form to add new jobs to the respective machine
 class AddJobPage(Screen):
+
+    #Object variable for button binding / screen switching in functions
+    manager = ObjectProperty(None)
+
+    def start(self, **kwargs):
+        #Unbinds and re-Bind back button to go back to the Overview
+        Window.unbind(on_keyboard=self.Android_back_click)
+        Window.bind(on_keyboard=self.Android_back_click)
+
+    #This callback binds the back/esc key to the previous page, and when returned true, will go to that page
+    def Android_back_click(self,window,key,*largs):
+        if key == 27:
+            self.manager.current='MachineStatusPage'
+            return True
     
     #Uses the machine name that was originally selected from the Main Overview so the job is added to the right machine
     selectedMachine = MainOverview.selectedMachine
