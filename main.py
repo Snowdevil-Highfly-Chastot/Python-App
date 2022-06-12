@@ -96,27 +96,22 @@ ButtonBoxLayout:
         orientation: 'vertical'
         StackLayout:
             orientation: 'tb-lr'
-            spacing: self.width / 3 * -1
-            Label:
+            spacing: self.width / 2.2 * -1
+            InputLabel:
                 text: "Current Job: "
                 font_size: self.width / 20
-                text_size: self.size
-            Label:
+            InputLabel:
                 text: "None"
                 font_size: self.width / 20
-                text_size: self.size
         StackLayout:
             orientation: 'tb-lr'
-            spacing: self.width / 3 * -1
-            Label:
+            spacing: self.width / 2.2 * -1
+            InputLabel:
                 text: "Completion Time: "
                 font_size: self.width / 20
-                text_size: self.size
-            Label:
+            InputLabel:
                 text: "None"
                 font_size: self.width / 20
-                text_size: self.size
-                multiline: True
     ''')
             #Add above widget to layout
             self.ids["machineButtons"].add_widget(machineButtonGroup)
