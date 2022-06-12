@@ -162,8 +162,8 @@
                         text: 'Time Left: '
                     OutputLabel:
                         text: root.Time_Left
-                StackLayout:
-                    orientation: 'lr-tb'
+                GridLayout:
+                    rows: 1
                     spacing: self.width / 50
                     UiButton:
                         text: 'Go Back'
@@ -242,17 +242,19 @@
                         id: bar_length
                         text: root.Bar_Length
                     InputLabel:
-                        text: 'Bar Remnant Parameter (in): '
+                        text: 'Bar Remnant (in): '
                     TextCollection:
                         id: bar_parameter
                         text: root.Bar_Parameter
-                StackLayout:
-                    orientation: 'lr-tb'
+                GridLayout:
+                    rows: 1
                     spacing: self.width / 50
                     UiButton:
+                        font_size: self.width / 9
                         text: "Cancel"
                         on_release: root.manager.current = 'MachineStatusPage'
                     UiButton:
+                        font_size: self.width / 9
                         text: "Submit"
                         on_release:
                             root.Part_Name = part_name.text
@@ -293,13 +295,15 @@
                         text: 'Location: '
                     TextCollection:
                         id: location
-                StackLayout:
-                    orientation: 'lr-tb'
+                GridLayout:
+                    rows: 1
                     spacing: self.width / 50
                     UiButton:
+                        font_size: self.width / 9
                         text: "Cancel"
                         on_release: root.manager.current = 'MainOverview'
                     UiButton:
+                        font_size: self.width / 9
                         text: "Submit"
                         on_release:
                             root.machineName = machineName.text
@@ -309,4 +313,5 @@
                             root.addNewMachine()
                             root.manager.current = 'MainOverview'
                             root.manager.current_screen.stop()
-                            root.manager.current_screen.start() 
+                            root.manager.current_screen.start()
+                    
