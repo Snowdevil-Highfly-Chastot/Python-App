@@ -6,6 +6,7 @@ from kivy.app import App, runTouchApp
 from kivy.graphics import Color, Rectangle
 from kivy.lang import Builder
 from kivy.clock import Clock
+from kivy.config import Config
 from kivy.properties import StringProperty, NumericProperty, ObjectProperty
 from kivy.utils import get_color_from_hex
 from kivy.core.window import Window
@@ -21,6 +22,9 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.behaviors import ButtonBehavior
+
+#Removes application exit from android back button press.
+Config.set('kivy', 'exit_on_escape', '0')
 
 #Loads kivy screenmanager file that has the entire application static UI/UX
 Builder.load_file("kv/ScreenManagement.kv")
