@@ -124,8 +124,8 @@
                     spacing: self.width / 30, self.width / 50 
                             
 <MachineStatusPage>:
-    on_pre_enter: root.start()
-    on_pre_leave: root.stop()
+    on_enter: root.start()
+    on_leave: root.stop()
     AnchorLayout:
         anchor_x: 'center'
         anchor_y: 'top'
@@ -199,7 +199,7 @@
                             root.manager.current_screen.Bar_Parameter = ""
                 
 <AddJobPage>:
-    on_pre_enter: root.start()
+    on_enter: root.start()
     AnchorLayout:
         anchor_x: 'center'
         anchor_y: 'top'
@@ -273,7 +273,7 @@
                             root.manager.current = 'MachineStatusPage'
       
 <AddMachinePage>:
-    on_pre_enter: root.start()
+    on_enter: root.start()
     AnchorLayout:
         anchor_x: 'center'
         anchor_y: 'top'
