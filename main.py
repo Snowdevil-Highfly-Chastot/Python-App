@@ -25,7 +25,6 @@ from kivy.uix.behaviors import ButtonBehavior
 
 #Removes application exit from android back button press.
 Config.set('kivy', 'exit_on_escape', '0')
-Config.set('kivy', 'double_tap_time', '0')
 
 #Loads kivy screenmanager file that has the entire application static UI/UX
 Builder.load_file("kv/ScreenManagement.kv")
