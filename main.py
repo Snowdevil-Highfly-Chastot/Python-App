@@ -139,6 +139,121 @@ ButtonBoxLayout:
     def stop(self):
         #Clears all child widgets of the GridLayout with the respective id
         self.ids["machineButtons"].clear_widgets()
+        
+class MainOverviewDelete(Screen):
+
+    #Object variable for button binding / screen switching in functions
+    manager = ObjectProperty(None)
+
+    #Varables, selected machine is for the app to know which machine is active in sub-screens
+    #app is used in this screens definitions
+    selectedMachine = StringProperty()
+    app = App.get_running_app()
+    
+
+    #Runs on screen open
+    def start(self, **kwargs):
+        
+        #Schedules loadMachines to run 1 time 
+        Clock.schedule_once(self.loadMachines)
+        #Unbinds and re-Bind back button to go back to the Overview
+        Window.unbind(on_keyboard=self.Android_back_click)
+        Window.bind(on_keyboard=self.Android_back_click)
+
+    #Loads all machines from db and creates a Kivy widget for each machine in db
+    def loadMachines(self, dt):
+        
+        #Machine names collects all machine names from database
+        machineNames = []
+        #test index and machine count are used for collecting the total quantity of machines in the db
+        testindex = 0
+        machineCount = 0
+        #index is the current machine being pulled in the loop below
+        index = 0
+
+        try:
+            #This loop will run until error, the error hit will determine how many machines are in db
+            while True:
+                readMachines(testindex)
+                testindex += 1
+                machineCount += 1
+        except:
+            pass
+        
+        #This loop will add all the machine names to the list above and will stop before error
+        while index < machineCount:
+            machineNames.append(readMachines(index))
+            index += 1
+        
+        #For every machine in the list above, this loop will create the kivy widgets inside the GridLayout with the respective id
+        for machine in machineNames:
+            
+            #Kivy widget group, some widgets are custom classes which are named at the top of the ScreenManagement.kv file
+            machineButtonGroup = Builder.load_string('''
+ButtonBoxLayout:
+    padding: self.width / 20, self.width / 30
+    on_release:
+        app.root.current = 'MachineStatusPage'
+        app.root.current_screen.selectedMachine = machineLabel.text
+    orientation: 'vertical'
+    BoxLayout:
+        orientation: 'horizontal'
+        Label:
+            id: machineLabel
+            text: "Machine"
+            font_size: self.width / 15
+            text_size: self.size
+            halign: 'center'
+            valign: 'top'
+    BoxLayout:
+        orientation: 'vertical'
+        StackLayout:
+            orientation: 'tb-lr'
+            spacing: self.width / 2.2 * -1
+            InputLabel:
+                text: "Current Job: "
+                font_size: self.width / 20
+            InputLabel:
+                text: "None"
+                font_size: self.width / 20
+        StackLayout:
+            orientation: 'tb-lr'
+            spacing: self.width / 2.2 * -1
+            InputLabel:
+                text: "Completion Time: "
+                font_size: self.width / 20
+            InputLabel:
+                text: "None"
+                font_size: self.width / 20
+    ''')
+            #Add above widget to layout
+            self.ids["machineButtons"].add_widget(machineButtonGroup)
+            #Change header to the machine name
+            self.ids["machineButtons"].children[0].children[1].children[0].text = machine
+            #Grab current job
+            currentMachineJob = Job(machine)
+            #Set text to Job Name
+            try:
+                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = str(currentMachineJob.grabJob(0))
+            except:
+                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = "None"
+                
+            #Set text to completion time
+            try:
+                self.ids["machineButtons"].children[0].children[0].children[0].children[0].text = str(currentMachineJob.grabJob(5))
+            except:
+                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = "None"
+
+    #This runs on screen exit, will not only save data, but also allow an easier refresh incase of new machines added or old ones deleted
+    def stop(self):
+        #Clears all child widgets of the GridLayout with the respective id
+        self.ids["machineButtons"].clear_widgets()
+        
+    #This callback binds the back/esc key to the previous page, and when returned true, will go to that page
+    def Android_back_click(self,window,key,*largs):
+        if key == 27:
+            self.manager.current='MainOverview'
+            return True
     
 #Dynamic status page for the selected machine. Loads data based upon the
 #name of the machine selected
@@ -342,10 +457,12 @@ class MainApp(App):
         screen2 = MachineStatusPage(name='MachineStatusPage')
         screen3 = AddMachinePage(name='AddMachinePage')
         screen4 = AddJobPage(name='AddJobPage')
+        screen5 = MainOverviewDelete(name='MainOverviewDelete')
         root.add_widget(screen1)
         root.add_widget(screen2)
         root.add_widget(screen3)
         root.add_widget(screen4)
+        root.add_widget(screen5)
         
         #Adds all machines to overview, only needs to initialize here, or when machines are added/deleted during runtime.
         #Currently it also initializes on_pre_enter to account for any changes to job or machines. Can setup cache and switch to use when necessary.

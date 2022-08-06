@@ -102,6 +102,7 @@
                     UiButton:
                         text: 'Delete Machine'
                         size_hint: .2, .9
+                        on_release: root.manager.current = 'MainOverviewDelete'
                     Label:
                         text: 'Sort By'
                         text_size: self.size
@@ -112,6 +113,42 @@
                     UiButton:
                         text: 'Name'
                         size_hint: .3, .9
+                GridLayout:
+                    id: machineButtons
+                    cols: 1
+                    height: self.minimum_height
+                    row_force_default: True
+                    size_hint_y: None
+                    row_default_height: self.width / 3
+                    col_default_width: self.width / 4
+                    padding: self.width / 30
+                    spacing: self.width / 30, self.width / 50 
+                            
+<MainOverviewDelete>:
+    on_pre_enter: root.start()
+    on_pre_leave: root.stop()
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'top'
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            PageGridLayout:
+                HeaderLabel:
+                    text: 'All Currently Added Machines'
+                    font_size: self.width / 15
+                GridLayout:
+                    rows: 1
+                    spacing: self.width / 50
+                    UiButton:
+                        text: 'Cancel'
+                        font_size: self.width / 10
+                        size_hint: .2, .9
+                        on_release: root.manager.current = 'MainOverview'
+                    UiButton:
+                        text: 'Delete Selected'
+                        font_size: self.width / 10
+                        size_hint: .2, .9
                 GridLayout:
                     id: machineButtons
                     cols: 1
