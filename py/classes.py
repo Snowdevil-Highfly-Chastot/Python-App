@@ -10,6 +10,7 @@ barfeedParts
 from .sqlite import (
 saveMachine,
 readMachine,
+deleteMachine,
 saveJob,
 readJob
 )
@@ -33,6 +34,12 @@ class Machine:
         #Returns a single item by using the machine name to get the row, and the column parameter
         result = readMachine(Column, self.machineName)
         return result
+        
+    def trashMachine(self):
+        
+        #Deletes machine from db using the name in created class
+        deleteMachine(self.machineName)
+        
 
         
 #Creates the job class for handling all machine jobs
