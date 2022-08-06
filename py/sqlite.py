@@ -60,6 +60,26 @@ def readMachine (Column, Machine_Name):
     setupDb.close
     return result
     
+def deleteMachine (Machine_Name):
+    
+    #Find current path of this folder
+    currentPath = os.path.join(ROOT_DIR)
+    
+    #Changes current directory to db directory in relation to this file
+    os.chdir(currentPath)
+    climbDirectory(1)
+    os.chdir('db')
+
+    #Creates database if not created, otherwise connects to it
+    setupDb = sql.connect('appDatabase.db')
+    cursor = setupDb.cursor()
+    
+    #Deletes machines with the selected machine name
+    cursor.execute('''DELETE FROM Machines WHERE Machine_Name = '%s' ''' % Machine_Name)
+    
+    #Closes db
+    setupDb.close
+    
     
 def saveJob(Part_Name, Part_Desc, Machine_Name, Parts_Needed, Time_Per_Part, Oal,Cut_Off_Width, Bar_Length, Bar_Parameter, Active):
     
