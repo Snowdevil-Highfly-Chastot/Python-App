@@ -49,6 +49,17 @@
             size: self.size
             pos: self.pos
             radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
+            
+<ToggleBoxLayout>:
+    padding: self.width / 40
+    background_color: 0.5,.5,.5,.5
+    canvas.before:
+        Color:
+            rgba: self.background_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
 
 <StyledGridLayout@GridLayout>:
     cols: 2

@@ -13,6 +13,7 @@ from kivy.core.window import Window
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
+from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.dropdown import DropDown
 from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
@@ -21,7 +22,7 @@ from kivy.uix.stacklayout import StackLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.uix.scrollview import ScrollView
-from kivy.uix.behaviors import ButtonBehavior
+from kivy.uix.behaviors import ButtonBehavior, ToggleButtonBehavior
 
 #Removes application exit from android back button press.
 Config.set('kivy', 'exit_on_escape', '0')
@@ -31,6 +32,9 @@ Builder.load_file("kv/ScreenManagement.kv")
 
 #The ButtonBoxLayout is used to encase the machine buttons on the Overview, and have clicking attributes
 class ButtonBoxLayout(ButtonBehavior, BoxLayout):
+    pass
+    
+class ToggleBoxLayout(ToggleButtonBehavior, BoxLayout):
     pass
 
 #First screen on app open, complete overview of all machines
@@ -190,11 +194,8 @@ class MainOverviewDelete(Screen):
             
             #Kivy widget group, some widgets are custom classes which are named at the top of the ScreenManagement.kv file
             machineButtonGroup = Builder.load_string('''
-ButtonBoxLayout:
+ToggleBoxLayout:
     padding: self.width / 20, self.width / 30
-    on_release:
-        app.root.current = 'MachineStatusPage'
-        app.root.current_screen.selectedMachine = machineLabel.text
     orientation: 'vertical'
     BoxLayout:
         orientation: 'horizontal'
