@@ -35,7 +35,15 @@ class ButtonBoxLayout(ButtonBehavior, BoxLayout):
     pass
     
 class ToggleBoxLayout(ToggleButtonBehavior, BoxLayout):
-    pass
+    
+    def __init__(self, **kwargs):
+        super(ToggleBoxLayout, self).__init__(**kwargs)
+
+    def on_state(self, widget, value):
+        if value == 'down':
+            self.background_color = (0.5,.4,.5,.5)
+        else:
+            self.background_color = (0.5,.5,.5,.5)
 
 #First screen on app open, complete overview of all machines
 class MainOverview(Screen):
@@ -471,7 +479,7 @@ class MainApp(App):
 
         #Creates the actual background rectangle and colors it
         with root.canvas.before:
-            Color(*get_color_from_hex('2D3142'))  # colors range from 0-1 not 0-255
+            Color(*get_color_from_hex('2D3142'))  # colors range from 0-1 not 0-255 if not using hex
             self.rect = Rectangle(size=root.size, pos=root.pos)
         return root
 
