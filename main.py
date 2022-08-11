@@ -32,7 +32,15 @@ Builder.load_file("kv/ScreenManagement.kv")
 
 #The ButtonBoxLayout is used to encase the machine buttons on the Overview, and have clicking attributes
 class ButtonBoxLayout(ButtonBehavior, BoxLayout):
-    pass
+    
+    def __init__(self, **kwargs):
+        super(ButtonBoxLayout, self).__init__(**kwargs)
+
+    def on_state(self, widget, value):
+        if value == 'down':
+            self.background_color = (get_color_from_hex('E0F1FF'))
+        else:
+            self.background_color = (get_color_from_hex('4F5D75'))
     
 class ToggleBoxLayout(ToggleButtonBehavior, BoxLayout):
     
@@ -41,9 +49,9 @@ class ToggleBoxLayout(ToggleButtonBehavior, BoxLayout):
 
     def on_state(self, widget, value):
         if value == 'down':
-            self.background_color = (0.5,.4,.5,.5)
+            self.background_color = (get_color_from_hex('E0F1FF'))
         else:
-            self.background_color = (0.5,.5,.5,.5)
+            self.background_color = (get_color_from_hex('4F5D75'))
 
 #First screen on app open, complete overview of all machines
 class MainOverview(Screen):
