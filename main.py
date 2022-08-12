@@ -7,7 +7,7 @@ from kivy.graphics import Color, Rectangle
 from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.config import Config
-from kivy.properties import StringProperty, NumericProperty, ObjectProperty
+from kivy.properties import StringProperty, NumericProperty, ObjectProperty, ListProperty
 from kivy.utils import get_color_from_hex
 from kivy.core.window import Window
 from kivy.uix.floatlayout import FloatLayout
@@ -36,16 +36,22 @@ class ButtonBoxLayout(ButtonBehavior, BoxLayout):
     def __init__(self, **kwargs):
         super(ButtonBoxLayout, self).__init__(**kwargs)
 
+    background_color = ListProperty((get_color_from_hex('4F5D75')))
+    
     def on_state(self, widget, value):
         if value == 'down':
             self.background_color = (get_color_from_hex('E0F1FF'))
         else:
             self.background_color = (get_color_from_hex('4F5D75'))
     
+#The ToggleBoxLayout is used in the Machine Delete screen.
+#It is the same as ButtonBoxLayout except has toggle functionality to allow multiple machine selection for deleting.
 class ToggleBoxLayout(ToggleButtonBehavior, BoxLayout):
     
     def __init__(self, **kwargs):
         super(ToggleBoxLayout, self).__init__(**kwargs)
+        
+    background_color = ListProperty((get_color_from_hex('4F5D75')))
 
     def on_state(self, widget, value):
         if value == 'down':

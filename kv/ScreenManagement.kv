@@ -1,7 +1,6 @@
-#:kivy 1.10.1
+#: kivy 1.10.1
 #: import NoTransition kivy.uix.screenmanager.NoTransition
 #: import utils kivy.utils
-#:set gray_dark utils.get_color_from_hex('#4F5D75')
 
 <UiButton@Button>:
     font_size: self.width / 6
@@ -43,7 +42,6 @@
 
 <ButtonBoxLayout>:
     padding: self.width / 40
-    background_color: grey_dark
     canvas.before:
         Color:
             rgba: self.background_color
@@ -54,7 +52,6 @@
             
 <ToggleBoxLayout>:
     padding: self.width / 40
-    background_color: 0.5,.5,.5,.5
     canvas.before:
         Color:
             rgba: self.background_color
