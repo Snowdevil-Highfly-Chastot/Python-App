@@ -2,16 +2,15 @@
 #: import NoTransition kivy.uix.screenmanager.NoTransition
 #: import utils kivy.utils
 
-<UiButton@Button>:
+<UiButton>:
     font_size: self.width / 6
     text_size: self.size
     size_hint: .25, 1
     halign: 'center'
     valign: 'center'
-    background_color: 0,0,0,0
     canvas.before:
         Color:
-            rgb: utils.get_color_from_hex("4F5D75")
+            rgba: self.background_color
         RoundedRectangle:
             size: self.size
             pos: self.pos

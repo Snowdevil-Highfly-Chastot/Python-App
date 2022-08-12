@@ -58,6 +58,19 @@ class ToggleBoxLayout(ToggleButtonBehavior, BoxLayout):
             self.background_color = (get_color_from_hex('E0F1FF'))
         else:
             self.background_color = (get_color_from_hex('4F5D75'))
+            
+class UiButton(ButtonBehavior, Label):
+    
+    def __init__(self, **kwargs):
+        super(UiButton, self).__init__(**kwargs)
+
+    background_color = ListProperty((get_color_from_hex('4F5D75')))
+    
+    def on_state(self, widget, value):
+        if value == 'down':
+            self.background_color = (get_color_from_hex('E0F1FF'))
+        else:
+            self.background_color = (get_color_from_hex('4F5D75'))
 
 #First screen on app open, complete overview of all machines
 class MainOverview(Screen):
