@@ -512,10 +512,6 @@ class MainApp(App):
         root.add_widget(screen3)
         root.add_widget(screen4)
         root.add_widget(screen5)
-        
-        #Adds all machines to overview, only needs to initialize here, or when machines are added/deleted during runtime.
-        #Currently it also initializes on_pre_enter to account for any changes to job or machines. Can setup cache and switch to use when necessary.
-        screen1.start()
 
         #Creates the actual background rectangle and colors it
         with root.canvas.before:
