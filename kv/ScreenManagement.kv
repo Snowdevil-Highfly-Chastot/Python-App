@@ -107,7 +107,12 @@
                     UiButton:
                         text: 'Add Machine'
                         size_hint: .2, .9
-                        on_release: root.manager.current = 'AddMachinePage'
+                        on_release:
+                            root.manager.current = 'AddMachinePage'
+                            root.manager.current_screen.machineName = ""
+                            root.manager.current_screen.desc = ""
+                            root.manager.current_screen.machineType = ""
+                            root.manager.current_screen.location = ""
                     UiButton:
                         text: 'Delete Machine'
                         size_hint: .2, .9
@@ -337,18 +342,22 @@
                         text: 'Name: '
                     TextCollection:
                         id: machineName
+                        text: root.machineName
                     InputLabel:
                         text: 'Description: '
                     TextCollection:
                         id: desc
+                        text: root.desc
                     InputLabel:
                         text: 'Type: '
                     TextCollection:
                         id: machineType
+                        text: root.machineType
                     InputLabel:
                         text: 'Location: '
                     TextCollection:
                         id: location
+                        text: root.location
                 GridLayout:
                     rows: 1
                     spacing: self.width / 50
