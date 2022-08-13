@@ -292,10 +292,10 @@ ToggleBoxLayout:
             self.manager.current='MainOverview'
             return True
             
-    def deleteSelectedMachines(self,widget):
+    def deleteSelectedMachines(self):
         toggles = []
         for child in self.ids["machineButtons"].children:
-            if isinstance(child, ToggleButton):
+            if isinstance(child, ToggleBoxLayout):
                 if child.state == 'down':
                     toggles.append(child.text)
         print(len(toggles), 'ToggleeButtons active:', toggles)
