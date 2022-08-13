@@ -75,9 +75,10 @@ def deleteMachine (Machine_Name):
     cursor = setupDb.cursor()
     
     #Deletes machines with the selected machine name
-    cursor.execute('''DELETE FROM Machines WHERE Machine_Name = '%s' ''' % Machine_Name)
+    cursor.execute('''DELETE FROM Machines WHERE Machine_Name = '%s' ''' % (Machine_Name))
     
-    #Closes db
+    #Commits and closes the database
+    setupDb.commit()
     setupDb.close
     
     

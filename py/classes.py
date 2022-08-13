@@ -17,7 +17,7 @@ readJob
 
 #Creates Machine class for handling all of the machines
 class Machine:
-    def __init__(self, machineName, desc, machineType, location):
+    def __init__(self, machineName, desc = "", machineType = "", location = ""):
         
         self.machineName = machineName
         self.desc = desc

@@ -293,12 +293,17 @@ ToggleBoxLayout:
             return True
             
     def deleteSelectedMachines(self):
+
         toggles = []
         for child in self.ids["machineButtons"].children:
             if isinstance(child, ToggleBoxLayout):
                 if child.state == 'down':
                     toggles.append(child.children[1].children[0].text)
-        print(len(toggles), 'ToggleeButtons active:', toggles)
+
+        for machine in toggles:
+            selectedMachine = Machine(machine)
+            selectedMachine.trashMachine()
+        #print(len(toggles), 'ToggleeButtons active:', toggles)
     
 #Dynamic status page for the selected machine. Loads data based upon the
 #name of the machine selected
