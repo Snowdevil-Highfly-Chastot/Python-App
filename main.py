@@ -303,7 +303,6 @@ ToggleBoxLayout:
         for machine in toggles:
             selectedMachine = Machine(machine)
             selectedMachine.trashMachine()
-        #print(len(toggles), 'ToggleeButtons active:', toggles)
     
 #Dynamic status page for the selected machine. Loads data based upon the
 #name of the machine selected
