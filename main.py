@@ -279,7 +279,7 @@ ToggleBoxLayout:
             try:
                 self.ids["machineButtons"].children[0].children[0].children[0].children[0].text = str(currentMachineJob.grabJob(5))
             except:
-                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = "None"
+                self.ids["machineButtons"].children[0].children[0].children[0].children[0].text = "None"
 
     #This runs on screen exit, will not only save data, but also allow an easier refresh incase of new machines added or old ones deleted
     def stop(self):
@@ -297,7 +297,7 @@ ToggleBoxLayout:
         for child in self.ids["machineButtons"].children:
             if isinstance(child, ToggleBoxLayout):
                 if child.state == 'down':
-                    toggles.append(child.text)
+                    toggles.append(child.children[1].children[0].text)
         print(len(toggles), 'ToggleeButtons active:', toggles)
     
 #Dynamic status page for the selected machine. Loads data based upon the
