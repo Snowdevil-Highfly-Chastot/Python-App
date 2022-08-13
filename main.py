@@ -179,7 +179,7 @@ ButtonBoxLayout:
     def stop(self):
         #Clears all child widgets of the GridLayout with the respective id
         self.ids["machineButtons"].clear_widgets()
-        
+
 class MainOverviewDelete(Screen):
 
     #Object variable for button binding / screen switching in functions
@@ -291,6 +291,14 @@ ToggleBoxLayout:
         if key == 27:
             self.manager.current='MainOverview'
             return True
+            
+    def deleteSelectedMachines(self,widget):
+        toggles = []
+        for child in self.ids["machineButtons"].children:
+            if isinstance(child, ToggleButton):
+                if child.state == 'down':
+                    toggles.append(child.text)
+        print(len(toggles), 'ToggleeButtons active:', toggles)
     
 #Dynamic status page for the selected machine. Loads data based upon the
 #name of the machine selected
