@@ -12,7 +12,8 @@ saveMachine,
 readMachine,
 deleteMachine,
 saveJob,
-readJob
+readJob,
+deleteJob
 )
 
 #Creates Machine class for handling all of the machines
@@ -39,6 +40,8 @@ class Machine:
         
         #Deletes machine from db using the name in created class
         deleteMachine(self.machineName)
+        #Deletes job(s) added to machine from db using the name in created class
+        deleteJob(self.machineName)
         
 
         

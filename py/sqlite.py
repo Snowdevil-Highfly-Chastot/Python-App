@@ -144,4 +144,23 @@ def readJob(Column, Machine_Name):
     setupDb.close
     return result
     
+def deleteJob(Machine_Name):
     
+    #Find current path of this folder
+    currentPath = os.path.join(ROOT_DIR)
+    
+    #Changes current directory to db directory in relation to this file
+    os.chdir(currentPath)
+    climbDirectory(1)
+    os.chdir('db')
+
+    #Creates database if not created, otherwise connects to it
+    setupDb = sql.connect('appDatabase.db')
+    cursor = setupDb.cursor()
+
+    #Deletes the existing job row for each machine
+    cursor.execute('''DELETE FROM Jobs WHERE Machine_Name = '%s' ''' % (Machine_Name))
+    
+    #Commits and closes the database
+    setupDb.commit()
+    setupDb.close
