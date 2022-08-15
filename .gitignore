@@ -1,0 +1,4 @@
+.db/
+.kivy_venv/
+.py\__pycache__
+.py\config\__pycache__
