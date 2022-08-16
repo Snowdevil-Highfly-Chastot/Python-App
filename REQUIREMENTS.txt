@@ -1,0 +1,5 @@
+This needs to be updated with versions and actual modules. As of now this is just a 
+broad overview of what's required to run this.
+
+Python
+Kivy
