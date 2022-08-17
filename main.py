@@ -30,43 +30,37 @@ Config.set('kivy', 'exit_on_escape', '0')
 #Loads kivy screenmanager file that has the entire application static UI/UX
 Builder.load_file("kv/ScreenManagement.kv")
 
-#The ButtonBoxLayout is used to encase the machine buttons on the Overview, and have clicking attributes
+#The ButtonBoxLayout is used to encase the machine buttons on the Overview,
+#and have clicking attributes
 class ButtonBoxLayout(ButtonBehavior, BoxLayout):
-    
+
     background_color = ListProperty((get_color_from_hex('4F5D75')))
-    
-    def __init__(self, **kwargs):
-        super(ButtonBoxLayout, self).__init__(**kwargs)
-    
-    def on_state(self, widget, value):
-        if value == 'down':
-            self.background_color = (get_color_from_hex('E0F1FF'))
-        else:
-            self.background_color = (get_color_from_hex('4F5D75'))
-    
-#The ToggleBoxLayout is used in the Machine Delete screen.
-#It is the same as ButtonBoxLayout except has toggle functionality to allow multiple machine selection for deleting.
-class ToggleBoxLayout(ToggleButtonBehavior, BoxLayout):
-    
-    background_color = ListProperty((get_color_from_hex('4F5D75')))
-    
-    def __init__(self, **kwargs):
-        super(ToggleBoxLayout, self).__init__(**kwargs)
 
     def on_state(self, widget, value):
         if value == 'down':
             self.background_color = (get_color_from_hex('E0F1FF'))
         else:
             self.background_color = (get_color_from_hex('4F5D75'))
-            
-#UiButton class widget is used in all of the single text buttons throughout the application         
-class UiButton(ButtonBehavior, Label):
-    
+
+#The ToggleBoxLayout is used in the Machine Delete screen.
+#It is the same as ButtonBoxLayout except has toggle functionality
+#to allow multiple machine selection for deleting.
+class ToggleBoxLayout(ToggleButtonBehavior, BoxLayout):
+
     background_color = ListProperty((get_color_from_hex('4F5D75')))
-    
-    def __init__(self, **kwargs):
-        super(UiButton, self).__init__(**kwargs)
-    
+
+    def on_state(self, widget, value):
+        if value == 'down':
+            self.background_color = (get_color_from_hex('E0F1FF'))
+        else:
+            self.background_color = (get_color_from_hex('4F5D75'))
+
+#UiButton class widget is used in all of the single text buttons throughout
+#the application
+class UiButton(ButtonBehavior, Label):
+
+    background_color = ListProperty((get_color_from_hex('4F5D75')))
+
     def on_state(self, widget, value):
         if value == 'down':
             self.background_color = (get_color_from_hex('E0F1FF'))
@@ -79,21 +73,22 @@ class MainOverview(Screen):
     #Object variable for button binding / screen switching in functions
     manager = ObjectProperty(None)
 
-    #Varables, selected machine is for the app to know which machine is active in sub-screens
+    #Varables, selected machine is for the app to know which machine is
+    #active in sub-screens
     #app is used in this screens definitions
     selectedMachine = StringProperty()
     app = App.get_running_app()
-    
+
 
     #Runs on screen open
     def start(self, **kwargs):
-        
-        #Schedules loadMachines to run 1 time 
+
+        #Schedules loadMachines to run 1 time
         Clock.schedule_once(self.loadMachines)
 
     #Loads all machines from db and creates a Kivy widget for each machine in db
     def loadMachines(self, dt):
-        
+
         #Machine names collects all machine names from database
         machineNames = []
         #test index and machine count are used for collecting the total quantity of machines in the db
@@ -110,15 +105,15 @@ class MainOverview(Screen):
                 machineCount += 1
         except:
             pass
-        
+
         #This loop will add all the machine names to the list above and will stop before error
         while index < machineCount:
             machineNames.append(readMachines(index))
             index += 1
-        
+
         #For every machine in the list above, this loop will create the kivy widgets inside the GridLayout with the respective id
         for machine in machineNames:
-            
+
             #Kivy widget group, some widgets are custom classes which are named at the top of the ScreenManagement.kv file
             machineButtonGroup = Builder.load_string('''
 ButtonBoxLayout:
@@ -168,7 +163,7 @@ ButtonBoxLayout:
                 self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = str(currentMachineJob.grabJob(0))
             except:
                 self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = "None"
-                
+
             #Set text to completion time
             try:
                 self.ids["machineButtons"].children[0].children[0].children[0].children[0].text = str(currentMachineJob.grabJob(5))
@@ -189,12 +184,12 @@ class MainOverviewDelete(Screen):
     #app is used in this screens definitions
     selectedMachine = StringProperty()
     app = App.get_running_app()
-    
+
 
     #Runs on screen open
     def start(self, **kwargs):
-        
-        #Schedules loadMachines to run 1 time 
+
+        #Schedules loadMachines to run 1 time
         Clock.schedule_once(self.loadMachines)
         #Unbinds and re-Bind back button to go back to the Overview
         Window.unbind(on_keyboard=self.Android_back_click)
@@ -202,7 +197,7 @@ class MainOverviewDelete(Screen):
 
     #Loads all machines from db and creates a Kivy widget for each machine in db
     def loadMachines(self, dt):
-        
+
         #Machine names collects all machine names from database
         machineNames = []
         #test index and machine count are used for collecting the total quantity of machines in the db
@@ -219,15 +214,15 @@ class MainOverviewDelete(Screen):
                 machineCount += 1
         except:
             pass
-        
+
         #This loop will add all the machine names to the list above and will stop before error
         while index < machineCount:
             machineNames.append(readMachines(index))
             index += 1
-        
+
         #For every machine in the list above, this loop will create the kivy widgets inside the GridLayout with the respective id
         for machine in machineNames:
-            
+
             #Kivy widget group, some widgets are custom classes which are named at the top of the ScreenManagement.kv file
             machineButtonGroup = Builder.load_string('''
 ToggleBoxLayout:
@@ -274,7 +269,7 @@ ToggleBoxLayout:
                 self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = str(currentMachineJob.grabJob(0))
             except:
                 self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = "None"
-                
+
             #Set text to completion time
             try:
                 self.ids["machineButtons"].children[0].children[0].children[0].children[0].text = str(currentMachineJob.grabJob(5))
@@ -285,13 +280,13 @@ ToggleBoxLayout:
     def stop(self):
         #Clears all child widgets of the GridLayout with the respective id
         self.ids["machineButtons"].clear_widgets()
-        
+
     #This callback binds the back/esc key to the previous page, and when returned true, will go to that page
     def Android_back_click(self,window,key,*largs):
         if key == 27:
             self.manager.current='MainOverview'
             return True
-            
+
     def deleteSelectedMachines(self):
 
         toggles = []
@@ -303,11 +298,11 @@ ToggleBoxLayout:
         for machine in toggles:
             selectedMachine = Machine(machine)
             selectedMachine.trashMachine()
-    
+
 #Dynamic status page for the selected machine. Loads data based upon the
 #name of the machine selected
 class MachineStatusPage(Screen):
-    
+
     #Object variable for button binding / screen switching in functions
     manager = ObjectProperty(None)
 
@@ -315,24 +310,24 @@ class MachineStatusPage(Screen):
     #Collects the selected machine from the overview to be able to pull and display the corresponding data.
     selectedMachine = MainOverview.selectedMachine
     Machine_Name = selectedMachine
-    
+
     #Job related variables
     Part_Name = StringProperty()
     Part_Desc = StringProperty()
     Parts_Needed = StringProperty()
     Time_Per_Part = StringProperty()
-    
+
     #Bar feeder related variables
     Oal = StringProperty()
     Cut_Off_Width = StringProperty()
     Bar_Length = StringProperty()
     Bar_Parameter = StringProperty()
-    
+
     #Math Variables
     Completion_Time = StringProperty()
     Time_Left = StringProperty()
     Parts_Left = StringProperty()
-    
+
     #Runs on screen open
     def start(self, **kwargs):
         #Starts coundown() loop
@@ -369,7 +364,7 @@ class MachineStatusPage(Screen):
 
         #Creates new class with just the machine name
         currentJob = Job(self.Machine_Name)
-        
+
         #Tries to pull all information below from the database and returns none/0 if there is no entry
         try:
             self.Part_Name = str(currentJob.grabJob(0))
@@ -377,7 +372,7 @@ class MachineStatusPage(Screen):
             self.Parts_Needed = str(currentJob.grabJob(4))
             self.Time_Per_Part = str(currentJob.grabJob(3))
             self.Completion_Time = str(currentJob.grabJob(5))
-            
+
             self.Oal = str(currentJob.grabJob(7))
             self.Cut_Off_Width = str(currentJob.grabJob(8))
             self.Bar_Length = str(currentJob.grabJob(9))
@@ -388,15 +383,15 @@ class MachineStatusPage(Screen):
             self.Time_Per_Part = "None"
             self.Parts_Needed = "None"
             self.Completion_Time = "None"
-            
+
             self.Oal = "0"
             self.Cut_Off_Width = "0"
             self.Bar_Length = "0"
             self.Bar_Parameter = "0"
-            
+
         #Creates another class with the updated information pulled from the db above
         updatedCurrentJob = Job(self.Machine_Name, " ", " ", self.Time_Per_Part, self.Parts_Needed)
-        
+
         #Does the math for the parts left
         try:
             if updatedCurrentJob.partsLeft() > 0:
@@ -405,10 +400,10 @@ class MachineStatusPage(Screen):
                 self.Parts_Left = "0"
         except:
             self.Parts_Left = "None"
-            
+
         #Creates yet another class to include the parts left from the updatedCurrentJob class
         jobTimeLeft = Job(self.Machine_Name, " ", " ", self.Time_Per_Part, self.Parts_Left)
-        
+
         #Does the math for the time left based on if there are any parts left
         try:
             if updatedCurrentJob.partsLeft() > 0:
@@ -442,7 +437,7 @@ class AddMachinePage(Screen):
     desc = StringProperty()
     machineType = StringProperty()
     location = StringProperty()
-    
+
     #Function to run on submit press
     def addNewMachine(self):
         #Creates new class with the collected information
@@ -466,7 +461,7 @@ class AddJobPage(Screen):
         if key == 27:
             self.manager.current='MachineStatusPage'
             return True
-    
+
     #Uses the machine name that was originally selected from the Main Overview so the job is added to the right machine
     selectedMachine = MainOverview.selectedMachine
     Machine_Name = selectedMachine
@@ -482,7 +477,7 @@ class AddJobPage(Screen):
     Cut_Off_Width = StringProperty()
     Bar_Length = StringProperty()
     Bar_Parameter = StringProperty()
-    
+
     #Definition to run on submit press
     def addNewJob(self):
         #Creates class for the new job with all the collected information
@@ -490,13 +485,13 @@ class AddJobPage(Screen):
         #Posts all collected data to db
         newJob.postJob()
 
-        
+
 #Root application, screen manager is defined along with the different screens,
 #and app background. Anything set here takes place all over.
-class MainApp(App):   
+class MainApp(App):
 
     def build(self):
-        
+
         #Creates root app and sets to a screen based Kivy application
         self.root = root = ScreenManager()
         #Binds the rectangle function below to the size of the window, to set the applications background
