@@ -421,7 +421,3 @@ class AddJobPage(Screen):
         newJob = Job(self.Machine_Name, self.Part_Name, self.Part_Desc, self.Parts_Needed, self.Time_Per_Part, "", self.Oal, self.Cut_Off_Width, self.Bar_Length, self.Bar_Parameter)
         #Posts all collected data to db
         newJob.postJob()
-
-
-#Root application, screen manager is defined along with the different screens,
-#and app background. Anything set here takes place all over.

@@ -2,6 +2,8 @@ from py.config.mainImports import *
 from kv.widgets import *
 from kv.screens import *
 
+#Root application, screen manager is defined along with the different screens,
+#and app background. Anything set here takes place all over.
 class MainApp(App):
 
     def build(self):
