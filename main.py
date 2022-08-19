@@ -1,5 +1,4 @@
 from py.config.mainImports import *
-from kv.widgets import *
 from kv.screens import *
 
 #Root application, screen manager is defined along with the different screens,
