@@ -6,6 +6,8 @@ class MainApp(App):
 
     def build(self):
 
+        #Creates db folder to hold the database, if it doesn't already exist.
+        Path("db").mkdir(parents=True, exist_ok=True)
         #Removes application exit from android back button press.
         Config.set('kivy', 'exit_on_escape', '0')
         #Creates root app and sets to a screen based Kivy application
