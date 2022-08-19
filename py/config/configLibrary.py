@@ -1,5 +1,4 @@
 import os
-from re import I
 
 ROOT_DIR = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
 
