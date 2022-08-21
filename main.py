@@ -1,5 +1,6 @@
 from py.config.mainImports import *
 from kv.screens import *
+import kivy
 
 #Root application, screen manager is defined along with the different screens,
 #and app background. Anything set here takes place all over.
@@ -13,14 +14,17 @@ class MainApp(App):
         Config.set('kivy', 'exit_on_escape', '0')
         #Creates root app and sets to a screen based Kivy application
         self.root = root = ScreenManager()
-        #Binds the rectangle function below to the size of the window, to set the applications background
+        #Binds the rectangle function below to the size of the window
+        #will set the applications background
         root.bind(size=self._update_rect, pos=self._update_rect)
-        #Creates all the screens from the classes above and adds them as widgets to the screenmanager
+        #Creates all the screens from the classes above and 
+        #adds them as widgets to the screenmanager
         screen1 = MainOverview(name='MainOverview')
         screen2 = MachineStatusPage(name='MachineStatusPage')
         screen3 = AddMachinePage(name='AddMachinePage')
         screen4 = AddJobPage(name='AddJobPage')
         screen5 = MainOverviewDelete(name='MainOverviewDelete')
+        #Adds screens to the root screen manager
         root.add_widget(screen1)
         root.add_widget(screen2)
         root.add_widget(screen3)
@@ -33,7 +37,8 @@ class MainApp(App):
             self.rect = Rectangle(size=root.size, pos=root.pos)
         return root
 
-    #Function to run and keep running while the app runs, automatically updates the size of the recangle to match the window size
+    #Function to run and keep running while the app runs.
+    #Automatically updates the size of the recangle to match the window size
     def _update_rect(self, instance, value):
         self.rect.pos = instance.pos
         self.rect.size = instance.size
