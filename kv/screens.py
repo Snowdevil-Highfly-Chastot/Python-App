@@ -348,7 +348,10 @@ class MachineStatusPage(Screen):
         #Does the math for the time left based on if there are any parts left
         try:
             if updatedCurrentJob.partsLeft() > 0:
-                self.Time_Left = str(jobTimeLeft.timeLeft())
+                
+                timeLeftDict = jobTimeLeft.timeLeft()
+                self.Time_Left = str(timeLeftDict['Days']) + ":" + str(timeLeftDict['Hours']) + ":" + str(timeLeftDict['Minutes']) + ":" + str(timeLeftDict['Seconds'])
+                
             else:
                 self.Time_Left = "0"
         except:
