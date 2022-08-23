@@ -24,18 +24,22 @@
 
 <InputLabel@Label>:
     font_size: self.width / 10
-    text_size: self.size
+    text_size: self.width, None
     halign: 'left'
-    valign: 'center'
+    valign: 'top'
+    height: self.texture_size[1]
+    pos_hint: {'top': 1}
 
 <OutputLabel@Label>:
     font_size: self.width / 10
-    text_size: self.size
+    text_size: self.width, None
     halign: 'right'
-    valign: 'center'
+    valign: 'top'
+    height: self.texture_size[1]
+    pos_hint: {'top': 1}
 
 <TextCollection@TextInput>:
-    multiline: False
+    multiline: True
     size_hint: 1, .7
     font_size: self.width / 9
 
@@ -54,6 +58,18 @@
     canvas.before:
         Color:
             rgba: self.background_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
+            
+<InfoBoxLayout@BoxLayout>:
+    padding: self.width / 20, self.width / 30
+    height: self.minimum_height
+    size_hint_y: None
+    canvas.before:
+        Color:
+            rgb: utils.get_color_from_hex("4F5D75")
         RoundedRectangle:
             size: self.size
             pos: self.pos
@@ -190,35 +206,82 @@
                 HeaderLabel:
                     id: selectedMachine
                     text: root.selectedMachine
-                StyledGridLayout:
-                    InputLabel:
-                        text: 'Current Job: '
-                    OutputLabel:
-                        text: root.Part_Name
-                    InputLabel:
-                        text: 'Job Description'
-                    OutputLabel:
-                        text: root.Part_Desc
-                    InputLabel:
-                        text: 'Parts Needed: '
-                    OutputLabel:
-                        text: root.Parts_Needed
-                    InputLabel:
-                        text: 'Parts Remaining: '
-                    OutputLabel:
-                        text: root.Parts_Left
-                    InputLabel:
-                        text: 'Time Per Part: '
-                    OutputLabel:
-                        text: root.Time_Per_Part
-                    InputLabel:
-                        text: 'Completion Time: '
-                    OutputLabel:
-                        text: root.Completion_Time
-                    InputLabel:
-                        text: 'Time Left: '
-                    OutputLabel:
-                        text: root.Time_Left
+                InfoBoxLayout:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        size_hint_y: None
+                        height: self.minimum_height
+                        spacing: 100 #add in self method
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: self.minimum_height
+                            InputLabel:
+                                text: 'Current Job: '
+                                size_hint_y: None
+                            OutputLabel:
+                                text: root.Part_Name
+                                size_hint_y: None
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: self.minimum_height
+                            InputLabel:
+                                text: 'Job Description'
+                                size_hint_y: None
+                            OutputLabel:
+                                text: root.Part_Desc
+                                size_hint_y: None
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: self.minimum_height
+                            InputLabel:
+                                text: 'Parts Needed: '
+                                size_hint_y: None
+                            OutputLabel:
+                                text: root.Parts_Needed
+                                size_hint_y: None
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: self.minimum_height
+                            InputLabel:
+                                text: 'Parts Remaining: '
+                                size_hint_y: None
+                            OutputLabel:
+                                text: root.Parts_Left
+                                size_hint_y: None
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: self.minimum_height
+                            InputLabel:
+                                text: 'Time Per Part: '
+                                size_hint_y: None
+                            OutputLabel:
+                                text: root.Time_Per_Part
+                                size_hint_y: None
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: self.minimum_height
+                            InputLabel:
+                                text: 'Completion Time: '
+                                size_hint_y: None
+                            OutputLabel:
+                                text: root.Completion_Time
+                                size_hint_y: None
+                        BoxLayout:
+                            orientation: 'horizontal'
+                            size_hint_y: None
+                            height: self.minimum_height
+                            InputLabel:
+                                text: 'Time Left: '
+                                size_hint_y: None
+                            OutputLabel:
+                                text: root.Time_Left
+                                size_hint_y: None
                 GridLayout:
                     rows: 1
                     spacing: self.width / 50
