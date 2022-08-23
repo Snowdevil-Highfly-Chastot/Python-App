@@ -96,8 +96,10 @@ ButtonBoxLayout:
             #Grab current job
             currentMachineJob = Job(machine)
             #Set text to Job Name
+            jobName = str(currentMachineJob.grabJob(0))
+            jobNameTruncate = (jobName[:19] + '..') if len(jobName) > 19 else jobName
             try:
-                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = str(currentMachineJob.grabJob(0))
+                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = jobNameTruncate
             except:
                 self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = "None"
 
@@ -202,8 +204,10 @@ ToggleBoxLayout:
             #Grab current job
             currentMachineJob = Job(machine)
             #Set text to Job Name
+            jobName = str(currentMachineJob.grabJob(0))
+            jobNameTruncate = (jobName[:19] + '..') if len(jobName) > 19 else jobName
             try:
-                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = str(currentMachineJob.grabJob(0))
+                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = jobNameTruncate
             except:
                 self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = "None"
 
