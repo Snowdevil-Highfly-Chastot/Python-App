@@ -29,6 +29,7 @@
     valign: 'top'
     height: self.texture_size[1]
     pos_hint: {'top': 1}
+    size_hint_y: None
 
 <OutputLabel@Label>:
     font_size: self.width / 10
@@ -37,6 +38,7 @@
     valign: 'top'
     height: self.texture_size[1]
     pos_hint: {'top': 1}
+    size_hint_y: None
 
 <TextCollection@TextInput>:
     multiline: True
@@ -74,6 +76,11 @@
             size: self.size
             pos: self.pos
             radius: [(40, 40), (40, 40), (40, 40), (40, 40)]
+
+<HorizontalDataLayout@BoxLayout>:
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: self.minimum_height
 
 <StyledGridLayout@GridLayout>:
     cols: 2
@@ -211,77 +218,43 @@
                         orientation: 'vertical'
                         size_hint_y: None
                         height: self.minimum_height
-                        spacing: 100 #add in self method
-                        BoxLayout:
-                            orientation: 'horizontal'
-                            size_hint_y: None
-                            height: self.minimum_height
+                        spacing: self.width / 20
+                        HorizontalDataLayout:
                             InputLabel:
                                 text: 'Current Job: '
-                                size_hint_y: None
                             OutputLabel:
                                 text: root.Part_Name
-                                size_hint_y: None
-                        BoxLayout:
-                            orientation: 'horizontal'
-                            size_hint_y: None
-                            height: self.minimum_height
+                        HorizontalDataLayout:
                             InputLabel:
                                 text: 'Job Description'
-                                size_hint_y: None
                             OutputLabel:
                                 text: root.Part_Desc
-                                size_hint_y: None
-                        BoxLayout:
-                            orientation: 'horizontal'
-                            size_hint_y: None
-                            height: self.minimum_height
+                        HorizontalDataLayout:
                             InputLabel:
                                 text: 'Parts Needed: '
-                                size_hint_y: None
                             OutputLabel:
                                 text: root.Parts_Needed
-                                size_hint_y: None
-                        BoxLayout:
-                            orientation: 'horizontal'
-                            size_hint_y: None
-                            height: self.minimum_height
+                        HorizontalDataLayout:
                             InputLabel:
                                 text: 'Parts Remaining: '
-                                size_hint_y: None
                             OutputLabel:
                                 text: root.Parts_Left
-                                size_hint_y: None
-                        BoxLayout:
-                            orientation: 'horizontal'
-                            size_hint_y: None
-                            height: self.minimum_height
+                        HorizontalDataLayout:
                             InputLabel:
                                 text: 'Time Per Part: '
-                                size_hint_y: None
                             OutputLabel:
                                 text: root.Time_Per_Part
-                                size_hint_y: None
-                        BoxLayout:
-                            orientation: 'horizontal'
-                            size_hint_y: None
-                            height: self.minimum_height
+                        HorizontalDataLayout:
                             InputLabel:
                                 text: 'Completion Time: '
-                                size_hint_y: None
                             OutputLabel:
                                 text: root.Completion_Time
-                                size_hint_y: None
-                        BoxLayout:
-                            orientation: 'horizontal'
-                            size_hint_y: None
-                            height: self.minimum_height
+                        HorizontalDataLayout:
                             InputLabel:
                                 text: 'Time Left: '
-                                size_hint_y: None
                             OutputLabel:
                                 text: root.Time_Left
-                                size_hint_y: None
+
                 GridLayout:
                     rows: 1
                     spacing: self.width / 50

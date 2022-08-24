@@ -54,11 +54,11 @@ class MainOverview(Screen):
             #Kivy widget group, some widgets are custom classes which are named at the top of the ScreenManagement.kv file
             machineButtonGroup = Builder.load_string('''
 ButtonBoxLayout:
+    orientation: 'vertical'
     padding: self.width / 20, self.width / 30
     on_release:
         app.root.current = 'MachineStatusPage'
         app.root.current_screen.selectedMachine = machineLabel.text
-    orientation: 'vertical'
     BoxLayout:
         orientation: 'horizontal'
         Label:
@@ -70,24 +70,17 @@ ButtonBoxLayout:
             valign: 'top'
     BoxLayout:
         orientation: 'vertical'
-        StackLayout:
-            orientation: 'tb-lr'
-            spacing: self.width / 2.2 * -1
+        spacing: self.width / 20
+        HorizontalDataLayout:
             InputLabel:
                 text: "Current Job: "
-                font_size: self.width / 20
-            InputLabel:
+            OutputLabel:
                 text: "None"
-                font_size: self.width / 20
-        StackLayout:
-            orientation: 'tb-lr'
-            spacing: self.width / 2.2 * -1
+        HorizontalDataLayout:
             InputLabel:
                 text: "Completion Time: "
-                font_size: self.width / 20
-            InputLabel:
+            OutputLabel:
                 text: "None"
-                font_size: self.width / 20
     ''')
             #Add above widget to layout
             self.ids["machineButtons"].add_widget(machineButtonGroup)
@@ -165,8 +158,8 @@ class MainOverviewDelete(Screen):
             #Kivy widget group, some widgets are custom classes which are named at the top of the ScreenManagement.kv file
             machineButtonGroup = Builder.load_string('''
 ToggleBoxLayout:
-    padding: self.width / 20, self.width / 30
     orientation: 'vertical'
+    padding: self.width / 20, self.width / 30
     BoxLayout:
         orientation: 'horizontal'
         Label:
@@ -178,24 +171,17 @@ ToggleBoxLayout:
             valign: 'top'
     BoxLayout:
         orientation: 'vertical'
-        StackLayout:
-            orientation: 'tb-lr'
-            spacing: self.width / 2.2 * -1
+        spacing: self.width / 20
+        HorizontalDataLayout:
             InputLabel:
                 text: "Current Job: "
-                font_size: self.width / 20
-            InputLabel:
+            OutputLabel:
                 text: "None"
-                font_size: self.width / 20
-        StackLayout:
-            orientation: 'tb-lr'
-            spacing: self.width / 2.2 * -1
+        HorizontalDataLayout:
             InputLabel:
                 text: "Completion Time: "
-                font_size: self.width / 20
-            InputLabel:
+            OutputLabel:
                 text: "None"
-                font_size: self.width / 20
     ''')
             #Add above widget to layout
             self.ids["machineButtons"].add_widget(machineButtonGroup)
