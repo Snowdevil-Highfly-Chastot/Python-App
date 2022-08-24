@@ -24,3 +24,6 @@ from kivy.uix.screenmanager import Screen, ScreenManager, NoTransition
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.behaviors import ButtonBehavior, ToggleButtonBehavior
 from pathlib import Path
+
+#Loads kivy screenmanager file that has the entire application static UI/UX
+Builder.load_file("kv/ScreenManagement.kv")

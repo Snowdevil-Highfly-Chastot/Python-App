@@ -1,9 +1,6 @@
 from py.config.mainImports import *
 from kv.widgets import *
 
-#Loads kivy screenmanager file that has the entire application static UI/UX
-Builder.load_file("kv/ScreenManagement.kv")
-
 #First screen on app open, complete overview of all machines
 class MainOverview(Screen):
 
@@ -20,94 +17,14 @@ class MainOverview(Screen):
     #Runs on screen open
     def start(self, **kwargs):
 
-        #Schedules loadMachines to run 1 time
-        Clock.schedule_once(self.loadMachines)
+        #Schedules buildButtons to run 1 time and build all added machine's buttons
+        Clock.schedule_once(self.buildButtons)
 
-    #Loads all machines from db and creates a Kivy widget for each machine in db
-    def loadMachines(self, dt):
+    def buildButtons(self, dt):
 
-        #Machine names collects all machine names from database
-        machineNames = []
-        #test index and machine count are used for collecting the total quantity of machines in the db
-        testindex = 0
-        machineCount = 0
-        #index is the current machine being pulled in the loop below
-        index = 0
+        #Function from widgets.py
+        loadMachines(self)
 
-        try:
-            #This loop will run until error, the error hit will determine how many machines are in db
-            while True:
-                readMachines(testindex)
-                testindex += 1
-                machineCount += 1
-        except:
-            pass
-
-        #This loop will add all the machine names to the list above and will stop before error
-        while index < machineCount:
-            machineNames.append(readMachines(index))
-            index += 1
-
-        #For every machine in the list above, this loop will create the kivy widgets inside the GridLayout with the respective id
-        for machine in machineNames:
-
-            #Kivy widget group, some widgets are custom classes which are named at the top of the ScreenManagement.kv file
-            machineButtonGroup = Builder.load_string('''
-ButtonBoxLayout:
-    padding: self.width / 20, self.width / 30
-    on_release:
-        app.root.current = 'MachineStatusPage'
-        app.root.current_screen.selectedMachine = machineLabel.text
-    orientation: 'vertical'
-    BoxLayout:
-        orientation: 'horizontal'
-        Label:
-            id: machineLabel
-            text: "Machine"
-            font_size: self.width / 15
-            text_size: self.size
-            halign: 'center'
-            valign: 'top'
-    BoxLayout:
-        orientation: 'vertical'
-        StackLayout:
-            orientation: 'tb-lr'
-            spacing: self.width / 2.2 * -1
-            InputLabel:
-                text: "Current Job: "
-                font_size: self.width / 20
-            InputLabel:
-                text: "None"
-                font_size: self.width / 20
-        StackLayout:
-            orientation: 'tb-lr'
-            spacing: self.width / 2.2 * -1
-            InputLabel:
-                text: "Completion Time: "
-                font_size: self.width / 20
-            InputLabel:
-                text: "None"
-                font_size: self.width / 20
-    ''')
-            #Add above widget to layout
-            self.ids["machineButtons"].add_widget(machineButtonGroup)
-            #Change header to the machine name
-            self.ids["machineButtons"].children[0].children[1].children[0].text = machine
-            #Grab current job
-            currentMachineJob = Job(machine)
-            #Set text to Job Name
-            try:
-                jobName = str(currentMachineJob.grabJob(0))
-                jobNameTruncate = (jobName[:19] + '..') if len(jobName) > 19 else jobName
-                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = jobNameTruncate
-            except:
-                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = "None"
-
-            #Set text to completion time
-            try:
-                self.ids["machineButtons"].children[0].children[0].children[0].children[0].text = str(currentMachineJob.grabJob(5))
-            except:
-                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = "None"
 
     #This runs on screen exit, will not only save data, but also allow an easier refresh incase of new machines added or old ones deleted
     def stop(self):
@@ -128,94 +45,16 @@ class MainOverviewDelete(Screen):
     #Runs on screen open
     def start(self, **kwargs):
 
-        #Schedules loadMachines to run 1 time
-        Clock.schedule_once(self.loadMachines)
+        #Schedules buildButtons to run 1 time and build all added machine's buttons
+        Clock.schedule_once(self.buildButtons)
         #Unbinds and re-Bind back button to go back to the Overview
         Window.unbind(on_keyboard=self.Android_back_click)
         Window.bind(on_keyboard=self.Android_back_click)
 
-    #Loads all machines from db and creates a Kivy widget for each machine in db
-    def loadMachines(self, dt):
+    def buildButtons(self, dt):
 
-        #Machine names collects all machine names from database
-        machineNames = []
-        #test index and machine count are used for collecting the total quantity of machines in the db
-        testindex = 0
-        machineCount = 0
-        #index is the current machine being pulled in the loop below
-        index = 0
-
-        try:
-            #This loop will run until error, the error hit will determine how many machines are in db
-            while True:
-                readMachines(testindex)
-                testindex += 1
-                machineCount += 1
-        except:
-            pass
-
-        #This loop will add all the machine names to the list above and will stop before error
-        while index < machineCount:
-            machineNames.append(readMachines(index))
-            index += 1
-
-        #For every machine in the list above, this loop will create the kivy widgets inside the GridLayout with the respective id
-        for machine in machineNames:
-
-            #Kivy widget group, some widgets are custom classes which are named at the top of the ScreenManagement.kv file
-            machineButtonGroup = Builder.load_string('''
-ToggleBoxLayout:
-    padding: self.width / 20, self.width / 30
-    orientation: 'vertical'
-    BoxLayout:
-        orientation: 'horizontal'
-        Label:
-            id: machineLabel
-            text: "Machine"
-            font_size: self.width / 15
-            text_size: self.size
-            halign: 'center'
-            valign: 'top'
-    BoxLayout:
-        orientation: 'vertical'
-        StackLayout:
-            orientation: 'tb-lr'
-            spacing: self.width / 2.2 * -1
-            InputLabel:
-                text: "Current Job: "
-                font_size: self.width / 20
-            InputLabel:
-                text: "None"
-                font_size: self.width / 20
-        StackLayout:
-            orientation: 'tb-lr'
-            spacing: self.width / 2.2 * -1
-            InputLabel:
-                text: "Completion Time: "
-                font_size: self.width / 20
-            InputLabel:
-                text: "None"
-                font_size: self.width / 20
-    ''')
-            #Add above widget to layout
-            self.ids["machineButtons"].add_widget(machineButtonGroup)
-            #Change header to the machine name
-            self.ids["machineButtons"].children[0].children[1].children[0].text = machine
-            #Grab current job
-            currentMachineJob = Job(machine)
-            #Set text to Job Name
-            try:
-                jobName = str(currentMachineJob.grabJob(0))
-                jobNameTruncate = (jobName[:19] + '..') if len(jobName) > 19 else jobName
-                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = jobNameTruncate
-            except:
-                self.ids["machineButtons"].children[0].children[0].children[1].children[0].text = "None"
-
-            #Set text to completion time
-            try:
-                self.ids["machineButtons"].children[0].children[0].children[0].children[0].text = str(currentMachineJob.grabJob(5))
-            except:
-                self.ids["machineButtons"].children[0].children[0].children[0].children[0].text = "None"
+        #Function from widgets.py
+        loadMachinesForDeleting(self)
 
     #This runs on screen exit, will not only save data, but also allow an easier refresh incase of new machines added or old ones deleted
     def stop(self):
