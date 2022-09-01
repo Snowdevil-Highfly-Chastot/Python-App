@@ -338,16 +338,16 @@ class MachineStatusPage(Screen):
                 timeLeftDict = jobTimeLeft.timeLeft()
                 
                 if timeLeftDict['Days'] == 0 and timeLeftDict['Hours'] == 0 and timeLeftDict['Minutes'] == 0:
-                    self.Time_Left = str(timeLeftDict['Seconds'])
+                    self.Time_Left = str("{:02d}".format(timeLeftDict['Seconds']))
                     
                 elif timeLeftDict['Days'] == 0 and timeLeftDict['Hours'] == 0:
-                    self.Time_Left = str(timeLeftDict['Minutes']) + ":" + str(timeLeftDict['Seconds'])
+                    self.Time_Left = str("{:02d}".format(timeLeftDict['Minutes'])) + ":" + str("{:02d}".format(timeLeftDict['Seconds']))
                     
                 elif timeLeftDict['Days'] == 0:
-                    self.Time_Left = str(timeLeftDict['Hours']) + ":" + str(timeLeftDict['Minutes']) + ":" + str(timeLeftDict['Seconds'])
+                    self.Time_Left = str("{:02d}".format(timeLeftDict['Hours'])) + ":" + str("{:02d}".format(timeLeftDict['Minutes'])) + ":" + str("{:02d}".format(timeLeftDict['Seconds']))
                     
                 else:
-                    self.Time_Left = str(timeLeftDict['Days']) + ":" + str(timeLeftDict['Hours']) + ":" + str(timeLeftDict['Minutes']) + ":" + str(timeLeftDict['Seconds'])
+                    self.Time_Left = str("{:02d}".format(timeLeftDict['Days'])) + ":" + str("{:02d}".format(timeLeftDict['Hours'])) + ":" + str("{:02d}".format(timeLeftDict['Minutes'])) + ":" + str("{:02d}".format(timeLeftDict['Seconds']))
                 
             else:
                 self.Time_Left = "0"
