@@ -336,7 +336,18 @@ class MachineStatusPage(Screen):
             if updatedCurrentJob.partsLeft() > 0:
                 
                 timeLeftDict = jobTimeLeft.timeLeft()
-                self.Time_Left = str(timeLeftDict['Days']) + ":" + str(timeLeftDict['Hours']) + ":" + str(timeLeftDict['Minutes']) + ":" + str(timeLeftDict['Seconds'])
+                
+                if timeLeftDict['Days'] == 0 and timeLeftDict['Hours'] == 0 and timeLeftDict['Minutes'] == 0:
+                    self.Time_Left = str(timeLeftDict['Seconds'])
+                    
+                elif timeLeftDict['Days'] == 0 and timeLeftDict['Hours'] == 0:
+                    self.Time_Left = str(timeLeftDict['Minutes']) + ":" + str(timeLeftDict['Seconds'])
+                    
+                elif timeLeftDict['Days'] == 0:
+                    self.Time_Left = str(timeLeftDict['Hours']) + ":" + str(timeLeftDict['Minutes']) + ":" + str(timeLeftDict['Seconds'])
+                    
+                else:
+                    self.Time_Left = str(timeLeftDict['Days']) + ":" + str(timeLeftDict['Hours']) + ":" + str(timeLeftDict['Minutes']) + ":" + str(timeLeftDict['Seconds'])
                 
             else:
                 self.Time_Left = "0"
