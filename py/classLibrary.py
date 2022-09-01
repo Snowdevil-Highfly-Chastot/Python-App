@@ -21,15 +21,14 @@ def runTimeLeft(partCount, partTime):
     minuteTimeLeft = timeMath(60) - ((hourTimeLeft * 60) + (dayTimeLeft * 1440))
     secondTimeLeft = timeMath(0) - ((minuteTimeLeft * 60) + (hourTimeLeft * 3600) + (dayTimeLeft * 86400))
 
-#Do not return variables with 0 and display separate time left values
-    if dayTimeLeft > 0:
-        totalTime.update({"Days" : dayTimeLeft})
-    if hourTimeLeft > 0:
-        totalTime.update({"Hours" : hourTimeLeft})
-    if minuteTimeLeft > 0:
-        totalTime.update({"Minutes" : minuteTimeLeft})
-    if secondTimeLeft > 0:
-        totalTime.update({"Seconds" : secondTimeLeft})
+#Updates blank dictionary with calculated results.
+    totalTime.update({
+        "Days" : dayTimeLeft,
+        "Hours" : hourTimeLeft,
+        "Minutes" : minuteTimeLeft,
+        "Seconds" : secondTimeLeft
+    })
+
 
     return totalTime
 
